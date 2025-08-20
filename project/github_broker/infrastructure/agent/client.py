@@ -68,3 +68,24 @@ class AgentClient:
         except requests.exceptions.RequestException as e:
             logging.error(f"Error connecting to the server at {url}: {e}")
             return None
+
+    def complete_task(self, issue_id: int):
+        """
+        タスクの完了をサーバーに通知します。
+
+        Args:
+            issue_id (int): 完了したタスクのIssue ID。
+        """
+        endpoint = "/complete-task"
+        url = f"http://{self.host}:{self.port}{endpoint}"
+        payload = {"issue_id": issue_id, "agent_id": self.agent_id}
+        try:
+            response = requests.post(
+                url, json=payload, headers=self.headers, timeout=30
+            )
+            response.raise_for_status()
+            logging.info(f"Successfully notified server of task completion for issue #{issue_id}.")
+            return True
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Error notifying server of task completion for issue #{issue_id}: {e}")
+            return False

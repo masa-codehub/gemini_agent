@@ -6,7 +6,11 @@ from fastapi.responses import JSONResponse
 from github_broker.application.exceptions import LockAcquisitionError
 from github_broker.application.task_service import TaskService
 from github_broker.infrastructure.di_container import container
-from github_broker.interface.models import AgentTaskRequest, TaskResponse
+from github_broker.interface.models import (
+    AgentTaskRequest,
+    TaskCompletionRequest,
+    TaskResponse,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -44,3 +48,15 @@ async def request_task_endpoint(
         return task
     else:
         return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@app.post("/complete-task", status_code=status.HTTP_200_OK)
+async def complete_task_endpoint(
+    completion_request: TaskCompletionRequest,
+    task_service: TaskService = Depends(get_task_service),
+):
+    logger.info(f"Received task completion from agent: {completion_request.agent_id} for issue: {completion_request.issue_id}")
+    task_service.complete_task(
+        issue_id=completion_request.issue_id, agent_id=completion_request.agent_id
+    )
+    return {"message": "Task completed successfully"}

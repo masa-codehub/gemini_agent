@@ -13,3 +13,8 @@ class TaskResponse(BaseModel):
     body: str
     labels: list[str]
     branch_name: str
+
+
+class TaskCompletionRequest(BaseModel):
+    issue_id: int
+    agent_id: str

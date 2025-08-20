@@ -63,6 +63,12 @@ if __name__ == "__main__":
 
                 executor.execute(assigned_task)
                 logging.info("Task execution process finished.")
+
+                # タスク完了をサーバーに通知
+                issue_id = assigned_task.get("issue_id")
+                if issue_id:
+                    client.complete_task(issue_id)
+
                 time.sleep(5)  # 短い待機時間
             else:
                 logging.info(

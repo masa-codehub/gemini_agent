@@ -95,3 +95,25 @@ class TaskService:
             )
             self.redis_client.release_lock(lock_key)
             raise
+
+    def complete_task(self, issue_id: int, agent_id: str):
+        """
+        タスクの完了をマークし、Issueのラベルを更新してロックを解放します。
+        """
+        lock_key = f"issue_lock_{issue_id}"
+        logger.info(f"Completing task for issue #{issue_id}")
+
+        try:
+            # ラベルを更新
+            self.github_client.remove_label(self.repo_name, issue_id, "in-progress")
+            self.github_client.remove_label(self.repo_name, issue_id, agent_id)
+            self.github_client.add_label(self.repo_name, issue_id, "needs-review")
+            logger.info(f"Issue #{issue_id} のラベルを 'needs-review' に更新しました。")
+
+        except Exception as e:
+            logger.error(f"Issue #{issue_id} のラベル更新に失敗しました: {e}")
+            # エラーが発生してもロックは解放する
+        finally:
+            # ロックを解放
+            self.redis_client.release_lock(lock_key)
+            logger.info(f"Lock released for issue #{issue_id}.")

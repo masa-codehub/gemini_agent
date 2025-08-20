@@ -1,123 +1,62 @@
-import os
+import unittest
 from unittest.mock import MagicMock, patch
+from github_broker.infrastructure.agent.client import AgentClient
 
-import pytest
-import requests
+class TestAgentClient(unittest.TestCase):
 
-from github_broker import AgentClient
+    def setUp(self):
+        # 準備
+        self.mock_gemini_executor = MagicMock()
+        self.agent_client = AgentClient(gemini_executor=self.mock_gemini_executor)
 
+    def test_execute_agent_successfully(self):
+        # 準備
+        self.mock_gemini_executor.execute.return_value = {
+            "tool_code": "print('Hello, World!')",
+            "stdout": "Hello, World!\n",
+            "stderr": "",
+            "exit_code": 0
+        }
 
-@pytest.fixture
-def agent_client():
-    """Provides a test instance of AgentClient."""
-    return AgentClient(agent_id="test-agent", capabilities=["python"])
+        # 実行
+        result = self.agent_client.execute_agent("test_repo", "test_issue")
 
+        # 検証
+        self.assertIn("tool_code", result)
+        self.assertEqual(result["stdout"], "Hello, World!\n")
+        self.mock_gemini_executor.execute.assert_called_once()
+        
+        # プロンプトが正しく構築されているかを検証
+        called_prompt = self.mock_gemini_executor.execute.call_args[0][0]
+        self.assertIn("GitHub Repository: test_repo", called_prompt)
+        self.assertIn("Issue: test_issue", called_prompt)
 
-@patch("requests.post")
-def test_request_task_success(mock_post, agent_client):
-    """
-    Test successful task request (200 OK).
-    """
-    # 準備
-    mock_response = MagicMock()
-    mock_response.status_code = 200
-    mock_response.reason = "OK"
-    mock_task_data = {"issue_id": 1, "title": "Test Issue"}
-    mock_response.json.return_value = mock_task_data
-    mock_post.return_value = mock_response
+    def test_execute_agent_with_execution_error(self):
+        # 準備
+        self.mock_gemini_executor.execute.return_value = {
+            "tool_code": "print('Error')",
+            "stdout": "",
+            "stderr": "Some error occurred",
+            "exit_code": 1
+        }
 
-    # 実行
-    task = agent_client.request_task()
+        # 実行
+        result = self.agent_client.execute_agent("error_repo", "error_issue")
 
-    # 検証
-    expected_url = (
-        f"http://{agent_client.host}:{agent_client.port}{agent_client.endpoint}"
-    )
-    expected_payload = {
-        "agent_id": agent_client.agent_id,
-        "capabilities": agent_client.capabilities,
-    }
-    mock_post.assert_called_once_with(
-        expected_url, json=expected_payload, headers=agent_client.headers, timeout=30
-    )
-    mock_response.raise_for_status.assert_called_once()
-    assert task == mock_task_data
+        # 検証
+        self.assertIn("stderr", result)
+        self.assertEqual(result["exit_code"], 1)
+        self.mock_gemini_executor.execute.assert_called_once()
 
+    def test_execute_agent_with_exception(self):
+        # 準備
+        self.mock_gemini_executor.execute.side_effect = Exception("Executor failed")
 
-@patch("requests.post")
-def test_request_task_no_content(mock_post, agent_client):
-    """
-    Test task request when no content is available (204 No Content).
-    """
-    # 準備
-    mock_response = MagicMock()
-    mock_response.status_code = 204
-    mock_post.return_value = mock_response
+        # 実行 & 検証
+        with self.assertRaises(Exception) as context:
+            self.agent_client.execute_agent("exception_repo", "exception_issue")
+        
+        self.assertTrue("Executor failed" in str(context.exception))
 
-    # 実行
-    task = agent_client.request_task()
-
-    # 検証
-    assert task is None
-    mock_response.raise_for_status.assert_not_called()
-
-
-@patch("requests.post")
-def test_request_task_server_error(mock_post, agent_client):
-    """
-    Test task request when the server returns an error that raises an exception.
-    """
-    # 準備
-    mock_response = MagicMock()
-    mock_response.status_code = 500
-    mock_response.raise_for_status.side_effect = requests.exceptions.HTTPError(
-        "Server Error"
-    )
-    mock_post.return_value = mock_response
-
-    # 実行
-    task = agent_client.request_task()
-
-    # 検証
-    assert task is None
-
-
-@patch(
-    "requests.post",
-    side_effect=requests.exceptions.ConnectionError("Connection refused"),
-)
-def test_request_task_connection_error(mock_post, agent_client):
-    """
-    Test task request when a connection error occurs.
-    """
-    # 実行
-    task = agent_client.request_task()
-
-    # 検証
-    assert task is None
-
-
-def test_agent_client_initialization_with_port():
-    """
-    Test AgentClient initialization with a specific port.
-    """
-    client = AgentClient(agent_id="test", capabilities=[], host="testhost", port=9000)
-    assert client.port == 9000
-
-
-@patch.dict(os.environ, {"APP_PORT": "9999"})
-def test_agent_client_initialization_with_env_var():
-    """
-    Test AgentClient initialization using APP_PORT environment variable.
-    """
-    client = AgentClient(agent_id="test", capabilities=[])
-    assert client.port == 9999
-
-
-def test_agent_client_initialization_default_port(monkeypatch):
-    """
-    Test AgentClient initialization with the default port when env var is not set.
-    """
-    monkeypatch.delenv("APP_PORT", raising=False)
-    client = AgentClient(agent_id="test", capabilities=[])
-    assert client.port == 8080
+if __name__ == '__main__':
+    unittest.main()

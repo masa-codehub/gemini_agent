@@ -1,69 +1,84 @@
+import unittest
 from unittest.mock import MagicMock, patch
-
-import pytest
-
-from github_broker.infrastructure.executors.gemini_executor import GeminiCliExecutor
+from github_broker.infrastructure.executors.gemini_executor import GeminiExecutor
 
 
-@pytest.fixture
-def executor():
-    """Provides a GeminiCliExecutor instance for tests."""
-    return GeminiCliExecutor()
+class TestGeminiExecutor(unittest.TestCase):
+
+    def setUp(self):
+        # 準備
+        self.mock_gemini_model = MagicMock()
+        self.executor = GeminiExecutor(gemini_model=self.mock_gemini_model)
+
+    def test_execute_successful_tool_call(self):
+        # 準備
+        mock_response = MagicMock()
+        mock_function_call = MagicMock()
+        mock_function_call.name = "run_shell_command"
+        mock_function_call.args = {"command": "ls -l"}
+        mock_response.candidates[0].content.parts = [
+            MagicMock(function_call=mock_function_call)]
+        self.mock_gemini_model.generate_content.return_value = mock_response
+
+        mock_tool_response = MagicMock()
+        mock_tool_response.function_response.name = "run_shell_command"
+        mock_tool_response.function_response.response = {
+            "stdout": "total 0\n-rw-r--r-- 1 user group 0 Aug 19 10:00 README.md\n",
+            "stderr": "",
+            "exit_code": 0
+        }
+        self.mock_gemini_model.tool.from_function_response.return_value = mock_tool_response
+
+        # 実行
+        result = self.executor.execute("Show me the files")
+
+        # 検証
+        self.assertIn("tool_code", result)
+        self.assertIn("stdout", result["tool_code_output"])
+        self.assertEqual(result["tool_code_output"]["exit_code"], 0)
+        self.mock_gemini_model.generate_content.assert_called()
+
+    def test_execute_no_tool_call_in_response(self):
+        # 準備
+        mock_response = MagicMock()
+        mock_response.candidates[0].content.parts = []  # ツールコールなし
+        self.mock_gemini_model.generate_content.return_value = mock_response
+
+        # 実行
+        result = self.executor.execute("Just chat")
+
+        # 検証
+        self.assertIsNone(result.get("tool_code"))
+        self.assertIn("text", result)
+
+    def test_execute_with_error_in_tool_execution(self):
+        # 準備
+        mock_response = MagicMock()
+        mock_function_call = MagicMock()
+        mock_function_call.name = "run_shell_command"
+        mock_function_call.args = {"command": "invalid_command"}
+        mock_response.candidates[0].content.parts = [
+            MagicMock(function_call=mock_function_call)]
+        self.mock_gemini_model.generate_content.return_value = mock_response
+
+        mock_tool_response = MagicMock()
+        mock_tool_response.function_response.name = "run_shell_command"
+        mock_tool_response.function_response.response = {
+            "stdout": "",
+            "stderr": "bash: invalid_command: command not found",
+            "exit_code": 127
+        }
+        self.mock_gemini_model.tool.from_function_response.return_value = mock_tool_response
+
+        # 実行
+        result = self.executor.execute("Run an invalid command")
+
+        # 検証
+        self.assertIn("tool_code", result)
+        self.assertEqual(result["tool_code_output"]["exit_code"], 127)
+        self.assertIn("command not found",
+                      result["tool_code_output"]["stderr"])
 
 
-@patch("subprocess.Popen")
-def test_execute_success(mock_popen, executor):
-    """
-    Test the successful execution of a task.
-    """
-    # 準備
-    mock_proc = MagicMock()
-    mock_proc.returncode = 0
-    mock_proc.stdout = ["line 1", "line 2"]
-    mock_popen.return_value.__enter__.return_value = mock_proc
-
-    task = {"title": "Test Title", "body": "Test Body", "branch_name": "feature/test"}
-
-    # 実行
-    executor.execute(task)
-
-    # 検証
-    mock_popen.assert_called_once()
-    args, kwargs = mock_popen.call_args
-    command = args[0]
-    assert command[0] == "gemini"
-    assert command[1] == "--yolo"
-    assert "# Issue: Test Title" in command[3]
-    assert "Test Body" in command[3]
-    assert "feature/test" in command[3]
-
-
-@patch("subprocess.Popen")
-def test_execute_command_fails(mock_popen, executor):
-    """
-    Test when the gemini cli command returns a non-zero exit code.
-    """
-    # 準備
-    mock_proc = MagicMock()
-    mock_proc.returncode = 1
-    mock_proc.stdout = ["error occurred"]
-    mock_popen.return_value.__enter__.return_value = mock_proc
-    task = {"title": "t", "body": "b", "branch_name": "b"}
-
-    # 実行
-    executor.execute(task)
-
-    # 検証
-    mock_popen.assert_called_once()
-
-
-@patch("subprocess.Popen", side_effect=FileNotFoundError("Command not found"))
-def test_execute_file_not_found(mock_popen, executor):
-    """
-    Test when the gemini cli command is not found.
-    """
-    # 実行
-    executor.execute(task={"title": "t", "body": "b", "branch_name": "b"})
-
-    # 検証
-    mock_popen.assert_called_once()
+if __name__ == '__main__':
+    unittest.main()
