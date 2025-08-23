@@ -18,7 +18,7 @@ if __name__ == "__main__":
     host = os.getenv("BROKER_HOST", "localhost")
     port = int(os.getenv("BROKER_PORT", 8080))
 
-    gemini_log_dir = os.getenv("GEMINI_LOG_DIR", "/app/logs")
+    gemini_log_dir = os.getenv("AGENT_MESSAGE_DIR", "/app/logs")
     gemini_model = os.getenv("GEMINI_MODEL", "gemini-2.5-pro")
 
     capabilities = [
