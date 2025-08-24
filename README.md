@@ -1,1 +1,1 @@
-# gemini_github_coding_agent
+# gemini_agent
