@@ -11,7 +11,7 @@ build-backend = "setuptools.build_meta"
 # ===================================================================
 # パッケージの「名札」となる部分です。
 [project]
-name = "coding_agent"
+name = "gemini_agent"
 version = "0.1.0"
 authors = [
   { name="Your Name", email="your@email.com" },
@@ -150,7 +150,7 @@ filterwarnings = [
 ]
 
 # 出力設定
-addopts = "-v --tb=short --strict-markers --cov=coding_agent --cov-report=term-missing"
+addopts = "-v --tb=short --strict-markers --cov=gemini_agent --cov-report=term-missing"
 
 # カスタムマーカーの定義
 markers = [
@@ -165,5 +165,5 @@ junit_family = "xunit2"
 # --- setuptoolsの設定 (パッケージを自動検出させる) ---
 [tool.setuptools.packages.find]
 where = ["."]  # プロジェクトのルートディレクトリを探す
-include = ["coding_agent*"]  # "coding_agent"で始まるディレクトリをパッケージとして含める
+include = ["gemini_agent*"]  # "gemini_agent"で始まるディレクトリをパッケージとして含める
 exclude = ["tests*"]  # "tests"ディレクトリはパッケージに含めない
