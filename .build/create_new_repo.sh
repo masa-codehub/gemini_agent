@@ -78,7 +78,7 @@ gh repo create "$REPO_NAME" --$VISIBILITY --description "ローカルリポジ�
 
 # 作成したリポジトリのSSH URLを取得
 GITHUB_USER=$(gh api user --jq .login)
-REPO_URL="git@github.com:$GITHUB_USER/$REPO_NAME.git"
+REPO_URL="https://github.com/$GITHUB_USER/$REPO_NAME.git"
 echo "✅ リポジトリを作成しました: https://github.com/$GITHUB_USER/$REPO_NAME"
 echo "---"
 
