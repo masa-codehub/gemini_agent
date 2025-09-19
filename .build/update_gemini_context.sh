@@ -1,18 +1,22 @@
 #!/bin/bash
 
-AGENT_ROLL_UPPER=$(echo $AGENT_ROLL | tr '[:lower:]' '[:upper:]')
+AGENT_ROLE_UPPER=$(echo $AGENT_ROLE | tr '[:lower:]' '[:upper:]')
 
-if [ -z "$AGENT_ROLL_UPPER" ]; then
-    echo "エラー: AGENT_ROLL 環境変数が設定されていません。" >&2
+if [ -z "$AGENT_ROLE_UPPER" ]; then
+    echo "エラー: AGENT_ROLE 環境変数が設定されていません。" >&2
     exit 1
 fi
 
 GEMINI_MD_PATH="/app/.gemini/GEMINI.md"
-AGENT_MD_PATH="/app/.gemini/AGENTS/${AGENT_ROLL_UPPER}.md"
+AGENT_MD_PATH="/app/.gemini/AGENTS/${AGENT_ROLE_UPPER}.md"
 
 if [ ! -f "$AGENT_MD_PATH" ]; then
     echo "エラー: エージェントロールファイルが $AGENT_MD_PATH に見つかりません。" >&2
     exit 1
+fi
+
+if [ ! -f "$GEMINI_MD_PATH" ]; then
+    touch "$GEMINI_MD_PATH"
 fi
 
 cp "$AGENT_MD_PATH" "$GEMINI_MD_PATH"
@@ -47,3 +51,24 @@ if [ -n "$GITHUB_REPOSITORY" ]; then
     fi
 fi
 
+# ~/.gemini/GEMINI.md の設定
+USER_GEMINI_MD_PATH="$HOME/.gemini/GEMINI.md"
+AGENTS_GEMINI_MD_PATH="/app/.gemini/AGENTS/_GEMINI.md"
+
+if [ -f "$AGENTS_GEMINI_MD_PATH" ]; then
+    if [ ! -d "$(dirname "$USER_GEMINI_MD_PATH")" ]; then
+        mkdir -p "$(dirname "$USER_GEMINI_MD_PATH")"
+    fi
+    if [ ! -f "$USER_GEMINI_MD_PATH" ]; then
+        touch "$USER_GEMINI_MD_PATH"
+    fi
+    cp "$AGENTS_GEMINI_MD_PATH" "$USER_GEMINI_MD_PATH"
+    if [ $? -eq 0 ]; then
+        echo "$USER_GEMINI_MD_PATH を $AGENTS_GEMINI_MD_PATH の内容で正常に更新しました。"
+    else
+        echo "エラー: $AGENTS_GEMINI_MD_PATH から $USER_GEMINI_MD_PATH へのファイルコピーに失敗しました。" >&2
+        exit 1
+    fi
+else
+    echo "警告: $AGENTS_GEMINI_MD_PATH が見つからないため、~/.gemini/GEMINI.md の更新はスキップされます。"
+fi

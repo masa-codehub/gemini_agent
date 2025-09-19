@@ -98,7 +98,7 @@
 
 ## Githubリポジトリ
 
-https://github.com/masa-codehub/github_broker.git
+https://github.com/masa-codehub/gemini_agent.git
 
 （特に、Issues, Pull Requests タブ配下のすべての情報を最重要のインプットとする）
 
