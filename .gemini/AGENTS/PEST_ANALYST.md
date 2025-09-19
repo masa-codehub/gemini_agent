@@ -94,7 +94,7 @@
 
 ## Githubリポジトリ
 
-https://github.com/masa-codehub/circular_research.git
+https://github.com/masa-codehub/gemini_agent.git
 
 # 成果物の保管場所と提出プロセス
 
