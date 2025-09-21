@@ -1,6 +1,8 @@
 # 開発環境のセットアップガイド
 
-このドキュメントでは、このプロジェクトの開発環境をセットアップする手順について説明します。
+このドキュメントでは、このプロジェクトの**ローカル開発環境**をセットアップする手順について説明します。
+
+> このプロジェクトは Docker を利用した開発もサポートしています。詳細は `docker-compose.yml` を参照してください。
 
 ## 1. 前提条件
 
@@ -8,14 +10,17 @@
 
 - [Git](https://git-scm.com/)
 - [GitHub CLI](https://cli.github.com/)
-- [Python](https://www.python.org/) (バージョン 3.13 以上)
+- [Python](https://www.python.org/) (バージョン 3.12 以上)
 - [Node.js](https://nodejs.org/) (npm を含む)
 
 ## 2. セットアップ手順
 
-### ステップ1: リポジトリのクローン
+### ステップ1: リポジトリの準備
 
-まず、このリポジトリをローカルマシンにクローンします。
+> **コントリビューター向けの注意**
+> プロジェクトに貢献する場合は、まずリポジトリをご自身のアカウントにフォークし、そのフォークをクローンしてください。GitHub CLI を使うと、`gh repo fork masa-codehub/gemini_agent --clone` コマンドでフォークとクローンを一度に行えます。
+
+まだクローンしていない場合は、以下のコマンドでリポジトリをローカルマシンにクローンします。
 
 ```bash
 git clone https://github.com/masa-codehub/gemini_agent.git
@@ -46,10 +51,10 @@ cd gemini_agent
 プロジェクトで必要なツールとライブラリをインストールします。
 
 1.  **Gemini CLI のインストール:**
-    Node.js のパッケージマネージャーである npm を使って、Google Gemini CLI をグローバルにインストールします。
+    Node.js のパッケージマネージャーである npm を使って、Google Gemini CLI をグローバルにインストールします。ビルドの再現性を高めるため、バージョンを固定します。
 
     ```bash
-    npm install -g @google/gemini-cli@latest
+    npm install -g @google/gemini-cli@0.4.0
     ```
 
 2.  **Python 依存関係のインストール:**

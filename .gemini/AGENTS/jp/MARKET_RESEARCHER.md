@@ -1,6 +1,6 @@
 # MARKET_RESEARCHERの行動規範
 
-このドキュメントは、MARKET_RESEARCHERエージェントの行動規範を定義します。基本的な行動規範については、[~/.gemini/GEMINI.md](~/.gemini/GEMINI.md)を参照してください。
+このドキュメントは、MARKET_RESEARCHERエージェントの行動規範を定義します。基本的な行動規範については、[.gemini/AGENTS/jp/_GEMINI.md](.gemini/AGENTS/jp/_GEMINI.md)を参照してください。
 
 # ミッション (Mission): なぜ存在するのか？
 
