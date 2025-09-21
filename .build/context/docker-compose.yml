@@ -26,13 +26,13 @@ services:
       - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT:-your_gcp_project}
       - GOOGLE_CLOUD_LOCATION=${GOOGLE_CLOUD_LOCATION:-us-central1}
     depends_on:
-      - gemini_agent
+      - github_broker
       - redis
     # command: ["bash", "run.sh"]
     stdin_open: true
     tty: true
 
-  gemini_agent:
+  github_broker:
     build:
       context: ./${BROKER_HOST}/.build
       dockerfile: Dockerfile
