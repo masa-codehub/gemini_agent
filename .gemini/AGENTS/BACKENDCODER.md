@@ -135,7 +135,7 @@ https://github.com/masa-codehub/gemini_agent.git
 app/ \# プロジェクトルート
 ├── docs/ \# 設計ドキュメント群
 │   └── ... (省略)
-├── bachend/ \# 実装コード群 (クリーンアーキテクチャ)
+├── backend/ \# 実装コード群 (クリーンアーキテクチャ)
 │   ├── domain/ \# Enterprise-wide business rules
 │   ├── application/ \# Application-specific business rules (Use Cases)
 │   ├── interface/ \# Adapters (Controllers, Presenters)
