@@ -54,7 +54,7 @@ cd gemini_agent
     Node.js のパッケージマネージャーである npm を使って、Google Gemini CLI をグローバルにインストールします。ビルドの再現性を高めるため、バージョンを固定します。
 
     ```bash
-    npm install -g @google/gemini-cli@0.4.0
+    npm install -g @google/gemini-cli@latest
     ```
 
 2.  **Python 依存関係のインストール:**
