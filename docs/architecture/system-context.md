@@ -19,12 +19,10 @@
 
 ```mermaid
 graph TD
-    subgraph "Gemini Agent System"
-        A[AI Agent]
-    end
+    A[Gemini Agent System]
 
     U1[開発者 / プロジェクト管理者] -- Issue を作成・レビュー --> G[GitHub]
-    U2[システムアーキテクト / エージェント管理者] -- エージェントの役割を定義 --> A
+    U2[システムアーキテクト / エージェント管理者] -- システムを設定 --> A
 
     A -- タスクを取得 --> B(Broker)
     B -- タスクを割り当て --> A
@@ -37,9 +35,9 @@ graph TD
 
     A -- Pull Request, Comment を作成 --> G
 
-    style U1 fill:#d_blue,stroke:#333,stroke-width:2px
-    style U2 fill:#d_blue,stroke:#333,stroke-width:2px
-    style A fill:#l_blue,stroke:#333,stroke-width:2px
+    style U1 fill:#f4f4f4,stroke:#333,stroke-width:2px
+    style U2 fill:#f4f4f4,stroke:#333,stroke-width:2px
+    style A fill:#d4e6f1,stroke:#333,stroke-width:2px
 ```
 
 | 外部システム | 連携内容 |
