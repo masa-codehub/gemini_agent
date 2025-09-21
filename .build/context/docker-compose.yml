@@ -25,12 +25,11 @@ services:
       - GEMINI_API_KEY=${GEMINI_API_KEY:-my_gemini_api_key}
       - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT:-your_gcp_project}
       - GOOGLE_CLOUD_LOCATION=${GOOGLE_CLOUD_LOCATION:-us-central1}
-    depends_on:
-      - github_broker
-      - redis
     # command: ["bash", "run.sh"]
     stdin_open: true
     tty: true
+    networks:
+      - ${BROKER_NETWORK:-github_broker_network}
 
   github_broker:
     build:
@@ -52,12 +51,16 @@ services:
     depends_on:
       - redis
     command: ["python", "main.py"]
+    networks:
+      - ${BROKER_NETWORK:-github_broker_network}
 
   redis:
     image: redis:latest
     hostname: redis
     ports:
       - "6379:6379"
+    networks:
+      - ${BROKER_NETWORK:-github_broker_network}
 
 volumes:
   gemini_config:
@@ -66,3 +69,8 @@ volumes:
 secrets:
   gcp_access_key:
     file: ./${GOOGLE_CLOUD_ACCESS_KEY}
+
+networks:
+  github_broker_network:
+    name: ${BROKER_NETWORK:-github_broker_network}   # ブローカーコンテナにセット
+    external: true  # エージェントコンテナにセット
