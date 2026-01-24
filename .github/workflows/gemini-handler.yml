@@ -1,0 +1,86 @@
+name: Gemini Issue Handler
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  gemini-implementation:
+    # このジョブは、ユーザーが用意したサーバー(Self-Hosted Runner)上で実行されます
+    # 複数ランナーが稼働している場合、空いているランナーが順次処理します
+    runs-on: [self-hosted]
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # GEMINI_API_KEY や GITHUB_MCP_PAT は、ホストマシンの環境変数を使用します
+
+    steps:
+      # 1. コードの取得: 最新のソースコードをRunner上にダウンロードします
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 設定リポジトリのCheckout (将来用)
+      # - name: Checkout Configuration
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: your-org/gemini-config
+      #     path: gemini-config
+      #     token: ${{ secrets.CONFIG_REPO_TOKEN }}
+
+      # 2. 環境の初期化: 依存ライブラリのインストールやCLIのセットアップを行います
+      #    run.sh 内で pip install や gemini extensions install が実行されます
+      - name: Initialize Environment
+        run: bash run.sh
+
+      # 3. Geminiによる実装実行 (Implementer Phase):
+      #    指示書(architecture-drafting.md)とIssueの内容(current_issue.md)を結合し、
+      #    パイプ経由でGemini CLIに渡して実行します。
+      - name: Gemini Implementer Phase
+        id: implementer
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          echo "Processing Issue #${ISSUE_NUMBER}: $ISSUE_TITLE"
+
+          # Issueの内容を一時ファイルに保存 (パイプ入力用)
+          echo -e "# Issue Info\n\nTitle: $ISSUE_TITLE\n\n$ISSUE_BODY" > current_issue.md
+
+          # 指示書とIssue情報を結合してGeminiに渡す
+          # -m オプションで最新の gemini-3-flash-preview を指定します
+          cat .github/workflows/context/architecture-drafting.md current_issue.md | gemini --yolo -m "gemini-3-flash-preview"
+
+      # 4. Pull Requestの作成:
+      #    Geminiによる変更結果を確認し、変更があれば新しいブランチを作成してPushします。
+      #    その後、GitHub CLI (gh) を使ってPRを作成します。
+      - name: Create Pull Request
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # git status で変更があるかを確認
+          if [[ -n $(git status --porcelain) ]]; then
+            BRANCH_NAME="feature/issue-${{ github.event.issue.number }}"
+            
+            # ブランチ作成と切り替え
+            git checkout -b "$BRANCH_NAME"
+            
+            # 全変更をステージング
+            git add .
+            
+            # コミット (Issue番号を含めることで紐付け)
+            git commit -m "feat: resolve issue #${{ github.event.issue.number }}"
+            
+            # リモートへPush
+            git push origin "$BRANCH_NAME"
+            
+            # PR作成
+            gh pr create --title "feat: resolve issue #${{ github.event.issue.number }}" --body "Automated implementation by Gemini CLI based on Issue #${{ github.event.issue.number }}"
+          else
+            echo "No changes detected. Skipping PR creation."
+          fi

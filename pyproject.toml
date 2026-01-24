@@ -35,7 +35,6 @@ dependencies = [
     "requests",
     "uvicorn[standard]",
     "pydantic-settings",
-    "github_broker @ git+https://github.com/masa-codehub/github_broker.git",
 ]
 
 [project.scripts]
@@ -152,10 +151,6 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "frontmatter"
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = "github_broker"
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
