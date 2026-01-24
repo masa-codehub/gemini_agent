@@ -40,18 +40,12 @@ RUN curl -sSL https://deb.nodesource.com/setup_24.x | bash - && \
     rm -rf /var/lib/apt/lists/*
 
 # gemini-cliをグローバルにインストール
-RUN npm update && npm install -g @google/gemini-cli@latest
+RUN npm update && npm install -g @google/gemini-cli@preview
 
 # 必要なPythonパッケージのインストール
+COPY ./pyproject.toml .
 RUN pip install --upgrade pip
-COPY requirements.in .
-RUN pip install pip-tools
-RUN pip-compile requirements.in
-RUN pip install --no-cache-dir -r requirements.txt
-
-# # 開発モード
-# COPY pyproject.toml .
-# RUN pip install -e .
+RUN pip install --no-cache-dir .[dev]
 
 # Pythonが.pycファイルを生成しないようにします。
 ENV PYTHONDONTWRITEBYTECODE=1

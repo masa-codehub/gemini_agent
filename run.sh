@@ -7,10 +7,12 @@ gh auth setup-git
 bash ./.build/setup_gemini_auth.sh
 
 # Gemini CLIのインストールと更新
-npm update && npm install -g @google/gemini-cli
+npm update && npm install -g @google/gemini-cli@preview
+gemini extensions install https://github.com/github/github-mcp-server
+# gemini extensions install https://github.com/gemini-cli-extensions/conductor
 
 # 外部モジュールのインストール
-pip install -U -r .build/repositories.txt && pip install -e .
+pip install -e .[dev]
 
 # エージェント切り替え変更
 bash .build/update_gemini_context.sh
@@ -18,9 +20,9 @@ bash .build/update_gemini_context.sh
 # pre-commitの設定
 pre-commit install --install-hooks
 
-# # ファイルの存在を確認（main.pyに変える）
-# if [ -f "main.py" ]; then
+# # ファイルの存在を確認
+# if [ -f "agents_main.py" ]; then
 #     echo "main process start"
-#     python "main.py"
+#     python "agents_main.py"
 # fi
 # echo "main process done"
