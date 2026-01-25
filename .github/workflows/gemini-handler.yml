@@ -52,15 +52,38 @@ jobs:
 
           # 1回目: 初期実装
           echo "--- Phase 1: Initial Implementation ---"
-          cat .github/workflows/context/architecture-drafting.md current_issue.md | gemini --yolo -m "gemini-3-flash-preview" > response.md
+          {
+            cat .github/workflows/context/architecture-drafting.md
+            echo -e "\n---\n# Current Context\n"
+            cat current_issue.md
+          } | gemini --yolo -m "gemini-3-flash-preview" > response.md
 
           # 2回目: 自己修正・改善
           echo "--- Phase 2: Refinement 1 ---"
-          cat .github/workflows/context/architecture-drafting.md current_issue.md response.md | gemini --yolo -m "gemini-3-flash-preview" > response.md
+          {
+            cat .github/workflows/context/architecture-drafting.md
+            echo -e "\n---\n# Current Context\n"
+            cat current_issue.md
+            echo -e "\n---\n# Previous Response\n"
+            cat response.md
+          } | gemini --yolo -m "gemini-3-flash-preview" > response.md
 
           # 3回目: 最終調整
           echo "--- Phase 3: Final Refinement ---"
-          cat .github/workflows/context/architecture-drafting.md current_issue.md response.md | gemini --yolo -m "gemini-3-flash-preview" > response.md
+          {
+            cat .github/workflows/context/architecture-drafting.md
+            echo -e "\n---\n# Current Context\n"
+            cat current_issue.md
+            echo -e "\n---\n# Previous Response\n"
+            cat response.md
+          } | gemini --yolo -m "gemini-3-flash-preview" > response.md
 
-          # PR作成指示書とこれまでの履歴(loop_context_final.md)を渡して、GeminiにPR作成を任せる
-          cat .github/workflows/context/pr-creation.md current_issue.md | gemini --yolo -m "gemini-3-flash-preview"
+          # PR作成指示書とこれまでの履歴を渡して、GeminiにPR作成を任せる
+          echo "--- Phase 4: PR Creation ---"
+          {
+            cat .github/workflows/context/pr-creation.md
+            echo -e "\n---\n# Original Issue\n"
+            cat current_issue.md
+            echo -e "\n---\n# Final Implementation Result\n"
+            cat response.md
+          } | gemini --yolo -m "gemini-3-flash-preview"
