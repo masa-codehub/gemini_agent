@@ -211,3 +211,5 @@ messages/
 
 # Track package-lock.json
 !package-lock.json.gemini/todo.md
+current_issue.md
+loop_context_*.md
