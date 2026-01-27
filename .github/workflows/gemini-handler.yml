@@ -15,21 +15,13 @@ jobs:
     # 複数ランナーが稼働している場合、空いているランナーが順次処理します
     runs-on: [self-hosted]
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # GEMINI_API_KEY や GITHUB_MCP_PAT は、ホストマシンの環境変数を使用します
+      GITHUB_TOKEN: ${{ secrets.GITHUB_MCP_PAT || secrets.GITHUB_TOKEN }}
+      AGENT_ROLE: SYSTEM_ARCHITECT
 
     steps:
       # 1. コードの取得: 最新のソースコードをRunner上にダウンロードします
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      # 設定リポジトリのCheckout (将来用)
-      # - name: Checkout Configuration
-      #   uses: actions/checkout@v4
-      #   with:
-      #     repository: your-org/gemini-config
-      #     path: gemini-config
-      #     token: ${{ secrets.CONFIG_REPO_TOKEN }}
 
       # 2. 環境の初期化: 依存ライブラリのインストールやCLIのセットアップを行います
       #    run.sh 内で pip install や gemini extensions install が実行されます
@@ -45,10 +37,21 @@ jobs:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
+          set -e
           echo "Processing Issue #${ISSUE_NUMBER}: $ISSUE_TITLE"
 
           # Issueの内容を一時ファイルに保存 (パイプ入力用)
           echo -e "# Issue Info\n\nTitle: $ISSUE_TITLE\n\n$ISSUE_BODY" > current_issue.md
+
+          # 0回目: ブランチ戦略の決定と切り替え
+          echo "--- Phase 0: Branch Strategy & Checkout ---"
+          BRANCH_COMMAND=$( {
+            cat .github/workflows/context/branch-strategy.md
+            echo -e "\n---\n# Current Context\n"
+            cat current_issue.md
+          } | gemini -m "gemini-3-flash-preview")
+          echo "Executing: $BRANCH_COMMAND"
+          eval "$BRANCH_COMMAND"
 
           # 1回目: 初期実装
           echo "--- Phase 1: Initial Implementation ---"
@@ -58,25 +61,27 @@ jobs:
             cat current_issue.md
           } | gemini --yolo -m "gemini-3-flash-preview" > response.md
 
-          # 2回目: 自己修正・改善
-          echo "--- Phase 2: Refinement 1 ---"
-          {
-            cat .github/workflows/context/architecture-drafting.md
-            echo -e "\n---\n# Current Context\n"
-            cat current_issue.md
-            echo -e "\n---\n# Previous Response\n"
-            cat response.md
-          } | gemini --yolo -m "gemini-3-flash-preview" > response_tmp.md && mv response_tmp.md response.md
+          # 2回目: 自己修正・改善 (テストのためコメントアウト)
+          # echo "--- Phase 2: Refinement 1 ---"
+          # {
+          #   cat .github/workflows/context/architecture-drafting.md
+          #   echo -e "\n---\n# Current Context\n"
+          #   cat current_issue.md
+          #   echo -e "\n---\n# Previous Response\n"
+          #   cat response.md
+          # } | gemini --yolo -m "gemini-3-flash-preview" > response_tmp.md
+          # mv response_tmp.md response.md
 
-          # 3回目: 最終調整
-          echo "--- Phase 3: Final Refinement ---"
-          {
-            cat .github/workflows/context/architecture-drafting.md
-            echo -e "\n---\n# Current Context\n"
-            cat current_issue.md
-            echo -e "\n---\n# Previous Response\n"
-            cat response.md
-          } | gemini --yolo -m "gemini-3-flash-preview" > response_tmp.md && mv response_tmp.md response.md
+          # 3回目: 最終調整 (テストのためコメントアウト)
+          # echo "--- Phase 3: Final Refinement ---"
+          # {
+          #   cat .github/workflows/context/architecture-drafting.md
+          #   echo -e "\n---\n# Current Context\n"
+          #   cat current_issue.md
+          #   echo -e "\n---\n# Previous Response\n"
+          #   cat response.md
+          # } | gemini --yolo -m "gemini-3-flash-preview" > response_tmp.md
+          # mv response_tmp.md response.md
 
           # PR作成指示書とこれまでの履歴を渡して、GeminiにPR作成を任せる
           echo "--- Phase 4: PR Creation ---"

@@ -36,14 +36,22 @@ description: Replaces the work of prescribing and adhering to branch definitions
        - `update-readme`
      - **例:** `feat/add-user-registration`
 
+## 作業手順 (Procedure)
+
+1. **ベースブランチの最新化 (Sync Base Branch):**
+   - 開発の起点となるベースブランチ（通常は `main` または `master`）に切り替え、リモートの最新状態を同期する。
+   - コマンド: `git checkout <base_branch> && git pull origin <base_branch>`
+
+2. **ベースブランチの統合 (Integrate Base into Feature):**
+   - 既存の `Feature Branch` で作業を再開する場合は、ベースブランチの最新変更をそのブランチに取り込む（マージまたはリベース）。
+   - コマンド例: `git merge <base_branch>` または `git rebase <base_branch>`
+
+3. **作業ブランチへの切り替え (Switch to Feature Branch):**
+   - 新規作成、または既存の作業ブランチに切り替える。
+   - 新規作成時の命名規則: `<type>/issue-<Issue番号>-<subject>`
+   - コマンド: `git checkout -b <feature_branch>` または `git checkout <feature_branch>`
+
 ## 運用ルール (Rules)
 
-1. **最新化 (Sync):**
-   作業開始前には必ず `Base Branch` の最新状態をリモートから取り込む。
-   `git pull --rebase origin <base_branch>`
-
-2. **統合 (Integration):**
-   既にある `Feature Branch` で作業を再開する場合も、`Base Branch` の最新変更を取り込む（マージまたはリベース）。
-
-3. **保護 (Protection):**
+1. **保護 (Protection):**
    `Base Branch` (main/master) への直接コミットは禁止。必ず `Feature Branch` を介する。
