@@ -23,8 +23,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. 環境の初期化: 依存ライブラリのインストールやCLIのセットアップを行います
-      #    run.sh 内で pip install や gemini extensions install が実行されます
+      # 2. 環境の初期化: Python依存ライブラリのインストールやリポジトリ用ツールのセットアップを行います
+      #    run.sh 内では pip install -e .[dev] や pre-commit のセットアップなどのみを行い、
+      #    Gemini CLI および gemini extensions は Self-Hosted Runner 側で事前インストールされている前提とします
       - name: Initialize Environment
         run: bash run.sh
 
@@ -50,8 +51,25 @@ jobs:
             echo -e "\n---\n# Current Context\n"
             cat current_issue.md
           } | gemini -m "gemini-3-flash-preview")
-          echo "Executing: $BRANCH_COMMAND"
-          eval "$BRANCH_COMMAND"
+          
+          # LLM 出力から安全なブランチ操作コマンドのみを実行する
+          # 1行目のみを対象とし、許可された git サブコマンドに限定する
+          SAFE_BRANCH_COMMAND=$(printf '%s\n' "$BRANCH_COMMAND" | head -n1 | tr -d '\r')
+          echo "Raw branch command from Gemini:"
+          printf '%s\n' "$BRANCH_COMMAND"
+          echo "Candidate safe branch command: $SAFE_BRANCH_COMMAND"
+
+          case "$SAFE_BRANCH_COMMAND" in
+            git\ checkout*|git\ switch*|git\ pull*|git\ merge*)
+              echo "Executing safe git command: $SAFE_BRANCH_COMMAND"
+              eval "$SAFE_BRANCH_COMMAND"
+              ;;
+            *)
+              echo "Refusing to execute unsafe branch command from Gemini."
+              echo "Only 'git checkout', 'git switch', 'git pull', and 'git merge' are allowed."
+              exit 1
+              ;;
+          esac
 
           # 1回目: 初期実装
           echo "--- Phase 1: Initial Implementation ---"
