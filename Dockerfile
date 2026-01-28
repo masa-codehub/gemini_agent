@@ -34,8 +34,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3 1 \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
-# 3. Node.js のインストール (NodeSource を使用して最新LTS系をインストール)
-RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
+# 3. Node.js のインストール (NodeSource を使用して最新の Current リリースをインストール)
+RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
