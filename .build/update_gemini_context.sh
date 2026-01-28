@@ -7,8 +7,12 @@ if [ -z "$AGENT_ROLE_UPPER" ]; then
     exit 1
 fi
 
-GEMINI_MD_PATH="/app/.gemini/GEMINI.md"
-AGENT_MD_PATH="/app/.gemini/AGENTS/${AGENT_ROLE_UPPER}.md"
+# リポジトリのルートディレクトリを取得
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+GEMINI_MD_PATH="${REPO_ROOT}/.gemini/GEMINI.md"
+AGENT_MD_PATH="${REPO_ROOT}/.gemini/AGENTS/${AGENT_ROLE_UPPER}.md"
 
 if [ ! -f "$AGENT_MD_PATH" ]; then
     echo "エラー: エージェントロールファイルが $AGENT_MD_PATH に見つかりません。" >&2
@@ -53,7 +57,7 @@ fi
 
 # ~/.gemini/GEMINI.md の設定
 USER_GEMINI_MD_PATH="$HOME/.gemini/GEMINI.md"
-AGENTS_GEMINI_MD_PATH="/app/.gemini/AGENTS/_GEMINI.md"
+AGENTS_GEMINI_MD_PATH="${REPO_ROOT}/.gemini/AGENTS/_GEMINI.md"
 
 if [ -f "$AGENTS_GEMINI_MD_PATH" ]; then
     if [ ! -d "$(dirname "$USER_GEMINI_MD_PATH")" ]; then

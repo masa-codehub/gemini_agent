@@ -23,6 +23,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # Python環境のセットアップ (SSLエラー対策)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Node.js環境のセットアップ (npm/gemini-cli対策)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       # 2. 環境の初期化: Python依存ライブラリのインストールやリポジトリ用ツールのセットアップを行います
       #    run.sh 内では pip install -e .[dev] や pre-commit のセットアップなどのみを行い、
       #    Gemini CLI および gemini extensions は Self-Hosted Runner 側で事前インストールされている前提とします
