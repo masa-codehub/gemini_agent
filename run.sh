@@ -2,10 +2,11 @@
 set -e
 
 # GitHub CLIの認証設定
+export GITHUB_TOKEN="${GITHUB_MCP_PAT}"
 gh auth setup-git
 
 # 外部モジュールのインストール
-python3 -m pip install --upgrade pip
+# python3 -m pip install --upgrade pip  # runnerのOSとのマッチングでアップグレード出来ない
 python3 -m pip install -e .[dev]
 
 # pre-commitの設定
