@@ -7,7 +7,7 @@ gh auth setup-git
 
 # 外部モジュールのインストール
 # python3 -m pip install --upgrade pip  # runnerのOSとのマッチングでアップグレード出来ない
-python3 -m pip install -e .[dev]
+python3 -m pip install -e .[dev] --break-system-packages
 
 # pre-commitの設定
 pre-commit install
