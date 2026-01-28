@@ -1,8 +1,8 @@
 # --- 最終的な実行イメージ (Ubuntuベースで一本化) ---
 FROM ubuntu:latest
 
-# apt-get実行時にインタラクティブなプロンプトを無効化
-ENV DEBIAN_FRONTEND=noninteractive
+# ビルド時のみ対話型プロンプトを無効化（完成イメージには残さない）
+ARG DEBIAN_FRONTEND=noninteractive
 
 # 1. 基本ツールと依存関係のインストール
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -23,18 +23,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Python 3.13 のインストール (deadsnakes PPA を使用)
-RUN add-apt-repository ppa:deadsnakes/ppa -y \
-    && apt-get update && apt-get install -y --no-install-recommends \
-        python3.13 \
-        python3.13-dev \
-        python3.13-venv \
+# 2. Python のインストール (OS標準の最新安定版)
+# Ubuntuのリポジトリにある最新の python3 と pip をインストールします
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3 \
         python3-pip \
+        python3-venv \
+        python3-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.13 1 \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python3.13 1
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
-# 3. Node.js のインストール (NodeSource を使用)
+# 3. Node.js のインストール (NodeSource を使用して最新LTS系をインストール)
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
