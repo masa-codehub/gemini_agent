@@ -1,7 +1,7 @@
 # --- 最終的な実行イメージ (Ubuntuベースで一本化) ---
 FROM ubuntu:latest
 
-# ビルド時のみ対話型プロンプトを無効化（完成イメージには残さない）
+# ビルド時のみ対話型プロンプトを無効化
 ARG DEBIAN_FRONTEND=noninteractive
 
 # 1. 基本ツールと依存関係のインストール
@@ -23,18 +23,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Python のインストール (OS標準の最新安定版)
-# Ubuntuのリポジトリにある最新の python3 と pip をインストールします
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3 \
+# 2. Python 3.13 のインストール (deadsnakes PPA を使用して最新版を確保)
+RUN add-apt-repository ppa:deadsnakes/ppa -y \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        python3.13 \
+        python3.13-dev \
+        python3.13-venv \
         python3-pip \
-        python3-venv \
-        python3-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3 1 \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python3 1
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.13 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.13 1 \
+    && update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
 
-# 3. Node.js のインストール (NodeSource を使用して最新の Current リリースをインストール)
+# CI環境での pip install エラー (PEP 668) を回避するための設定
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
+
+# 3. Node.js のインストール (NodeSource Current)
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
     && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
@@ -54,27 +58,30 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.
     && apt-get install -y --no-install-recommends google-cloud-cli \
     && rm -rf /var/lib/apt/lists/*
 
-# 6. Gemini CLI のインストール
-RUN npm install -g @google/gemini-cli@preview \
-    && gemini extensions install https://github.com/github/github-mcp-server --consent
+# 6. Gemini CLI のインストール (本体はグローバルに)
+RUN npm install -g @google/gemini-cli@preview
 
-# 7. GitHub Actions Runner のダウンロードと展開
+# 7. ランナー用のユーザー作成
+RUN useradd -m runner \
+    && usermod -aG sudo runner \
+    && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# 8. GitHub Actions Runner のダウンロードと展開
 WORKDIR /home/runner
 RUN LATEST_VERSION=$(curl -s https://api.github.com/repos/actions/runner/releases/latest | jq -r '.tag_name' | sed 's/^v//') \
     && curl -o actions-runner.tar.gz -L "https://github.com/actions/runner/releases/download/v${LATEST_VERSION}/actions-runner-linux-x64-${LATEST_VERSION}.tar.gz" \
     && tar xzf ./actions-runner.tar.gz \
-    && rm actions-runner.tar.gz
-
-# 8. ランナー用のユーザー作成
-RUN useradd -m runner \
-    && usermod -aG sudo runner \
-    && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
+    && rm actions-runner.tar.gz \
     && chown -R runner:runner /home/runner
 
 # 9. スクリプト類をコピーして権限設定
 COPY --chown=runner:runner .build/entrypoint.sh .
 RUN chmod u+x entrypoint.sh && sudo ./bin/installdependencies.sh
 
+# --- ここから重要: 実行ユーザーに切り替えてから拡張機能をインストール ---
 USER runner
+
+# Gemini 拡張機能を runner ユーザーのホームディレクトリにインストール
+RUN gemini extensions install https://github.com/github/github-mcp-server --consent
 
 ENTRYPOINT ["/home/runner/entrypoint.sh"]
