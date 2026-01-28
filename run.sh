@@ -15,6 +15,11 @@ pre-commit install
 # AGENT_ROLE は環境変数から渡される想定
 bash .build/update_gemini_context.sh
 
-# gemini-cliのインストール
-npm install -g @google/gemini-cli@preview
-gemini extensions install https://github.com/github/github-mcp-server --consent
+# gemini-cliのインストール (GitHub Actions環境以外の場合のみ実行)
+if [ "$GITHUB_ACTIONS" != "true" ]; then
+    echo "Local environment detected. Installing gemini-cli and extensions..."
+    npm install -g @google/gemini-cli@preview
+    gemini extensions install https://github.com/github/github-mcp-server --consent
+else
+    echo "GitHub Actions environment detected. Skipping gemini-cli installation as it is assumed to be pre-installed."
+fi
