@@ -2,6 +2,7 @@
 set -e
 
 # GitHub CLIの認証設定
+export GITHUB_TOKEN="${GITHUB_MCP_PAT}"
 gh auth setup-git
 
 # 外部モジュールのインストール
