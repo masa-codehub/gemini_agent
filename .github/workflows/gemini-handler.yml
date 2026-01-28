@@ -36,15 +36,9 @@ jobs:
           node-version: '20'
 
       # 2. 環境の初期化: Python依存ライブラリのインストールやリポジトリ用ツールのセットアップを行います
-      - name: Install Python Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e .[dev]
-
-      - name: Setup Pre-commit
-        run: pre-commit install
-
-      - name: Initialize Other Tools
+      #    run.sh 内では pip install -e .[dev] や pre-commit のセットアップなどのみを行い、
+      #    Gemini CLI および gemini extensions は Self-Hosted Runner 側で事前インストールされている前提とします
+      - name: Initialize Environment
         run: bash run.sh
 
       # 3. Geminiによる実装実行 (Implementer Loop):
