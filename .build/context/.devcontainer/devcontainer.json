@@ -3,7 +3,7 @@
     "service": "service-name",
     "workspaceFolder": "/app",
     "dockerComposeFile": "../docker-compose.yml",
-    "updateContentCommand": "bash .build/context/run.sh",
+    "updateContentCommand": "bash .build/run.sh",
     "customizations": {
         "vscode": {
             "settings": {
@@ -28,7 +28,8 @@
                 "ms-python.vscode-pylance",
                 "ms-python.vscode-python-envs",
                 "redhat.vscode-yaml",
-                "shd101wyy.markdown-preview-enhanced"
+                "shd101wyy.markdown-preview-enhanced",
+                "esbenp.prettier-vscode"
             ]
         }
     }
