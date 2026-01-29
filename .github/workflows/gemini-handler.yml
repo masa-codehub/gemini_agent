@@ -27,7 +27,7 @@ jobs:
       #    run.sh 内では pip install -e .[dev] や pre-commit のセットアップなどのみを行い、
       #    Gemini CLI および gemini extensions は Self-Hosted Runner 側で事前インストールされている前提とします
       - name: Initialize Environment
-        run: bash run.sh
+        run: bash ./.build/run.sh
 
       # 3. Geminiによる実装実行 (Implementer Loop):
       #    最大3回のループを行い、実装と自己修正を繰り返します。
