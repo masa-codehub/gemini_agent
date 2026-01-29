@@ -1,9 +1,9 @@
 {
     "name": "name",
-    "service": "service-name",
+    "service": "agent",
     "workspaceFolder": "/app",
     "dockerComposeFile": "../docker-compose.yml",
-    "updateContentCommand": "bash .build/context/run.sh",
+    "updateContentCommand": "bash ./.build/run.sh",
     "customizations": {
         "vscode": {
             "settings": {

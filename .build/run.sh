@@ -28,8 +28,8 @@ fi
 echo "=== Setup Complete ==="
 
 # コンテキスト更新など
-if [ -f ".build/update_gemini_context.sh" ]; then
-    bash .build/update_gemini_context.sh
+if [ -f "./.build/update_gemini_context.sh" ]; then
+    bash ./.build/update_gemini_context.sh
 fi
 
-source .venv/bin/activate
+source /app/.venv/bin/activate
