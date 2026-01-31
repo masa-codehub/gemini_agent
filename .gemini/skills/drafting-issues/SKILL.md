@@ -5,22 +5,22 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 # Issue Drafting (Objective-Oriented & Verifiable)
 
-このスキルは、`reqs/tasks/template/issue-draft.md` をベースに、エージェントが自律的に実行可能な「完全な指示書」を作成します。
+このスキルは、`assets/issue-draft-template.md` をベースに、エージェントが自律的に実行可能な「完全な指示書」を作成します。
 
 ## ワークフロー (Workflow)
 
-以下のチェックリストに従って、高品質なIssueドラフトを作成してください。
+以下のチェックリストに従って、高品質なIssueドラフトを作成し、保存してください。
 
 ```markdown
 ドラフト作成進捗:
-
 - [ ] 1. 個別目標の定義 (SMART Goal)
 - [ ] 2. メタデータ定義 (Frontmatter)
 - [ ] 3. 目的と背景の記述 (Why & What)
 - [ ] 4. 参照資料の特定 (Input Context)
 - [ ] 5. 手順と制約の記述 (How & Constraints)
 - [ ] 6. ブランチと検証基準の定義 (Branch & Verify)
-- [ ] 7. 品質レビュー (Final Quality Gate)
+- [ ] 7. ファイル保存 (Save to Drafts)
+- [ ] 8. 品質レビュー (Final Quality Gate)
 ```
 
 ### 1. 個別目標の定義 (Objective Setting)
@@ -73,25 +73,25 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 - **Branching Strategy:** 開発の起点と作業場所を定義する。詳細は `references/branching-strategy.md` を参照。
   - **Base Branch:** 統合先となるブランチ。
-    - 通常はコンテキストで定義されている統合ブランチを使用する。
-    - 統合ブランチを`main`にマージするための**統合Issue** の場合は`main`を使用する。（この場合、`Feature Branch`に統合ブランチを指定する）
-  - **Feature Branch:** 作業用ブランチ。命名規則 `<type>/task-{{task_id}}-{{subject}}` に従う（例: `feat/task-T-01-update-sequence`）。
-    - 統合ブランチを`main`にマージする**統合Issue** は、`Feature Branch`に統合ブランチを指定する。
+  - **Feature Branch:** 作業用ブランチ。命名規則 `<type>/task-{{task_id}}-{{subject}}` に従う。
 - **Verification & DoD:**
   - **観測される挙動:** ファイルの存在、内容の非空確認。
   - **ファイル状態:** 構文エラーがないこと。
   - **整合性:** 定義された用語が正確に使われていること。
 
-### 7. 品質レビュー (Final Quality Gate)
+### 7. ファイル保存 (Save to Drafts)
 
-作成したドラフトを `issue-review` スキル相当の基準で監査し、品質を保証する。
+**目的:** 作成した内容を物理ファイルとして出力する。
+
+- **Action:**
+  - 内容を `reqs/tasks/drafts/issue-{{task_id}}.md` に書き込む。
+  - ファイル名は必ず `issue-` プレフィックスと `task_id` を組み合わせること。
+
+### 8. 品質レビュー (Final Quality Gate)
+
+保存されたファイルを `issue-review` スキル相当の基準で監査し、品質を保証する。
 
 - **Action:**
   - `assets/review-report-template.md` を使用してレビュー結果を生成する。
-  - ユーザーから保存先パスが指定されている場合は、そのパスにレポートを保存する。
-  - **重要:** 保存の有無に関わらず、レポート内容は必ず標準出力にも表示する（ユーザーが即座に確認できるようにするため）。
-  - レビューで「Request Changes」となった場合は、指摘事項を修正してから完了とする。
-
-## テンプレート
-
-Issueドラフトの作成には `assets/issue-draft-template.md` を使用してください。
+  - **重要:** レポート内容は必ず標準出力に表示する。保存先が指定されている場合はファイルにも保存する。
+  - レビューで「Request Changes」となった場合は、ファイルを修正して再度保存・レビューを行う。
