@@ -55,13 +55,13 @@ TDDサイクル進捗:
 **目的:** 「動くコード」を「維持可能なコード」へ昇華させる。
 
 - **Action:**
-  - **静的解析:** Linterと型チェッカーを実行し、警告をゼロにする。
-    - コマンド: `run_shell_command{command: "ruff check . && ruff format . && mypy ."}`
-  - **構造改善:**
-    - **Type Safety:** `Any` を排除し、具体的な型定義を行う。
-    - **Readability:** 複雑なロジックを分割し、変数を適切な名前に変更する。
-    - **Docstrings:** 公開関数/クラスにGoogle StyleのDocstringを追加する。
+  - **現状分析:** `assets/refactoring-analysis-template.md` を使用して、静的解析結果やコードの改善点を分析・列挙する。
+    - 分析結果は標準出力に表示し、保存先指定があればファイルに保存する。
+  - **改善実行:** 分析に基づき、優先度の高い項目から修正を行う。
+    - **Static Analysis:** `pre-commit run --all-files` を実行し、自動修正を適用する。
+    - **Structure:** `Type Safety`, `Readability`, `SSOT` の観点で手動リファクタリングを行う。
   - **再検証:** リファクタリング後もテストがGreenであることを確認する。
+    - テスト失敗時は `references/debugging-workflow.md` を参照して効率的に修正する。
 
 ### 5. 最終検証と納品 (Final Audit & Deliver)
 
@@ -69,7 +69,7 @@ TDDサイクル進捗:
 
 - **Action:**
   - **全テスト実行:** `run_shell_command{command: "pytest"}` で回帰テストを行う。
-  - **SSOT整合性:** 実装が仕様書やアーキテクチャ定義と矛盾していないか最終確認する。
+  - **Pre-commit:** `run_shell_command{command: "pre-commit run --all-files"}` ですべてのフックを通過させる。
   - **完了:** 全てのチェックがGreenであればタスク完了とする。
 
 ## リファレンス
