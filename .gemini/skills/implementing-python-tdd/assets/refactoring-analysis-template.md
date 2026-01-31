@@ -17,7 +17,15 @@
 - [ ] **責務 (Responsibility):** (例: UseCaseロジックがControllerに漏れ出している)
 - [ ] **依存関係 (Dependency):** (例: Domain層がInfrastructure層をインポートしている)
 
-## 2. 改善提案 (Improvement Proposals)
+## 2. 自己レビュー (Self-Review Checklist)
+
+- [ ] **Pythonic:** イディオム（コンテキストマネージャ、ジェネレータ等）を適切に使用しているか？
+- [ ] **型ヒント:** 引数と戻り値に完全な型ヒントがあるか？ (`Any` を排除)
+- [ ] **Docstrings:** 公開インターフェースにGoogleスタイルのDocstringがあるか？
+- [ ] **SSOT:** 設計ドキュメントやADRと整合しているか？
+- [ ] **テスト:** 全てのテストがパスしているか (Green)？
+
+## 3. 改善提案 (Improvement Proposals)
 
 ### 優先度 1: 重要 (Critical - Must Fix)
 *(型安全性、バグ、重大なアーキテクチャ違反)*
@@ -32,11 +40,3 @@
 ### 優先度 3: 洗練 (Polish - Nice to Have)
 *(Docstring、軽微なスタイル調整)*
 1. 追加: ...
-
-## 3. 自己レビュー (Self-Review Checklist)
-
-- [ ] **Pythonic:** イディオム（コンテキストマネージャ、ジェネレータ等）を適切に使用しているか？
-- [ ] **型ヒント:** 引数と戻り値に完全な型ヒントがあるか？ (`Any` を排除)
-- [ ] **Docstrings:** 公開インターフェースにGoogleスタイルのDocstringがあるか？
-- [ ] **SSOT:** 設計ドキュメントやADRと整合しているか？
-- [ ] **テスト:** 変更後、全てのテストがパスしているか (Green)？

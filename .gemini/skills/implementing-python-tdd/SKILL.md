@@ -1,5 +1,5 @@
 ---
-name: tdd-python-drafting
+name: implementing-python-tdd
 description: Executes the complete TDD cycle (Red/Green/Refactor) for Python projects. Handles test creation, implementation, and code quality assurance (linting, type checking, refactoring) in a single integrated workflow.
 ---
 
@@ -66,10 +66,11 @@ TDDサイクル進捗:
 **目的:** 実装結果を深く分析し、さらなる品質向上案を提示する。
 
 - **Action:**
-  - **分析:** `assets/refactoring-analysis-template.md` を使用して、実装されたコードを多角的に分析する（Pythonicさ、設計の整合性、複雑度等）。
-  - **提案:** 分析結果に基づき、さらなる改善点や将来的なリファクタリング案を列挙する。
-  - **出力:** 分析と提案の結果を必ず標準出力に表示する。指定があればファイルに保存する。
-  - **完了:** 自己レビュー項目を全てパスし、納品可能な品質であることを確認してタスク完了とする。
+  - **分析:** `assets/refactoring-analysis-template.md` を使用して、実装されたコードを多角的に分析する（静的解析、コードスメル、設計整合性等）。
+  - **自己レビュー:** 分析結果に基づき、テンプレートのチェックリスト（Pythonic, Type Hints, SSOT等）で品質を確認する。
+  - **提案:** 分析とレビューの結果に基づき、さらなる改善点や将来的なリファクタリング案を列挙する。
+  - **出力:** 分析、レビュー、提案の結果を必ず標準出力に表示する。指定があればファイルに保存する。
+  - **完了:** 自己レビューをクリアし、納品可能な品質であることを確認してタスク完了とする。
 
 ## リファレンス
 
