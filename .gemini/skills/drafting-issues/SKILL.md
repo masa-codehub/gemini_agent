@@ -84,7 +84,12 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 ### 7. 品質レビュー (Final Quality Gate)
 
-作成したドラフトを `issue-review` スキルで監査し、品質基準（Ambiguity-Free, Atomic, Verifiable）を満たすまで修正してください。
+作成したドラフトを `issue-review` スキル相当の基準で監査し、品質を保証する。
+
+- **Action:**
+  - `assets/review-report-template.md` を使用してレビュー結果を生成する。
+  - ユーザーから保存先パスが指定されている場合は、そのパスにレポートを保存する。指定がない場合は標準出力に表示する。
+  - レビューで「Request Changes」となった場合は、指摘事項を修正してから完了とする。
 
 ## テンプレート
 
