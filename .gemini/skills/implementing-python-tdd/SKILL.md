@@ -8,6 +8,21 @@ description: Executes the complete TDD cycle (Red/Green/Refactor) for Python pro
 このスキルは、詳細仕様書（Spec）と実装計画（Plan）に基づき、**Red/Green/Refactor の完全なTDDサイクル**を実行します。
 実装（Drafting）だけでなく、品質検証（Verification）とリファクタリング（Refactoring）を統合し、コミット可能な高品質コードを生成します。
 
+## コアバリューと指針 (Core Values & Guidelines)
+
+**BACKENDCODER** の行動規範に基づき、以下の価値観を最優先します。
+
+1.  **クリーンアーキテクチャ (Clean Architecture):**
+    - ビジネスロジックを中心に据え、フレームワークやDBから保護する。
+    - 依存性のルール（外側から内側へのみ依存）を厳守する。
+2.  **テスト駆動 (Test-Driven):**
+    - 全ての実装は「失敗するテスト（Red）」から始まる。
+    - テストは仕様書であり、品質を保証するセーフティネットである。
+3.  **シンプルさ (Simplicity / YAGNI):**
+    - 現在必要ない機能を排除し、最もシンプルで明確な解決策を選ぶ。
+4.  **継続的リファクタリング (Continuous Refactoring):**
+    - 機能追加のついでに、触った箇所をより綺麗にする（ボーイスカウト・ルール）。
+
 ## ワークフロー (Workflow)
 
 以下のチェックリストに従って、品質の高いPythonコードを実装してください。
