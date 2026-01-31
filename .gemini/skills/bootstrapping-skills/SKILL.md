@@ -24,14 +24,14 @@ description: Bootstraps new Gemini CLI agent skills by generating standard direc
 ユーザーから以下の情報が不足している場合は、質問して収集してください：
 
 1.  **スキル名 (Skill Name)**: `kebab-case` かつ動名詞（例: `analyzing-data`）を推奨。
-2.  **スコープ (Scope)**: "User" (`~/.gemini/skills/`) または "Workspace" (`./.gemini/skills/`)。
+2.  **スコープ (Scope)**: "Workspace" (`./.gemini/skills/`) のみに限定。
 3.  **複雑度 (Complexity)**: "Simple"（単一ファイル）または "Advanced"（`scripts/`, `references/`, `assets/` を含む）。
 4.  **目的 (Purpose)**: 英語(English)かつ三人称での簡潔な説明。
 
 ### 2. パスとディレクトリの決定
 
 - **バリデーション**: 名前が `google`, `gemini` などの予約語でないことを確認。
-- **ターゲット**: スコープに応じて絶対パスまたはプロジェクト相対パスを決定。
+- **ターゲット**: プロジェクト相対パス (`./.gemini/skills/<skill-name>/`) を使用。
 
 ### 3. スキルの生成
 
