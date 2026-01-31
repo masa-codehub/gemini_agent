@@ -39,3 +39,9 @@
 2. **[Section Name]**
    - **Problem:** ...
    - **Fix:** ...
+
+## 4. Improvements
+*(List additional suggestions for better quality or efficiency, not necessarily blocking approval)*
+
+- [ ] Suggestion 1
+- [ ] Suggestion 2
