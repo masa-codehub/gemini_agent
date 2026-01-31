@@ -1,5 +1,9 @@
 # PR Title Template
 <type>(<scope>): <subject>
+<!-- 
+Types: feat, fix, docs, style, refactor, perf, test, chore, build, ci, revert
+Example: feat(auth): add google login support
+-->
 
 # PR Body Template
 
@@ -21,3 +25,11 @@ Closes #<Issue番号>
 
 - [ ] Unit Test:
 - [ ] Manual Check:
+
+## 品質確認 (Quality Control)
+
+- [ ] リンター・フォーマッター (`ruff`, `mypy`) のチェックを通過した
+- [ ] 不要なデバッグログやコメントアウトを削除した
+
+---
+@copilot
