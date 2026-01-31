@@ -29,7 +29,12 @@
 - [ ] **Test-Driven:** Verifiable DoD included?
 - [ ] **Negative Constraints:** "What NOT to do" defined?
 
-## 3. Findings & Required Actions
+## 3. SSOT Verification
+*(Run `ssot-verification` skill and summarize findings)*
+- [ ] **Conceptual Integrity:** No contradictions with high-level design?
+- [ ] **Logic & Trade-offs:** Consistent with past decisions?
+
+## 4. Findings & Required Actions
 *(List specific issues and concrete correction proposals)*
 
 1. **[Section Name]**
@@ -40,7 +45,7 @@
    - **Problem:** ...
    - **Fix:** ...
 
-## 4. Improvements
+## 5. Improvements
 *(List additional suggestions for better quality or efficiency, not necessarily blocking approval)*
 
 - [ ] Suggestion 1
