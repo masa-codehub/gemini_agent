@@ -27,6 +27,7 @@ description: Bootstraps new Gemini CLI agent skills by generating standard direc
 2.  **スコープ (Scope)**: "Workspace" (`./.gemini/skills/`) のみに限定。
 3.  **複雑度 (Complexity)**: "Simple"（単一ファイル）または "Advanced"（`scripts/`, `references/`, `assets/` を含む）。
 4.  **目的 (Purpose)**: 英語(English)かつ三人称での簡潔な説明。
+    *   **英語化のための確認**: 提供された目的が曖昧な場合（例:「管理する」）、具体的な動作（「作成と更新を行う」等）やトリガー条件（「〇〇について聞かれた時」）を質問し、英語にした際に意図が明確になるようにしてください。
 
 ### 2. パスとディレクトリの決定
 
