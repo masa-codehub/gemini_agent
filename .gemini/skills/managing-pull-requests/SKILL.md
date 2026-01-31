@@ -1,5 +1,5 @@
 ---
-name: github-pull-request
+name: managing-pull-requests
 description: Manages the lifecycle of GitHub Pull Requests, including creation with conventional titles and bodies, synchronization with base branches, and conflict resolution. Ensures changes are properly reviewed and verified before merging.
 ---
 
