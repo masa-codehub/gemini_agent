@@ -88,7 +88,8 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 - **Action:**
   - `assets/review-report-template.md` を使用してレビュー結果を生成する。
-  - ユーザーから保存先パスが指定されている場合は、そのパスにレポートを保存する。指定がない場合は標準出力に表示する。
+  - ユーザーから保存先パスが指定されている場合は、そのパスにレポートを保存する。
+  - **重要:** 保存の有無に関わらず、レポート内容は必ず標準出力にも表示する（ユーザーが即座に確認できるようにするため）。
   - レビューで「Request Changes」となった場合は、指摘事項を修正してから完了とする。
 
 ## テンプレート
