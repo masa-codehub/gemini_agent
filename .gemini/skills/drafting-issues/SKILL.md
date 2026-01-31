@@ -79,19 +79,20 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
   - **ファイル状態:** 構文エラーがないこと。
   - **整合性:** 定義された用語が正確に使われていること。
 
-### 7. ファイル保存 (Save to Drafts)
+### 7. ドラフトの出力 (Output Draft)
 
-**目的:** 作成した内容を物理ファイルとして出力する。
+**目的:** 作成した内容を出力する。
 
 - **Action:**
-  - 内容を `reqs/tasks/drafts/issue-{{task_id}}.md` に書き込む。
-  - ファイル名は必ず `issue-` プレフィックスと `task_id` を組み合わせること。
+  - 作成したドラフトを必ず標準出力に表示する。
+  - ユーザーから保存先パスが指定されている場合は、そのパスにファイルを保存する。
+  - 指定がない場合の推奨パス: `reqs/tasks/drafts/issue-{{task_id}}.md`
 
 ### 8. 品質レビュー (Final Quality Gate)
 
-保存されたファイルを `issue-review` スキル相当の基準で監査し、品質を保証する。
+保存された内容を監査し、品質を保証する。
 
 - **Action:**
   - `assets/review-report-template.md` を使用してレビュー結果を生成する。
   - **重要:** レポート内容は必ず標準出力に表示する。保存先が指定されている場合はファイルにも保存する。
-  - レビューで「Request Changes」となった場合は、ファイルを修正して再度保存・レビューを行う。
+  - レビューで「Request Changes」となった場合は、ドラフトを修正して再度出力・レビューを行う。
