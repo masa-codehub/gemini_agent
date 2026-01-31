@@ -28,59 +28,12 @@ fi
 echo "--- Phase 1: Initial Implementation ---"
 {
   cat .github/workflows/context/architecture-drafting.md
-  echo -e "
----
-# Current Context
-"
   cat current_issue.md
 } | gemini --yolo -m "gemini-3-flash-preview" > response.md
-
-# 2回目: 自己修正・改善 (テストのためコメントアウト)
-# echo "--- Phase 2: Refinement 1 ---"
-# {
-#   cat .github/workflows/context/architecture-drafting.md
-#   echo -e "
----
-# Current Context
-"
-#   cat current_issue.md
-#   echo -e "
----
-# Previous Response
-"
-#   cat response.md
-# } | gemini --yolo -m "gemini-3-flash-preview" > response_tmp.md
-# mv response_tmp.md response.md
-
-# 3回目: 最終調整 (テストのためコメントアウト)
-# echo "--- Phase 3: Final Refinement ---"
-# {
-#   cat .github/workflows/context/architecture-drafting.md
-#   echo -e "
----
-# Current Context
-"
-#   cat current_issue.md
-#   echo -e "
----
-# Previous Response
-"
-#   cat response.md
-# } | gemini --yolo -m "gemini-3-flash-preview" > response_tmp.md
-# mv response_tmp.md response.md
 
 # PR作成指示書とこれまでの履歴を渡して、GeminiにPR作成を任せる
 echo "--- Phase 4: PR Creation ---"
 {
   cat .github/workflows/context/pr-creation.md
-  echo -e "
----
-# Original Issue
-"
-  cat current_issue.md
-  echo -e "
----
-# Final Implementation Result
-"
   cat response.md
 } | gemini --yolo -m "gemini-3-flash-preview"
