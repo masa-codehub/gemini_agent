@@ -1,5 +1,5 @@
 ---
-name: issue-drafting
+name: drafting-issues
 description: Generates objective-oriented and verifiable Issue drafts based on templates. Ensures strict alignment with SMART goals, metadata consistency, and verifiable implementation steps.
 ---
 
