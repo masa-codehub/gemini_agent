@@ -38,7 +38,7 @@ description: 新しい Gemini CLI エージェントスキルの雛形を作成�
 ```markdown
 ---
 name: <skill-name>
-description: <purpose> (三人称で記述します。例: "ログを分析し..."。 "私は分析します" は避けてください)
+description: <purpose> (三人称、かつ英語(English)で記述します。例: "Analyzes logs..."。 "I will help analyze..." は避けてください)
 ---
 
 # <スキル タイトル>
