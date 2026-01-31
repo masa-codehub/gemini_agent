@@ -70,7 +70,7 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 **目的:** 作業場所の固定と、目標達成の証明方法。
 
-- **Branching Strategy:** `github-branch-strategy` に従い、開発の起点と作業場所を定義する。
+- **Branching Strategy:** 開発の起点と作業場所を定義する。詳細は `references/branching-strategy.md` を参照。
     - **Base Branch:** 統合先となるブランチ（通常は `main`）。
     - **Feature Branch:** 作業用ブランチ。命名規則 `<type>/task-{{task_id}}-{{subject}}` に従う（例: `feat/task-T-01-update-sequence`）。
 - **Verification & DoD:**
