@@ -13,6 +13,7 @@ description: Bootstraps new Gemini CLI agent skills by generating standard direc
 
 ```markdown
 スキルの生成状況:
+
 - [ ] 1. 情報収集 (Name, Scope, Complexity, Purpose)
 - [ ] 2. パス確定とディレクトリ作成
 - [ ] 3. テンプレートの適用とファイル生成
@@ -27,9 +28,9 @@ description: Bootstraps new Gemini CLI agent skills by generating standard direc
 2.  **スコープ (Scope)**: "Workspace" (`./.gemini/skills/`) のみに限定。
 3.  **複雑度 (Complexity)**: "Simple"（単一ファイル）または "Advanced"（`scripts/`, `references/`, `assets/` を含む）。
 4.  **目的 (Purpose)**: スキルが何を行うかの簡潔な説明。
-    *   **英語化を想定した具体化**: YAMLフロントマターの `description` は、最終的に「英語かつ三人称」で記述される必要があります。翻訳した際に意図が曖昧にならないよう、以下の点を確認・深掘りしてください。
-        *   **具体的な動作**: 「管理する (manage)」のような広範な表現を避け、「作成・更新・削除を行う」のように具体的なアクションを特定する。
-        *   **トリガー条件**: 「どのような状況やキーワードでこのスキルが選択されるべきか」を明確にする。
+    - **英語化を想定した具体化**: YAMLフロントマターの `description` は、最終的に「英語かつ三人称」で記述される必要があります。翻訳した際に意図が曖昧にならないよう、以下の点を確認・深掘りしてください。
+      - **具体的な動作**: 「管理する (manage)」のような広範な表現を避け、「作成・更新・削除を行う」のように具体的なアクションを特定する。
+      - **トリガー条件**: 「どのような状況やキーワードでこのスキルが選択されるべきか」を明確にする。
 
 ### 2. パスとディレクトリの決定
 

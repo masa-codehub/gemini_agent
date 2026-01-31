@@ -13,6 +13,7 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 ```markdown
 ドラフト作成進捗:
+
 - [ ] 1. 個別目標の定義 (SMART Goal)
 - [ ] 2. メタデータ定義 (Frontmatter)
 - [ ] 3. 目的と背景の記述 (Why & What)
@@ -61,9 +62,9 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 - **負の制約 (Negative Constraints):** 「編集してはいけないファイル」や「使用禁止の記法」を明示する。詳細は `references/negative-constraints.md` を参照。
 - **実装手順 (Changes):**
-    - 作成・編集するファイルパス。
-    - 使用するテンプレート (`assets/` 配下のテンプレート等)。
-    - ステップバイステップの具体的な指示。
+  - 作成・編集するファイルパス。
+  - 使用するテンプレート (`assets/` 配下のテンプレート等)。
+  - ステップバイステップの具体的な指示。
 - **構成変更 (Configuration):** ファイルの削除・移動がある場合のみ記述。
 
 ### 6. ブランチ戦略と検証手順 (Sections 4 & 5)
@@ -71,12 +72,15 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 **目的:** 作業場所の固定と、目標達成の証明方法。
 
 - **Branching Strategy:** 開発の起点と作業場所を定義する。詳細は `references/branching-strategy.md` を参照。
-    - **Base Branch:** 統合先となるブランチ（通常は `main`）。
-    - **Feature Branch:** 作業用ブランチ。命名規則 `<type>/task-{{task_id}}-{{subject}}` に従う（例: `feat/task-T-01-update-sequence`）。
+  - **Base Branch:** 統合先となるブランチ。
+    - 通常はコンテキストで定義されている統合ブランチを使用する。
+    - 統合ブランチを`main`にマージするための**統合Issue** の場合は`main`を使用する。（この場合、`Feature Branch`に統合ブランチを指定する）
+  - **Feature Branch:** 作業用ブランチ。命名規則 `<type>/task-{{task_id}}-{{subject}}` に従う（例: `feat/task-T-01-update-sequence`）。
+    - 統合ブランチを`main`にマージする**統合Issue** は、`Feature Branch`に統合ブランチを指定する。
 - **Verification & DoD:**
-    - **観測される挙動:** ファイルの存在、内容の非空確認。
-    - **ファイル状態:** 構文エラーがないこと。
-    - **整合性:** 定義された用語が正確に使われていること。
+  - **観測される挙動:** ファイルの存在、内容の非空確認。
+  - **ファイル状態:** 構文エラーがないこと。
+  - **整合性:** 定義された用語が正確に使われていること。
 
 ### 7. 品質レビュー (Final Quality Gate)
 

@@ -49,8 +49,7 @@ my-skill/
 ```markdown
 ---
 name: code-reviewer
-description:
-  コードレビューを行うためのスキルです。ローカルの変更とリモートの Pull Request の両方をサポートします。
+description: コードレビューを行うためのスキルです。ローカルの変更とリモートの Pull Request の両方をサポートします。
 ---
 
 # Code Reviewer
