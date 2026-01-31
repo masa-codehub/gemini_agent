@@ -2,41 +2,41 @@
 
 ## 1. 現状分析 (Current State Analysis)
 
-### A. Static Analysis Findings
-*(Run `pre-commit run --all-files` and paste key errors/warnings here)*
+### A. 静的解析の検出事項 (Static Analysis Findings)
+*(`pre-commit run --all-files` を実行し、主要なエラーや警告をここに貼り付けてください)*
 - [ ] Linter (Ruff):
 - [ ] Type Checker (Mypy):
 
-### B. Code Smell Detection
-*(Identify non-Pythonic patterns, duplication, or complexity)*
-- [ ] **Complexity:** (e.g., deeply nested loops, functions > 20 lines)
-- [ ] **Duplication:** (e.g., repeated logic in multiple functions)
-- [ ] **Naming:** (e.g., unclear variable names, non-standard casing)
+### B. コードスメルの検出 (Code Smell Detection)
+*(非Pythonicなパターン、重複、または過度な複雑性を特定してください)*
+- [ ] **複雑度 (Complexity):** (例: 深いネスト、20行を超える関数)
+- [ ] **重複 (Duplication):** (例: 複数の関数で繰り返されるロジック)
+- [ ] **命名 (Naming):** (例: 不明確な変数名、非標準的なケーシング)
 
-### C. Gap Analysis (vs SSOT/Clean Architecture)
-- [ ] **Responsibility:** (e.g., UseCase logic leaking into Controller)
-- [ ] **Dependency:** (e.g., Domain layer importing Infrastructure)
+### C. ギャップ分析 (vs SSOT/Clean Architecture)
+- [ ] **責務 (Responsibility):** (例: UseCaseロジックがControllerに漏れ出している)
+- [ ] **依存関係 (Dependency):** (例: Domain層がInfrastructure層をインポートしている)
 
 ## 2. 改善提案 (Improvement Proposals)
 
-### Priority 1: Critical (Must Fix)
-*(Type safety, bugs, major architectural violations)*
-1. Fix: ...
-2. Fix: ...
+### 優先度 1: 重要 (Critical - Must Fix)
+*(型安全性、バグ、重大なアーキテクチャ違反)*
+1. 修正: ...
+2. 修正: ...
 
-### Priority 2: Quality (Should Fix)
-*(Readability, performance, standard compliance)*
-1. Refactor: ...
-2. Rename: ...
+### 優先度 2: 品質 (Quality - Should Fix)
+*(可読性、パフォーマンス、標準準拠)*
+1. リファクタリング: ...
+2. 名称変更: ...
 
-### Priority 3: Polish (Nice to Have)
-*(Docstrings, minor stylistic adjustments)*
-1. Add: ...
+### 優先度 3: 洗練 (Polish - Nice to Have)
+*(Docstring、軽微なスタイル調整)*
+1. 追加: ...
 
 ## 3. 自己レビュー (Self-Review Checklist)
 
-- [ ] **Pythonic:** Idiomatic usage (e.g., context managers, generators)?
-- [ ] **Type Hints:** Fully typed arguments/returns? (No `Any`)
-- [ ] **Docstrings:** Google-style docstrings for public interfaces?
-- [ ] **SSOT:** Consistent with design docs and ADRs?
-- [ ] **Tests:** All tests passing (Green) after changes?
+- [ ] **Pythonic:** イディオム（コンテキストマネージャ、ジェネレータ等）を適切に使用しているか？
+- [ ] **型ヒント:** 引数と戻り値に完全な型ヒントがあるか？ (`Any` を排除)
+- [ ] **Docstrings:** 公開インターフェースにGoogleスタイルのDocstringがあるか？
+- [ ] **SSOT:** 設計ドキュメントやADRと整合しているか？
+- [ ] **テスト:** 変更後、全てのテストがパスしているか (Green)？
