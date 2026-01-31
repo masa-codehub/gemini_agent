@@ -14,6 +14,7 @@ description: Executes the complete TDD cycle (Red/Green/Refactor) for Python pro
 
 ```markdown
 TDDサイクル進捗:
+
 - [ ] 1. 準備 (Preparation & Context Load)
 - [ ] 2. Red: テストの作成と失敗確認 (Write Fail Test)
 - [ ] 3. Green: 最小限の実装とパス確認 (Make it Work)
@@ -65,12 +66,13 @@ TDDサイクル進捗:
 
 ### 5. 最終検証と納品 (Final Audit & Deliver)
 
-**目的:** 全体への影響がないことを確認し、変更を確定する。
+**目的:** 品質の最終確認を行い、納品レポートを作成する。
 
 - **Action:**
-  - **全テスト実行:** `run_shell_command{command: "pytest"}` で回帰テストを行う。
-  - **Pre-commit:** `run_shell_command{command: "pre-commit run --all-files"}` ですべてのフックを通過させる。
-  - **完了:** 全てのチェックがGreenであればタスク完了とする。
+  - `assets/refactoring-analysis-template.md` を使用して、最終的なコードの状態を記録する。
+    - 全てのテストと `pre-commit` がパスしていることを確認し、レポートに記載する。
+    - レポートは標準出力に表示し、指定があればファイルに保存する。
+  - **完了:** レポートに問題がなければタスク完了とする。
 
 ## リファレンス
 
