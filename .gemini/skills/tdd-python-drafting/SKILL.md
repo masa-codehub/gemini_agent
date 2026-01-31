@@ -51,28 +51,25 @@ TDDサイクル進捗:
   - **検証:** `pytest` を実行し、**全てパス（Green）** することを確認する。
     - コマンド: `run_shell_command{command: "pytest <test_file_path>"}`
 
-### 4. Refactor: 品質向上と静的解析 (Make it Right)
+### 4. Refactor: 構造改善と静的解析 (Make it Right)
 
-**目的:** 「動くコード」を「維持可能なコード」へ昇華させる。
-
-- **Action:**
-  - **現状分析:** `assets/refactoring-analysis-template.md` を使用して、静的解析結果やコードの改善点を分析・列挙する。
-    - 分析結果は標準出力に表示し、保存先指定があればファイルに保存する。
-  - **改善実行:** 分析に基づき、優先度の高い項目から修正を行う。
-    - **Static Analysis:** `pre-commit run --all-files` を実行し、自動修正を適用する。
-    - **Structure:** `Type Safety`, `Readability`, `SSOT` の観点で手動リファクタリングを行う。
-  - **再検証:** リファクタリング後もテストがGreenであることを確認する。
-    - テスト失敗時は `references/debugging-workflow.md` を参照して効率的に修正する。
-
-### 5. 最終検証と納品 (Final Audit & Deliver)
-
-**目的:** 品質の最終確認を行い、納品レポートを作成する。
+**目的:** 「動くコード」を「標準に準拠したコード」へ整理する。
 
 - **Action:**
-  - `assets/refactoring-analysis-template.md` を使用して、最終的なコードの状態を記録する。
-    - 全てのテストと `pre-commit` がパスしていることを確認し、レポートに記載する。
-    - レポートは標準出力に表示し、指定があればファイルに保存する。
-  - **完了:** レポートに問題がなければタスク完了とする。
+  - **Static Analysis:** `pre-commit run --all-files` を実行し、自動修正を適用する。
+  - **Cleanup:** 不要なコメントやデバッグコードを削除し、型ヒントを整理する。
+  - **再検証:** 修正後もテストがGreenであることを確認する。
+    - テスト失敗時は `references/debugging-workflow.md` を参照して修正する。
+
+### 5. 品質アセスメントと改善提案 (Quality Assessment & Proposals)
+
+**目的:** 実装結果を深く分析し、さらなる品質向上案を提示する。
+
+- **Action:**
+  - **分析:** `assets/refactoring-analysis-template.md` を使用して、実装されたコードを多角的に分析する（Pythonicさ、設計の整合性、複雑度等）。
+  - **提案:** 分析結果に基づき、さらなる改善点や将来的なリファクタリング案を列挙する。
+  - **出力:** 分析と提案の結果を必ず標準出力に表示する。指定があればファイルに保存する。
+  - **完了:** 自己レビュー項目を全てパスし、納品可能な品質であることを確認してタスク完了とする。
 
 ## リファレンス
 
