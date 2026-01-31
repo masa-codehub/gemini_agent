@@ -1,55 +1,57 @@
 ---
 name: github-pull-request
-description: Replaces the entire process from creating and managing pull requests to final verification before merging. Typical use cases: (1) Synchronizing with the base branch, checking for conflicts, and automatic rebasing, (2) Creating titles based on conventions and detailed bodies including purpose, change summary, and verification methods, (3) Managing PRs through review feedback cycles and phase promotions based on dependencies.
+description: Manages the lifecycle of GitHub Pull Requests, including creation with conventional titles and bodies, synchronization with base branches, and conflict resolution. Ensures changes are properly reviewed and verified before merging.
 ---
 
-# プルリクエストの管理 (PR Protocol)
+# GitHub Pull Request Management
 
-1. **変更のコミット (Commit):**
-   PR作成前に、未コミットの変更がある場合は `github-commit` スキルを呼び出して変更をコミットする。
-   `activate_skill{name: "github-commit"}`
+このスキルは、GitHubのプルリクエスト作成からマージ前の検証までのプロセスを管理します。
 
-2. **既存PRの確認:**
-   重複を防ぐため、`list_pull_requests` で関連する既存PRがないか確認する。
+## ワークフロー (Workflow)
 
-3. **Baseブランチとの同期と競合チェック (Sync & Conflict Check):**
-   PRを作成する前に、マージ先となる `base` ブランチの最新状態を取り込み、コンフリクトがないか確認する。
-   `run_shell_command{command: "git pull --rebase origin <base>"}`
-   - **コンフリクトが発生した場合:**
-     手動で解消し、コミット（またはrebase continue）を行ってから次の手順へ進む。
-
-4. **新規作成 (Creation):**
-   `create_pull_request` を実行する際は、以下のテンプレートを参照して `title` と `body` を指定する。
-   **`head` (作業ブランチ) と `base` (マージ先) を必ず明示的に指定すること。**
-   PR作成前に必ず思考プロセス内でテンプレートを埋め、**独自の要約や省略をせず**に `body` パラメータへ指定すること。
-
-   `create_pull_request --title "<以下のテンプレートを参照>" --body "<以下のテンプレートを参照>" --head "<head>" --base "<base>"`
-
-**PR Title テンプレート:**
+以下の手順に従って、標準化されたプルリクエストを作成・管理します。
 
 ```markdown
-<type>(<scope>): <subject>
+PR作成進捗:
+- [ ] 1. 変更のコミット確認 (Ensure Committed)
+- [ ] 2. 既存PRの確認 (Check Duplicates)
+- [ ] 3. Baseブランチとの同期 (Sync & Rebase)
+- [ ] 4. PRの作成 (Create PR using Template)
 ```
 
-**PR Body テンプレート:**
+### 1. 変更のコミット確認 (Ensure Committed)
 
-```markdown
-## 目的 (Goal)
+**目的:** PRに含めるべき変更が確実に記録されていることを保証する。
 
-<!-- なぜこの変更が必要か（背景とアウトカム） -->
+- **Action:**
+  - `git status` で未コミットの変更がないか確認する。
+  - ある場合は `activate_skill{name: "github-commit"}` を呼び出してコミットする。
 
-## 変更の概要 (Summary)
+### 2. 既存PRの確認 (Check Duplicates)
 
-<!-- 何をどのように変更したか -->
+**目的:** 重複したPRの作成を防ぐ。
 
-## 関連Issue (References)
+- **Action:**
+  - `list_pull_requests` を使用して、同じ目的のPRが既に存在しないか確認する。
 
-Closes #<Issue番号>
+### 3. Baseブランチとの同期 (Sync & Rebase)
 
-## 検証方法 (Verification)
+**目的:** 統合時のコンフリクトを未然に防ぎ、履歴を綺麗に保つ。
 
-<!-- 実施したテストや動作確認の手順と結果（ログ等） -->
+- **Action:**
+  - マージ先となる `base` ブランチ（通常は `main`）の最新状態を取り込む。
+  - `run_shell_command{command: "git pull --rebase origin <base>"}`
+  - **コンフリクト時:** 手動で解消し、解決してから次へ進む。
 
-- [ ] Unit Test:
-- [ ] Manual Check:
-```
+### 4. PRの作成 (Create PR)
+
+**目的:** レビュワーに必要な情報を過不足なく伝えるPRを作成する。
+
+- **Action:**
+  - `assets/pull-request-template.md` を参照し、`title` と `body` を作成する。
+  - **必須:** `head` (作業ブランチ) と `base` (マージ先) を明示的に指定する。
+  - `create_pull_request` ツールを呼び出す。
+
+## テンプレート
+
+PRのタイトルと本文の作成には `assets/pull-request-template.md` を使用してください。
