@@ -27,8 +27,8 @@ ADR作成プロセスを**OODAループ (Observe -> Orient -> Decide -> Act)** �
 
 1.  **ユーザーヒアリング:**
     - ユーザーが抱えている課題感、解決したいこと、制約条件を聞き出す。
-2.  **Active Reconnaissance (偵察):**
-    - `activate_skill{name: "active-reconnaissance"}`
+2.  **事実調査 (Scouting Facts):**
+    - `activate_skill{name: "scouting-facts"}`
     - 関連する既存コード、既存ADR、仕様書を調査する。
     - 「何が実装済みで、何が欠けているか」の事実（Fact）を収集する。
 
@@ -73,7 +73,7 @@ ADR作成プロセスを**OODAループ (Observe -> Orient -> Decide -> Act)** �
 
 2.  **Option B: Done (完了・PR・次へ)**
     - ドキュメントの内容にユーザーが最終承認し、ADR作成を完了する場合。
-    - `activate_skill{name: "github-pull-request"}` (PR作成)
+    - `activate_skill{name: "managing-pull-requests"}` (PR作成)
     - PR作成後、**Architecture Implementation (アーキテクチャの具体化・実装)** へ進むことを提案して終了する。
 
 ## 禁止事項 (Anti-Patterns)

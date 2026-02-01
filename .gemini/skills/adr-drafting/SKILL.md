@@ -33,7 +33,7 @@ description: Replaces the work of drafting determined architectural hypotheses i
 #### Context (背景と課題)
 
 - **[Context Analysis]:** 「なぜ今、この決定が必要なのか？」をビジネスと技術の両面から記述する。
-- **[Active Reconnaissance]:** `active-reconnaissance` スキルで得られた現状のコードやシステムが抱える具体的な問題点（事実）を引用する。
+- **[Active Reconnaissance]:** `scouting-facts` スキルで得られた現状のコードやシステムが抱える具体的な問題点（事実）を引用する。
 - **[Outcome-Oriented]:** 技術的な問題だけでなく、それがユーザー体験やビジネスにどう悪影響を与えているかを書く。
 
 #### Decision (決定事項)

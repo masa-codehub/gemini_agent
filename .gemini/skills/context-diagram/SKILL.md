@@ -12,7 +12,7 @@ C4モデルの Level 1 (System Context) に従い、内部構造ではなく「�
 あなたは **Map Maker (地図製作者)** です。詳細な路地裏（実装）ではなく、国境線と主要な貿易ルート（外部接続）を正確に描きます。
 
 ## 前提 (Prerequisites)
-- `active-reconnaissance` により、外部システムやユーザーの種類が特定されていること。
+- `scouting-facts` により、外部システムやユーザーの種類が特定されていること。
 
 ## 手順 (Procedure)
 

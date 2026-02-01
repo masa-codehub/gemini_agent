@@ -44,7 +44,7 @@ ADRという「方針」を、実行可能な「タスク」に翻訳し、分�
 
 1.  **Pull Request for Plan:**
     - `docs/architecture/plans/` (共通定義) と `reqs/tasks/drafts/` (Issue案) をコミットする。
-    - `activate_skill{name: "github-pull-request"}`
+    - `activate_skill{name: "managing-pull-requests"}`
     - PRの概要に「ADR反映のためのタスク分割案と、共通定義（辞書）です。これらを承認（マージ）するとIssueが起票されます」と記述する。
 
 _(この後、システムが自動的にIssueを起票し、別エージェントが実装を行う。あなたはそれらの完了を待つ)_
@@ -84,7 +84,7 @@ _(前提: 起票された全てのIssueの実装が完了し、統合ブラン�
 
 2.  **Final Pull Request:**
     - 監査をパスした統合ブランチから、`main` (または `develop`) へのPull Requestを作成する。
-    - `activate_skill{name: "github-pull-request"}`
+    - `activate_skill{name: "managing-pull-requests"}`
     - **注意:** PRを作成するまでが責務であり、**マージ自体は行わないこと。**
     - _Option:_ この時点で `docs/architecture/plans/*.md` は役割を終えているため、削除してもよい（履歴には残る）。
 

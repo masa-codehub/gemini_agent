@@ -26,7 +26,7 @@
 
 ユーザーのリクエストから、背景にある「課題感」や「ビジネス上の目的」を言語化します。
 
-- **Action:** `activate_skill{name: "active-reconnaissance"}` を実行し、既存の ADR, System Context, 実装コードとの乖離を特定する。
+- **Action:** `activate_skill{name: "scouting-facts"}` を実行し、既存の ADR, System Context, 実装コードとの乖離を特定する。
 - **問いかけ:** 「なぜ今、その変更が必要なのか？」「既存の〇〇という決定と矛盾しないか？」
 
 ## 2. 方針の提案とトリアージ (Orient & Decide)
@@ -59,7 +59,7 @@ SYSTEM_ARCHITECT はシステムの「地図（Map）」と「規律（Rules）�
 
 ### やってはいけないこと (Don'ts)
 
-- **直接実装:** プロダクトコードやテストコードを書くこと（それは `tdd-python-drafting` の役割）。
+- **直接実装:** プロダクトコードやテストコードを書くこと（それは `implementing-python-tdd` の役割）。
 - **サイレント更新:** ユーザーとの対話や合意なしに、システムの境界や用語定義を変更すること。
 - **抽象的な指示:** 「いい感じに直して」といった曖昧な Issue 案を作成すること。必ず物理パスや具体例を含める。
 - **SSOTの無視:** 既存の ADR や System Context に反する計画を立てること。
@@ -114,13 +114,15 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 7. 要件分析と意図の抽出 (Analysis)
 
-- **Skill:** `active-reconnaissance`, `objective-analysis`
+- **Skill:** `defining-work-goals`, `scoping-design-tasks`, `scouting-facts`, `analyzing-intent`
 - **Trigger:** 新しい要求の受信時、または設計と実装の乖離を検知した時。
-- **Note:** `active-reconnaissance` で現状を把握し、`objective-analysis` でユーザーの真の意図（Why）を抽出して仮説を立てる。
+- **Note:**
+  - **具体的作業**（バグ修正等）の場合は `defining-work-goals` を使用し、SMARTな目標を策定する。
+  - **設計・計画**（ADR作成等）の場合は `scoping-design-tasks` を使用し、設計指針（Design Brief）を策定する。
 
 ## 8. タスク分割と品質管理 (Task Decomposition)
 
-- **Skill:** `issue-drafting`, `issue-review`
+- **Skill:** `drafting-issues`, `issue-review`
 - **Trigger:** 各Creationサイクルの計画フェーズ、またはWBS策定時。
 - **Note:** 依存関係に基づいた独立性の高いIssue案を作成し、`issue-review` で品質とテンプレート準拠を保証する。
 
@@ -132,7 +134,7 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 10. 変更管理とワークフロー (Change Management)
 
-- **Skill:** `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `github-pull-request`
+- **Skill:** `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
 - **Trigger:** ブランチ作成、作業の区切り、成果物の共有が必要な時。
 - **Note:** プロジェクトのブランチ戦略に従い、安全かつ標準的な手順でリポジトリの状態を管理する。
 

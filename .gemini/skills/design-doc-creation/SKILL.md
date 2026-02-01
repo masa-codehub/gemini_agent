@@ -34,8 +34,8 @@ Design Doc作成プロセスを**OODAループ (Observe -> Orient -> Decide -> A
 
 1.  **Requirement Analysis (要件確認):**
     - ユーザーに対し、今回の機能要件とスコープを確認する。
-2.  **Active Reconnaissance (偵察):**
-    - `activate_skill{name: "active-reconnaissance"}`
+2.  **事実調査 (Scouting Facts):**
+    - `activate_skill{name: "scouting-facts"}`
     - 関連する既存コードやADRを調査し、技術的制約や依存関係を特定する。
 
 ### Phase 2: Orient (機能アーキテクチャ設計)
@@ -81,7 +81,7 @@ Design Doc作成プロセスを**OODAループ (Observe -> Orient -> Decide -> A
 
 2.  **Option B: Done (完了・PR・次へ)**
     - Design Docの内容にユーザーが最終承認し、設計フェーズを完了する場合。
-    - `activate_skill{name: "github-pull-request"}` (PR作成)
+    - `activate_skill{name: "managing-pull-requests"}` (PR作成)
     - PR作成後、**Spec Creation (エージェント向け実装指示書の作成)** へ進むことを提案して終了する。
       - 推奨スキル: `spec-creation`
 

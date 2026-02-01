@@ -18,7 +18,7 @@ description: Replaces the review process for strictly auditing specification for
 ### 1. 比較対象のロード (Load Context)
 
 - **Action:**
-  - `activate_skill{name: "active-reconnaissance"}` を実行し、Source Requirement (Issue/ADR), System Context, および Existing Specs の内容を正確に把握する。
+  - `activate_skill{name: "scouting-facts"}` を実行し、Source Requirement (Issue/ADR), System Context, および Existing Specs の内容を正確に把握する。
 
 ### 2. 共通定義の精査 (Audit Common Definitions)
 

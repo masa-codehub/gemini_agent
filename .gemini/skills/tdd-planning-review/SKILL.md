@@ -18,7 +18,7 @@ description: Replaces the review task of strictly auditing whether the created i
 ### 1. 比較対象のロード (Load Context)
 
 - **Action:**
-  - `activate_skill{name: "active-reconnaissance"}` を実行し、Source Specs, Handover, および Current Architecture の内容を正確に把握する。
+  - `activate_skill{name: "scouting-facts"}` を実行し、Source Specs, Handover, および Current Architecture の内容を正確に把握する。
 
 ### 2. 共通実装計画の精査 (Audit Common Implementation Plan)
 

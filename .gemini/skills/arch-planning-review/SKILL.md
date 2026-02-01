@@ -18,7 +18,7 @@ description: Replaces the review process for strictly auditing created architect
 ### 1. 比較対象のロード (Load Context)
 
 - **Action:**
-  - `activate_skill{name: "active-reconnaissance"}` を実行し、Source ADR, System Context, および As-Is Architecture の内容を正確に把握する。
+  - `activate_skill{name: "scouting-facts"}` を実行し、Source ADR, System Context, および As-Is Architecture の内容を正確に把握する。
 
 ### 2. 共通定義の精査 (Audit Common Definitions)
 

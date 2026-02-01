@@ -20,12 +20,12 @@ ADRを分析し、「何を描くか」だけでなく、「どう分担する�
 
 ## 手順 (Procedure)
 
-### 1. 目標設定 (Objective Setting)
+### 1. 目標設定 (SMART目標設定 (Setting SMART Goals))
 
 **目的:** 今回のPlanning活動のゴールと成功基準を明確にする。
 
 - **Action:**
-  - `activate_skill{name: "objective-setting"}`
+  - `activate_skill{name: "setting-smart-goals"}`
   - 今回のADR反映作業において、「誰に」「何を」伝えることが最も重要か（Value）を定義し、それを満たすためのSMART目標を設定する。
   - _Goal:_ 「**Spec Strategist (仕様戦略家)** が、迷わず仕様書（Specs）の分割・計画を行えるレベルのIssue案と共通定義を作成し、レビューをパスする。」
 
@@ -35,7 +35,7 @@ ADRを分析し、「何を描くか」だけでなく、「どう分担する�
 **重要:** タスクが細分化されるため、この共通定義書が唯一の頼みの綱となる。一切の曖昧さを排除せよ。
 
 - **Action:**
-  - `activate_skill{name: "active-reconnaissance"}` でADRと現状を分析し、**参照したファイルパスを記録する**。
+  - `activate_skill{name: "scouting-facts"}` でADRと現状を分析し、**参照したファイルパスを記録する**。
   - **Template:** `docs/architecture/template/arch-plan.md` を `read_file` する。
   - **Common Definitions Doc** (`docs/architecture/plans/YYYYMMDD-{feature}-plan.md`) を作成し、テンプレートの全項目を埋める。
     - **SSOT Audit Log:** 参照したADR, Context, Codeのパスを列挙する。
@@ -66,7 +66,7 @@ ADRを分析し、「何を描くか」だけでなく、「どう分担する�
 **目的:** 定義された戦略に基づき、具体的なIssue案ファイルを作成する。
 
 - **Action:**
-  - `activate_skill{name: "issue-drafting"}`
+  - `activate_skill{name: "drafting-issues"}`
   - Step 3 で定義した各タスクについて、Issue案を作成する。
   - **Mandatory:** 全てのIssue案本文に以下を含めるよう指示する：
     1.  Step 2で作成した **Common Definitions Doc へのリンク**。

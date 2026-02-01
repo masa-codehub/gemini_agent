@@ -28,12 +28,12 @@ description: Replaces the work of analyzing requirements, formulating strategies
   - `docs/handovers/arch-to-spec.md` が存在する場合、その内容を `read_file` する。
   - 前フェーズで「保留された事項」や「特に注意すべき境界」を把握し、今回のPlanningに反映させる。
 
-### 1. 目標設定 (Objective Setting)
+### 1. 目標設定 (SMART目標設定 (Setting SMART Goals))
 
 **目的:** 今回のPlanning活動のゴールと成功基準を明確にする。
 
 - **Action:**
-  - `activate_skill{name: "objective-setting"}`
+  - `activate_skill{name: "setting-smart-goals"}`
   - 今回の仕様策定において、「誰に」「何を」伝えることが最も重要か（Value）を定義し、それを満たすためのSMART目標を設定する。
   - _Goal:_ 「**Implementer (実装者)** が、迷わずTDD（テスト駆動開発）を開始できるレベルのIssue案と共通定義を作成し、レビューをパスする。」
 
@@ -42,7 +42,7 @@ description: Replaces the work of analyzing requirements, formulating strategies
 **目的:** 全タスクで統一すべき「用語」や「規約」を先に定義し、仕様間の不整合を防ぐ。
 
 - **Action:**
-  - `activate_skill{name: "active-reconnaissance"}` でIssue/ADRと現状の仕様書群を分析。
+  - `activate_skill{name: "scouting-facts"}` でIssue/ADRと現状の仕様書群を分析。
   - **Common Definitions Doc** (`docs/specs/plans/YYYYMMDD-{feature}-plan.md`) を作成し、以下を定義する。
     - **Ubiquitous Language:** 実装コード（クラス名、変数名）として使用されるべき用語の定義。
     - **Data Models:** エンティティやデータ構造の共通型定義。
@@ -78,7 +78,7 @@ description: Replaces the work of analyzing requirements, formulating strategies
 **目的:** 定義された戦略に基づき、具体的なIssue案ファイルを作成する。
 
 - **Action:**
-  - `activate_skill{name: "issue-drafting"}`
+  - `activate_skill{name: "drafting-issues"}`
   - Step 3 で定義した各タスクについて、Issue案を作成する。
   - **Mandatory:** 全てのIssue案本文に以下を含めるよう指示する：
     1.  Step 2で作成した **Common Definitions Doc へのリンク**。

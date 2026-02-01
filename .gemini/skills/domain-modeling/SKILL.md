@@ -14,7 +14,7 @@ ADR（意思決定）、Design Doc（設計）、System Context（全体像）�
 
 ## 前提 (Prerequisites)
 
-- `active-reconnaissance` 等により、解決すべき課題や対象領域が明確になっていること。
+- `scouting-facts` 等により、解決すべき課題や対象領域が明確になっていること。
 
 ## 手順 (Procedure)
 
