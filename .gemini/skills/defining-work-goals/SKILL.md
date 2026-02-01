@@ -6,7 +6,7 @@ description: Orchestrates the definition of SMART goals for concrete implementat
 # 作業目標策定オーケストレーション (Defining Work Goals)
 
 具体的な実装作業や修正タスクにおいて、ユーザーの依頼を「実行可能で検証可能な具体的目標（SMARTゴール）」に変換するプロセスを統括するスキル。
-`scouting-facts` (調査)、`analyzing-intent` (分析)、`setting-smart-goals` (目標設定) を連携させ、即座に作業を開始できるレベルまで具体化します。
+調査から目標設定までを自律的にループさせ、エージェント自身で完結可能な計画を立てることを最優先とする。
 
 ## 役割定義 (Role Definition)
 
@@ -24,16 +24,26 @@ description: Orchestrates the definition of SMART goals for concrete implementat
 
 ### 1. 事実の収集 (Reconnaissance Phase)
 - `activate_skill{name: "scouting-facts"}` を実行し、コードやSSOTの現状を把握する。
+- **自律判断:** 調査結果（レポート）が不十分（推測が多い、ファイルが見つからない）な場合は、キーワードを変えて**再調査**を行う。
 
 ### 2. 意図の分析と仮説 (Analysis Phase)
-- `activate_skill{name: "analyzing-intent"}` を実行し、ユーザーの真の意図と解決策の仮説を立てる。
+- `activate_skill{name: "analyzing-intent"}` を実行する。
+- **入力:** Step 1 の `Reconnaissance Report` をインプットとして使用する。
+- **自律判断:**
+  - 提示された仮説が「実現不可能」または「リスク大」と判定された場合、ユーザーに聞くのではなく、Step 1 に戻って**代替手段を調査**する。
+  - 「事実」と「仮説」の間に論理的飛躍がないか確認する。
 
 ### 3. 具体的目標の設定 (Goal Setting Phase)
-- `activate_skill{name: "setting-smart-goals"}` を実行し、機械的に検証可能なSMARTゴール（Goal Definition）を作成する。
+- `activate_skill{name: "setting-smart-goals"}` を実行する。
+- **入力:** Step 2 の `Analysis Report`（特に推奨案）をインプットとして使用する。
+- **アクション:**
+  - 最も確実性の高い仮説を採用し、機械的に検証可能なSMARTゴール（Goal Definition）を作成する。
 
 ### 4. 最終監査 (Final Audit)
-- 導き出された目標が事実に基づき、かつ検証可能であることを最終確認する。
+- 導き出された目標が、最初の「事実」に基づき、かつ「検証可能」であることを最終確認する。
+- **Retry:** 目標に曖昧さが残る場合は、Step 3 を再実行させる。
 
 ## 完了条件 (Definition of Done)
 
-- ユーザーに対し、検証コマンドを含む `Goal Definition` を提示し、作業開始の承認を得ること。
+- 検証コマンドを含む `Goal Definition` が完成しており、それが実行可能であると論理的に説明できる状態。
+- ユーザーに対し、完成した定義書を提示し、作業開始の承認を得ること。

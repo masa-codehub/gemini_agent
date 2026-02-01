@@ -6,7 +6,7 @@ description: Defines the scope and direction for design and planning tasks (ADRs
 # 設計スコープ策定オーケストレーション (Scoping Design Tasks)
 
 ADR作成、システムコンテキストの更新、詳細仕様策定などの「設計・計画タスク」において、その方向性と検討すべき論点を明確にするスキル。
-`scouting-facts` (調査) と `analyzing-intent` (分析) を連携させ、後続の各種 `*-creation` スキルへの最適なインプット（設計指針）を作成します。
+不確実性が高い領域のため、ユーザーとの**対話**を通じて合意形成を図りながら進行する。
 
 ## 役割定義 (Role Definition)
 
@@ -18,8 +18,8 @@ ADR作成、システムコンテキストの更新、詳細仕様策定など�
 全体の進捗:
 - [ ] 1. 現場の事実調査 (Reconnaissance Phase)
 - [ ] 2. 設計課題と仮説の分析 (Analysis Phase)
-- [ ] 3. 設計指針の策定 (Design Scoping Phase)
-- [ ] 4. 最終監査 (Final Audit)
+- [ ] 3. 対話と合意形成 (Dialogue Phase)
+- [ ] 4. 設計指針の策定 (Design Scoping Phase)
 ```
 
 ### 1. 現場の事実調査 (Reconnaissance Phase)
@@ -27,14 +27,20 @@ ADR作成、システムコンテキストの更新、詳細仕様策定など�
 
 ### 2. 設計課題と仮説の分析 (Analysis Phase)
 - `activate_skill{name: "analyzing-intent"}` を実行し、5W1H分析、Gap分析、および多角的な設計仮説（Options）を立案する。
+- **入力:** Step 1 の `Reconnaissance Report` を使用する。
 
-### 3. 設計指針の策定 (Design Scoping Phase)
-- 分析結果を元に、`assets/design-brief-template.md` を使用して設計指針を作成する。
-- 具体的アクション（実装）ではなく、検討すべき論点や、ドキュメントに含めるべき内容を特定する。
+### 3. 対話と合意形成 (Dialogue Phase)
+- **アクション:**
+  - `Analysis Report` で特定された「論点」「トレードオフ」「不明点 (Unknowns)」について、ユーザーに質問を投げかける。
+  - エージェントが独断で決めるのではなく、ユーザーの意向（優先すべき価値観など）を確認する。
+  - 必要に応じて Step 1 (再調査) や Step 2 (再分析) に戻る。
 
-### 4. 最終監査 (Final Audit)
-- 策定されたスコープが、プロジェクトのビジョンや既存のADR群と整合しているかを確認する。
+### 4. 設計指針の策定 (Design Scoping Phase)
+- ユーザーとの合意事項を元に、`assets/design-brief-template.md` を使用して設計指針を作成する。
+- **入力:** Step 2 のレポートと、Step 3 の対話結果。
+- **Output:**
+  - 後続の `*-creation` スキル（ADR作成など）が迷わず作業できるレベルの「発注書」として仕上げる。
 
 ## 完了条件 (Definition of Done)
 
-- ユーザーに対し、`Analysis Report` と `Design Brief` を提示し、後続の設計フェーズ（`adr-creation` 等）へ進むことの合意を得ること。
+- ユーザーに対し、`Design Brief` を提示し、後続の設計フェーズへ進むことの合意を得ること。
