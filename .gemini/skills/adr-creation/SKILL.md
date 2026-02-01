@@ -73,7 +73,7 @@ ADR作成プロセスを**OODAループ (Observe -> Orient -> Decide -> Act)** �
 
 2.  **Option B: Done (完了・PR・次へ)**
     - ドキュメントの内容にユーザーが最終承認し、ADR作成を完了する場合。
-    - `activate_skill{name: "github-pull-request"}` (PR作成)
+    - `activate_skill{name: "managing-pull-requests"}` (PR作成)
     - PR作成後、**Architecture Implementation (アーキテクチャの具体化・実装)** へ進むことを提案して終了する。
 
 ## 禁止事項 (Anti-Patterns)

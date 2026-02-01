@@ -44,7 +44,7 @@ description: Replaces the entire process of translating high-level designs (Arch
 
 1.  **Pull Request for Plan:**
     - `docs/specs/plans/` (共通定義) と `reqs/tasks/drafts/` (Issue案) をコミットする。
-    - `activate_skill{name: "github-pull-request"}`
+    - `activate_skill{name: "managing-pull-requests"}`
     - PRの概要に「上位設計反映のための仕様策定計画（共通定義）とタスク分割案です。これらを承認（マージ）するとIssueが起票されます」と明記し、承認を求める。
 
 _(この後、システムが自動的にIssueを起票し、別エージェントが仕様書の執筆を行う。あなたはそれらの完了を待つ)_
@@ -86,7 +86,7 @@ _(前提: 起票された全てのIssueが完了し、統合ブランチにマ�
 
 2.  **Final Pull Request:**
     - 監査をパスした統合ブランチから、`main` (または `develop`) へのPull Requestを作成する。
-    - `activate_skill{name: "github-pull-request"}`
+    - `activate_skill{name: "managing-pull-requests"}`
     - **注意:** PRを作成するまでが責務であり、**マージ自体は行わないこと。**
     - _Option:_ この時点で `docs/specs/plans/*.md` は役割を終えているため、削除してもよい（履歴には残る）。
 

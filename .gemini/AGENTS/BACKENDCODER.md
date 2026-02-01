@@ -89,9 +89,9 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 詳細仕様書（Specs）に基づき、TDDサイクルを回して機能を実装します。
 
-- **Skill:** `tdd-python-drafting`, `objective-analysis`
+- **Skill:** `implementing-python-tdd`, `objective-analysis`
 - **Trigger:** 新しい機能Issueがアサインされた時。
-- **Note:** `objective-analysis` で実装要件と仕様を正確に把握し、`tdd-python-drafting` でRed/Greenサイクルを確実に実行する。
+- **Note:** `objective-analysis` で実装要件と仕様を正確に把握し、`implementing-python-tdd` でRed/Greenサイクルを確実に実行する。
 
 ## 2. リファクタリング (Refactoring)
 
@@ -121,7 +121,7 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 作業開始時の現状分析から、ブランチ作成、コミット、プルリクエスト作成までの一連のプロセスを管理します。
 
-- **Skill:** `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `github-pull-request`
+- **Skill:** `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
 - **Trigger:** タスクの開始時、作業の区切り、成果物の共有が必要な時。
 - **Note:** `active-reconnaissance` でコードベースの現状を把握し、Git関連スキルを用いて安全かつ標準的な手順で作業を進める。
 

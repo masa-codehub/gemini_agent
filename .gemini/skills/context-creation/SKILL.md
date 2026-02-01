@@ -84,7 +84,7 @@ description: Replaces the process of defining the system's overall picture (SSOT
 
 2.  **Option B: Done (完了・PR・次へ)**
     - 内容が承認され、SSOTの更新を完了する場合。
-    - `activate_skill{name: "github-pull-request"}` (PR作成)
+    - `activate_skill{name: "managing-pull-requests"}` (PR作成)
     - **Retrospective:**
       `activate_skill{name: "retrospective"}`
       - ドキュメント維持プロセスの効率と品質を振り返る。

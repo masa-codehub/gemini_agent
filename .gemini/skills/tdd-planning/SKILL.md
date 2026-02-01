@@ -59,7 +59,7 @@ description: Replaces the implementation strategy formulation work of analyzing 
   - **Output Definition:** 次のステップのために、以下の構成案を確定する。
     1.  **Draft Issue List:** 作成するIssue案のタイトルとファイル名（例: `tdd-usecase-registration.md`）。
     2.  **Output Directory:** `reqs/tasks/drafts/{starting_doc_name}/` (例: `reqs/tasks/drafts/spec-005-registration/`)。
-    3.  **TDD Scenarios (Critical):** 実装者が `tdd-python-drafting` スキルで使用する具体的な Red/Green シナリオ。
+    3.  **TDD Scenarios (Critical):** 実装者が `implementing-python-tdd` スキルで使用する具体的な Red/Green シナリオ。
 
     **Example:**
     - Directory: `reqs/tasks/drafts/spec-005-registration/`
@@ -73,7 +73,7 @@ description: Replaces the implementation strategy formulation work of analyzing 
 **目的:** 定義された戦略に基づき、具体的なIssue案ファイルを作成する。
 
 - **Action:**
-  - `activate_skill{name: "issue-drafting"}`
+  - `activate_skill{name: "drafting-issues"}`
   - Step 3 で定義した各タスクについて、Issue案を作成する。
   - **Mandatory:** 全てのIssue案本文に以下を含めるよう指示する：
     1.  Step 2で作成した **Common Implementation Plan へのリンク**。

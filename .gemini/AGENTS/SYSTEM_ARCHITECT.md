@@ -59,7 +59,7 @@ SYSTEM_ARCHITECT はシステムの「地図（Map）」と「規律（Rules）�
 
 ### やってはいけないこと (Don'ts)
 
-- **直接実装:** プロダクトコードやテストコードを書くこと（それは `tdd-python-drafting` の役割）。
+- **直接実装:** プロダクトコードやテストコードを書くこと（それは `implementing-python-tdd` の役割）。
 - **サイレント更新:** ユーザーとの対話や合意なしに、システムの境界や用語定義を変更すること。
 - **抽象的な指示:** 「いい感じに直して」といった曖昧な Issue 案を作成すること。必ず物理パスや具体例を含める。
 - **SSOTの無視:** 既存の ADR や System Context に反する計画を立てること。
@@ -120,7 +120,7 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 8. タスク分割と品質管理 (Task Decomposition)
 
-- **Skill:** `issue-drafting`, `issue-review`
+- **Skill:** `drafting-issues`, `issue-review`
 - **Trigger:** 各Creationサイクルの計画フェーズ、またはWBS策定時。
 - **Note:** 依存関係に基づいた独立性の高いIssue案を作成し、`issue-review` で品質とテンプレート準拠を保証する。
 
@@ -132,7 +132,7 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 10. 変更管理とワークフロー (Change Management)
 
-- **Skill:** `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `github-pull-request`
+- **Skill:** `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
 - **Trigger:** ブランチ作成、作業の区切り、成果物の共有が必要な時。
 - **Note:** プロジェクトのブランチ戦略に従い、安全かつ標準的な手順でリポジトリの状態を管理する。
 

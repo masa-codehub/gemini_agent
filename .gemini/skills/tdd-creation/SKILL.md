@@ -44,7 +44,7 @@ description: Replaces the entire process of formulating implementation plans and
 
 1.  **Pull Request for Plan:**
     - `docs/implementation/plans/` (共通計画) と `reqs/tasks/drafts/` (Issue案) をコミットする。
-    - `activate_skill{name: "github-pull-request"}`
+    - `activate_skill{name: "managing-pull-requests"}`
     - PRの概要に「仕様反映のための実装計画（共通方針）とタスク分割案です。これらを承認（マージ）すると、TDDによる実装タスク（Issue）が自動起票されます」と明記し、承認を求める。
 
 _(この後、システムが自動的にIssueを起票し、別エージェントが `tdd-implementation` スキルを用いて実装を行う。あなたはそれらの完了を待つ)_
@@ -91,7 +91,7 @@ _(前提: 起票された全てのIssueが完了し、統合ブランチにマ�
 
     - 監査をパスした統合ブランチから、`main` (または `develop`) へのPull Requestを作成する。
 
-    - `activate_skill{name: "github-pull-request"}`
+    - `activate_skill{name: "managing-pull-requests"}`
 
     - **注意:** PRを作成するまでが責務であり、**マージ自体は行わないこと。**
 

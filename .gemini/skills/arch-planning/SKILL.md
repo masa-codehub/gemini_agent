@@ -66,7 +66,7 @@ ADRを分析し、「何を描くか」だけでなく、「どう分担する�
 **目的:** 定義された戦略に基づき、具体的なIssue案ファイルを作成する。
 
 - **Action:**
-  - `activate_skill{name: "issue-drafting"}`
+  - `activate_skill{name: "drafting-issues"}`
   - Step 3 で定義した各タスクについて、Issue案を作成する。
   - **Mandatory:** 全てのIssue案本文に以下を含めるよう指示する：
     1.  Step 2で作成した **Common Definitions Doc へのリンク**。

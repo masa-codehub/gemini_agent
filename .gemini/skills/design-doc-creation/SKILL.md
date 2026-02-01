@@ -81,7 +81,7 @@ Design Doc作成プロセスを**OODAループ (Observe -> Orient -> Decide -> A
 
 2.  **Option B: Done (完了・PR・次へ)**
     - Design Docの内容にユーザーが最終承認し、設計フェーズを完了する場合。
-    - `activate_skill{name: "github-pull-request"}` (PR作成)
+    - `activate_skill{name: "managing-pull-requests"}` (PR作成)
     - PR作成後、**Spec Creation (エージェント向け実装指示書の作成)** へ進むことを提案して終了する。
       - 推奨スキル: `spec-creation`
 

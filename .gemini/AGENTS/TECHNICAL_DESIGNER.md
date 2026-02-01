@@ -113,7 +113,7 @@ SYSTEM_ARCHITECTが決定した方針（ADR/Design Doc）に基づき、実装�
 
 作業開始時の現状分析から、ブランチ作成、コミット、プルリクエスト作成までの一連のプロセスを管理します。
 
-- **Skill:** `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `github-pull-request`
+- **Skill:** `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
 - **Trigger:** タスクの開始時、作業の区切り、成果物の共有が必要な時。
 - **Note:** `active-reconnaissance` でSSOTと現状の乖離を特定し、GitHub関連のスキルを用いて安全かつ標準的な手順で変更をリポジトリに反映する。
 
