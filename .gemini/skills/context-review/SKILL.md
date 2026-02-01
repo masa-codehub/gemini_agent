@@ -15,7 +15,7 @@ description: Replaces the task of auditing whether the updated system context ac
 ## 前提 (Prerequisites)
 
 - システムコンテキストのドラフト (`context-drafting` の成果物) が存在すること。
-- 最新のコードベースの状態が把握できていること（`active-reconnaissance` 済みであること）。
+- 最新のコードベースの状態が把握できていること（`scouting-facts` 済みであること）。
 
 ## 手順 (Procedure)
 

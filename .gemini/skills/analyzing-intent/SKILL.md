@@ -1,9 +1,9 @@
 ---
-name: objective-analysis
+name: analyzing-intent
 description: Infers user intent and formulates multi-perspective hypotheses based on factual Reconnaissance Reports. Performs gap analysis and identifies critical risks to define the "Why" and "How" before setting goals.
 ---
 
-# 目的分析 (Objective Analysis)
+# 意図分析 (Analyzing Intent)
 
 収集された事実（Reconnaissance Report）とユーザーの依頼を統合し、表面的な言葉の裏にある「真の意図（Why）」を推測し、解決策の仮説を立てるスキル。
 このステップでは「何を目指すべきか」の解釈を加え、目標設定のための論理的な土台を構築することを目的とする。
@@ -64,4 +64,4 @@ description: Infers user intent and formulates multi-perspective hypotheses base
 
 ## 完了後のアクション
 
-レポートを出力した後、ユーザーに「分析と仮説の立案が完了した」ことを伝え、次のステップ（`objective-setting` による目標設定）に進むか、不足情報の確認を行うか提案してください。
+レポートを出力した後、ユーザーに「分析と仮説の立案が完了した」ことを伝え、次のステップ（`setting-smart-goals` による目標設定）に進むか、不足情報の確認を行うか提案してください。

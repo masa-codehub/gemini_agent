@@ -6,7 +6,7 @@ description: Orchestrates the definition of SMART goals for concrete implementat
 # 作業目標策定オーケストレーション (Defining Work Goals)
 
 具体的な実装作業や修正タスクにおいて、ユーザーの依頼を「実行可能で検証可能な具体的目標（SMARTゴール）」に変換するプロセスを統括するスキル。
-`active-reconnaissance` (調査)、`objective-analysis` (分析)、`objective-setting` (目標設定) を連携させ、即座に作業を開始できるレベルまで具体化します。
+`scouting-facts` (調査)、`analyzing-intent` (分析)、`setting-smart-goals` (目標設定) を連携させ、即座に作業を開始できるレベルまで具体化します。
 
 ## 役割定義 (Role Definition)
 
@@ -23,13 +23,13 @@ description: Orchestrates the definition of SMART goals for concrete implementat
 ```
 
 ### 1. 事実の収集 (Reconnaissance Phase)
-- `activate_skill{name: "active-reconnaissance"}` を実行し、コードやSSOTの現状を把握する。
+- `activate_skill{name: "scouting-facts"}` を実行し、コードやSSOTの現状を把握する。
 
 ### 2. 意図の分析と仮説 (Analysis Phase)
-- `activate_skill{name: "objective-analysis"}` を実行し、ユーザーの真の意図と解決策の仮説を立てる。
+- `activate_skill{name: "analyzing-intent"}` を実行し、ユーザーの真の意図と解決策の仮説を立てる。
 
 ### 3. 具体的目標の設定 (Goal Setting Phase)
-- `activate_skill{name: "objective-setting"}` を実行し、機械的に検証可能なSMARTゴール（Goal Definition）を作成する。
+- `activate_skill{name: "setting-smart-goals"}` を実行し、機械的に検証可能なSMARTゴール（Goal Definition）を作成する。
 
 ### 4. 最終監査 (Final Audit)
 - 導き出された目標が事実に基づき、かつ検証可能であることを最終確認する。

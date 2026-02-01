@@ -23,7 +23,7 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 - [ ] 8. 品質レビュー (Final Quality Gate)
 ```
 
-### 1. 個別目標の定義 (Objective Setting)
+### 1. 個別目標の定義 (SMART目標設定 (Setting SMART Goals))
 
 **目的:** このタスク（Issue）単体で達成すべき成果を明確化する。
 

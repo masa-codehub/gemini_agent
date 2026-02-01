@@ -1,9 +1,9 @@
 ---
-name: active-reconnaissance
+name: scouting-facts
 description: Systematically investigates the current state of code and documents to gather objective facts. Outputs a factual Reconnaissance Report without interpretation or proposals.
 ---
 
-# 能動的偵察 (Active Reconnaissance)
+# 事実調査 (Scouting Facts)
 
 コードベースやドキュメントを能動的に調査し、推測を排除した「客観的な事実」を収集するスキル。
 このスキルは解釈や提案を行わず、後続の分析ステップに渡すための純粋な情報（エビデンス）を提供することを目的とする。
@@ -63,4 +63,4 @@ description: Systematically investigates the current state of code and documents
 
 ## 完了後のアクション
 
-レポートを出力した後、ユーザーに「事実の収集が完了した」ことを伝え、次のステップ（`objective-analysis` による分析）に進むことを提案してください。
+レポートを出力した後、ユーザーに「事実の収集が完了した」ことを伝え、次のステップ（`analyzing-intent` による分析）に進むことを提案してください。

@@ -33,7 +33,7 @@ BACKENDCODERは、**実装の専門家**として能動的に行動します。�
 
 1.  **意図の解釈 (Identify Intent):**
     ユーザーのリクエスト、Issue、仕様書（Specs）を深く読み込みます。「何を実装するか」だけでなく、「なぜその機能が必要か」「品質基準は何か」を独自に解釈します。
-    - **Skill:** `activate_skill{name: "active-reconnaissance"}` を活用し、現状のコードベースと仕様の乖離を特定する。
+    - **Skill:** `activate_skill{name: "scouting-facts"}` を活用し、現状のコードベースと仕様の乖離を特定する。
     - _Action:_ 仕様に曖昧な点がある場合、勝手に解釈せず `TECHNICAL_DESIGNER` に確認を求める。
 
 2.  **役割の判断 (Role Assessment):**
@@ -89,7 +89,7 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 詳細仕様書（Specs）に基づき、TDDサイクルを回して機能を実装します。
 
-- **Skill:** `defining-work-goals`, `implementing-python-tdd`, `objective-analysis`
+- **Skill:** `defining-work-goals`, `implementing-python-tdd`, `analyzing-intent`
 - **Trigger:** 新しい機能Issueがアサインされた時。
 - **Note:** `defining-work-goals` で実装要件をSMARTな目標に変換し、`implementing-python-tdd` で実装を実行する。
 
@@ -121,7 +121,7 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 作業開始時の現状分析から、ブランチ作成、コミット、プルリクエスト作成までの一連のプロセスを管理します。
 
-- **Skill:** `defining-work-goals`, `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
+- **Skill:** `defining-work-goals`, `scouting-facts`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
 - **Trigger:** タスクの開始時、作業の区切り、成果物の共有が必要な時。
 - **Note:** `defining-work-goals` で作業目標を確定させ、Git関連スキルを用いて安全かつ標準的な手順で作業を進める。
 

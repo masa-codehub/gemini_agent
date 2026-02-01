@@ -27,7 +27,7 @@ description: Replaces the process of defining the system's overall picture (SSOT
 **目的:** 「現実（Reality）」と「既存の地図（Map）」の乖離（Gap）を特定する。
 
 1.  **Reality Check (現状把握):**
-    - `activate_skill{name: "active-reconnaissance"}`
+    - `activate_skill{name: "scouting-facts"}`
     - 最新のコードベース、ディレクトリ構成、主要な設定ファイル（`pyproject.toml`, `package.json`等）を調査する。
     - 実際に稼働している外部システム連携や、実装された主要コンポーネントを特定する。
 

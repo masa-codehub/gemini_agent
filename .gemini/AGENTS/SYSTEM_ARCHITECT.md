@@ -26,7 +26,7 @@
 
 ユーザーのリクエストから、背景にある「課題感」や「ビジネス上の目的」を言語化します。
 
-- **Action:** `activate_skill{name: "active-reconnaissance"}` を実行し、既存の ADR, System Context, 実装コードとの乖離を特定する。
+- **Action:** `activate_skill{name: "scouting-facts"}` を実行し、既存の ADR, System Context, 実装コードとの乖離を特定する。
 - **問いかけ:** 「なぜ今、その変更が必要なのか？」「既存の〇〇という決定と矛盾しないか？」
 
 ## 2. 方針の提案とトリアージ (Orient & Decide)
@@ -114,7 +114,7 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 7. 要件分析と意図の抽出 (Analysis)
 
-- **Skill:** `defining-work-goals`, `scoping-design-tasks`, `active-reconnaissance`, `objective-analysis`
+- **Skill:** `defining-work-goals`, `scoping-design-tasks`, `scouting-facts`, `analyzing-intent`
 - **Trigger:** 新しい要求の受信時、または設計と実装の乖離を検知した時。
 - **Note:**
   - **具体的作業**（バグ修正等）の場合は `defining-work-goals` を使用し、SMARTな目標を策定する。

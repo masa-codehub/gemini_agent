@@ -34,8 +34,8 @@ Design Doc作成プロセスを**OODAループ (Observe -> Orient -> Decide -> A
 
 1.  **Requirement Analysis (要件確認):**
     - ユーザーに対し、今回の機能要件とスコープを確認する。
-2.  **Active Reconnaissance (偵察):**
-    - `activate_skill{name: "active-reconnaissance"}`
+2.  **事実調査 (Scouting Facts):**
+    - `activate_skill{name: "scouting-facts"}`
     - 関連する既存コードやADRを調査し、技術的制約や依存関係を特定する。
 
 ### Phase 2: Orient (機能アーキテクチャ設計)

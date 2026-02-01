@@ -1,9 +1,9 @@
 ---
-name: objective-setting
+name: setting-smart-goals
 description: Translates analyzed intent into concrete, SMART goals for agent execution. Defines expected outcomes and mechanical verification methods (DoD) to ensure autonomous completion.
 ---
 
-# 目標設定 (Objective Setting)
+# SMART目標設定 (Setting SMART Goals)
 
 分析結果（Analysis Report）に基づき、エージェントが自律的に実行可能な具体的目標（SMART）と、完了を客観的に証明するための検証条件（DoD）を定義するスキル。
 このステップでは「何をどう達成するか」を、一切の曖昧さを排して確定させることを目的とする。
