@@ -47,7 +47,7 @@ description: Replaces the entire process of formulating implementation plans and
     - `activate_skill{name: "managing-pull-requests"}`
     - PRの概要に「仕様反映のための実装計画（共通方針）とタスク分割案です。これらを承認（マージ）すると、TDDによる実装タスク（Issue）が自動起票されます」と明記し、承認を求める。
 
-_(この後、システムが自動的にIssueを起票し、別エージェントが `tdd-implementation` スキルを用いて実装を行う。あなたはそれらの完了を待つ)_
+_(この後、システムが自動的にIssueを起票し、別エージェントが `implementing-python-tdd` スキルを用いて実装を行う。あなたはそれらの完了を待つ)_
 
 ### Phase 3: Audit & Correction (監査と是正)
 
@@ -60,7 +60,7 @@ _(前提: 起票された全てのIssueが完了し、統合ブランチにマ�
       1.  **詳細仕様 (Specs):** 全ての要件、エラーハンドリング、バリデーションが実装されているか。
       2.  **共通実装計画 (Common Implementation Plan):** 定義された方針、レイヤー構造に従っているか。
     - **Verification Action:** 言語に応じた検証スキルを実行し、全テストがGreenであることを確認する。
-      - **Python:** `activate_skill{name: "python-verification"}` を使用する。
+      - **Python:** `implementing-python-tdd` の検証フェーズを利用する。
       - **Others:** `run_shell_command` で適切なテストコマンドを実行する。
 
 2.  **Create Handover Items (Next Step):**

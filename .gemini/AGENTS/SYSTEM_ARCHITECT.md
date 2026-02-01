@@ -122,9 +122,9 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 8. タスク分割と品質管理 (Task Decomposition)
 
-- **Skill:** `drafting-issues`, `issue-review`
+- **Skill:** `drafting-issues`
 - **Trigger:** 各Creationサイクルの計画フェーズ、またはWBS策定時。
-- **Note:** 依存関係に基づいた独立性の高いIssue案を作成し、`issue-review` で品質とテンプレート準拠を保証する。
+- **Note:** 依存関係に基づいた独立性の高いIssue案を作成し、テンプレート準拠と品質を意識して記述する。
 
 ## 9. 概念的一貫性の監査とフィードバック (Audit & Review)
 
