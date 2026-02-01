@@ -40,8 +40,13 @@ description: Orchestrates the definition of SMART goals for concrete implementat
   - 最も確実性の高い仮説を採用し、機械的に検証可能なSMARTゴール（Goal Definition）を作成する。
 
 ### 4. 最終監査 (Final Audit)
-- `assets/final-audit-template.md` を使用して、策定された目標の品質をチェックする。
-- **Retry:** 監査で問題が見つかった場合は、指摘内容に応じて Step 1 (再調査) または Step 3 (再設定) を実行させる。
+- 導き出された目標が、後工程（実行フェーズ）にとって最適なインプットになっているかを確認する。
+- **Action:**
+  - タスクの種類に応じて、以下のテンプレートを使用して監査を行う。
+    - **実装・コーディング:** `assets/audit-for-implementation.md`
+    - **ドキュメント記述:** `assets/audit-for-design.md`
+    - **計画策定:** `assets/audit-for-planning.md`
+  - **Retry:** 監査で問題が見つかった場合は、指摘内容に応じて Step 1 (再調査) または Step 3 (再設定) を実行させる。
 
 ## 完了条件 (Definition of Done)
 
