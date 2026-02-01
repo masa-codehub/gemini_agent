@@ -20,6 +20,7 @@ ADR作成、システムコンテキストの更新、詳細仕様策定など�
 - [ ] 2. 設計課題と仮説の分析 (Analysis Phase)
 - [ ] 3. 対話と合意形成 (Dialogue Phase)
 - [ ] 4. 設計指針の策定 (Design Scoping Phase)
+- [ ] 5. 最終監査 (Final Audit)
 ```
 
 ### 1. 現場の事実調査 (Reconnaissance Phase)
@@ -40,6 +41,13 @@ ADR作成、システムコンテキストの更新、詳細仕様策定など�
 - **入力:** Step 2 のレポートと、Step 3 の対話結果。
 - **Output:**
   - 後続の `*-creation` スキル（ADR作成など）が迷わず作業できるレベルの「発注書」として仕上げる。
+
+### 5. 最終監査 (Final Audit)
+- タスクの種類に応じて、以下のテンプレートを使用して監査を行う。
+  - **ADR / Design Doc:** `assets/audit-architecture.md`
+  - **Specification:** `assets/audit-specification.md`
+  - **TDD Planning:** `assets/audit-tdd-plan.md`
+- **判定:** 監査をクリアした場合のみ、ユーザーに提示して承認を求める。クリアできない場合は Step 2 または 3 に戻る。
 
 ## 完了条件 (Definition of Done)
 
