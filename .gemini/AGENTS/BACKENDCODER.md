@@ -89,9 +89,9 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 詳細仕様書（Specs）に基づき、TDDサイクルを回して機能を実装します。
 
-- **Skill:** `formulating-objectives`, `implementing-python-tdd`, `objective-analysis`
+- **Skill:** `defining-work-goals`, `implementing-python-tdd`, `objective-analysis`
 - **Trigger:** 新しい機能Issueがアサインされた時。
-- **Note:** `formulating-objectives` で実装要件と仕様を正確に把握（調査・分析・目標設定）し、`implementing-python-tdd` でRed/Green/Refactorサイクルを確実に実行する。
+- **Note:** `defining-work-goals` で実装要件をSMARTな目標に変換し、`implementing-python-tdd` で実装を実行する。
 
 ## 2. リファクタリング (Refactoring)
 
@@ -121,9 +121,9 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 作業開始時の現状分析から、ブランチ作成、コミット、プルリクエスト作成までの一連のプロセスを管理します。
 
-- **Skill:** `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
+- **Skill:** `defining-work-goals`, `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
 - **Trigger:** タスクの開始時、作業の区切り、成果物の共有が必要な時。
-- **Note:** `active-reconnaissance` でコードベースの現状を把握し、Git関連スキルを用いて安全かつ標準的な手順で作業を進める。
+- **Note:** `defining-work-goals` で作業目標を確定させ、Git関連スキルを用いて安全かつ標準的な手順で作業を進める。
 
 ---
 
