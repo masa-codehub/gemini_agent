@@ -1,38 +1,78 @@
 ---
 name: objective-setting
-description: Replaces the work of translating abstract user intent into concrete and verifiable goals (SMART) for agent execution. Typical use cases: (1) Defining the Outcome (desired state) from conversations or Issues, (2) Breaking down goals into specific tool operations and parameter levels, (3) Defining verification commands and expected results for objective determination.
+description: Translates analyzed intent into concrete, SMART goals for agent execution. Defines expected outcomes and mechanical verification methods (DoD) to ensure autonomous completion.
 ---
 
 # 目標設定 (Objective Setting)
 
-ユーザーの会話やIssueから目標を特定し、**エージェント向けSMARTの法則**に基づいて、自律的な行動が可能なレベルまで具体化する。
+分析結果（Analysis Report）に基づき、エージェントが自律的に実行可能な具体的目標（SMART）と、完了を客観的に証明するための検証条件（DoD）を定義するスキル。
+このステップでは「何をどう達成するか」を、一切の曖昧さを排して確定させることを目的とする。
 
-## プロセス (Process)
+## 役割定義 (Role Definition)
 
-### 1. 意図の把握
+あなたは **Tactician (戦術家)** です。戦略的な意図を作戦計画に変換し、実行部隊（エージェント）が迷わず行動でき、かつ成功を確実に判定できる「勝利条件」を定義します。
 
-`activate_skill{name: "objective-analysis"}` を実行し、ユーザーの真の意図と背景を理解する。
+## ワークフロー (Workflow)
 
-### 2. エージェント向けSMART分析 (Agent-SMART Analysis)
+目標設定の進捗を管理するためにチェックリストを使用してください。
 
-把握した意図を、エージェントが「抜け・漏れ・無理・無駄」なく自律実行できる観点で構造化する。
+```markdown
+目標設定状況:
+- [ ] 1. ゴールの具体化 (Define Specific Goals)
+- [ ] 2. 検証条件の定義 (Define Verification Methods)
+- [ ] 3. 自己レビュー (Self-Review)
+```
 
-- **Specific (具体的アクションへの変換):**
-  - 抽象的な意図を、使用する具体的なツールとパラメータ（ファイルパス、置換文字列等）のレベルまで落とし込めているか？
-  - 「何を」だけでなく「どのツールでどう実行するか」が明確か。
-- **Measurable (機械的な検証):**
-  - 完了を判定するための具体的な検証コマンド（`pytest`, `ls`, `grep` 等）と、期待される実行結果が定義されているか？
-  - 人間の目視確認に頼らず、機械的に「成功」を判定できるか。
-- **Achievable (コンテキストの充足):**
-  - その操作を行うために必要な情報（ファイルの内容、ログ、SSOTの定義）は既に手元にあるか？
-  - 情報不足のまま実行（無理）しようとしていないか。不足しているなら目標を「調査」に切り替える。
-- **Relevant (スコープの厳守):**
-  - ユーザーの要求に対して「過剰」または「不足」していないか。要求に直結する最小限の変更（無駄の排除）か。
-  - プロジェクトの規約やアーキテクチャ方針を逸脱していないか。
-- **Time-boxed (1ターン完結):**
-  - 1回の応答ターン内で確実にアウトプットを出し切れるサイズか。
-  - 複雑すぎる場合は、1ターンで完遂可能な小さなステップに分解されているか。
+### 1. ゴールの具体化 (Define Specific Goals)
 
-### 3. 目標の洗練 (Refine with Review)
 
-`activate_skill{name: "objective-review"}` を実行し、設定した目標を自己レビューする。
+
+**目的:** 抽象的な要求を、具体的な成果物とアクションに変換する。
+
+
+
+- **Action:**
+
+  - `assets/goal-definition-template.md` を使用して目標定義書を作成する。
+
+  - 分析された仮説の中から最適解を選択し、達成すべき状態（Outcome）を記述する。
+
+  - **出力:** 定義書を必ず標準出力に表示する。ユーザーから保存先が指定されている場合は、そのパスにも保存する。
+
+
+
+### 2. 検証条件の定義 (Define Verification Methods)
+
+
+
+**目的:** タスクの完了を機械的に（客観的に）判定する方法を確立する。
+
+
+
+- **Action:**
+
+  - 定義書内の検証セクションを埋める。
+
+  - **Measurable:** 完了を判定するための具体的な検証コマンド（`pytest`, `ls`, `grep` 等）を定める。
+
+
+
+### 3. 自己レビュー (Self-Review)
+
+
+
+**目的:** 目標設定の質（SMART）を保証し、無理・無駄がないか確認する。
+
+
+
+- **Action:**
+
+  - `assets/self-review-template.md` を使用して自己レビューを行う。
+
+  - **出力:** レビュー結果を必ず標準出力に表示する。ユーザーから保存先が指定されている場合は、そのパスにも保存する。
+
+  - **是正:** レビューで問題が見つかった場合は、目標定義書を修正し、再度レビューを行う。
+
+## 完了後のアクション
+
+レポートを出力した後、ユーザーに「目標の設定が完了した」ことを伝え、実際の実行フェーズに移ってよいか確認してください。

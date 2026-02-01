@@ -114,9 +114,9 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 7. 要件分析と意図の抽出 (Analysis)
 
-- **Skill:** `active-reconnaissance`, `objective-analysis`
+- **Skill:** `formulating-objectives`, `active-reconnaissance`, `objective-analysis`
 - **Trigger:** 新しい要求の受信時、または設計と実装の乖離を検知した時。
-- **Note:** `active-reconnaissance` で現状を把握し、`objective-analysis` でユーザーの真の意図（Why）を抽出して仮説を立てる。
+- **Note:** `formulating-objectives` を用いて、調査・分析・目標設定を一貫して行い、実行可能なタスク定義（ゴール）を策定する。
 
 ## 8. タスク分割と品質管理 (Task Decomposition)
 

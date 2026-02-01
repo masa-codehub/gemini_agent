@@ -89,25 +89,25 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 詳細仕様書（Specs）に基づき、TDDサイクルを回して機能を実装します。
 
-- **Skill:** `implementing-python-tdd`, `objective-analysis`
+- **Skill:** `formulating-objectives`, `implementing-python-tdd`, `objective-analysis`
 - **Trigger:** 新しい機能Issueがアサインされた時。
-- **Note:** `objective-analysis` で実装要件と仕様を正確に把握し、`implementing-python-tdd` でRed/Greenサイクルを確実に実行する。
+- **Note:** `formulating-objectives` で実装要件と仕様を正確に把握（調査・分析・目標設定）し、`implementing-python-tdd` でRed/Green/Refactorサイクルを確実に実行する。
 
 ## 2. リファクタリング (Refactoring)
 
 既存の振る舞いを変えずに、コードの内部構造を改善します。
 
-- **Skill:** `tdd-python-refactoring`
+- **Skill:** `implementing-python-tdd`
 - **Trigger:** コードの可読性低下、技術的負債の解消が必要な時。
-- **Note:** 事前にテストが通過していることを確認し、リファクタリング中も常にGreenを維持する。
+- **Note:** `implementing-python-tdd` の Refactor フェーズを利用し、テストが通過していることを確認しながらクリーンなコードへ昇華させる。
 
 ## 3. コード品質検証 (Quality Verification)
 
 実装したコードがプロジェクトの品質基準（Lint, Format, Type, Test）および仕様（SSOT）を満たしているか検証します。
 
-- **Skill:** `python-verification`, `ssot-verification`
+- **Skill:** `implementing-python-tdd`, `ssot-verification`
 - **Trigger:** コミット前、PR作成前、または既存コードの診断。
-- **Note:** `python-verification` で静的解析・テストを通し、`ssot-verification` で詳細設計との整合性を確認する。
+- **Note:** `implementing-python-tdd` の検証機能で静的解析・テストを通し、`ssot-verification` で詳細設計との整合性を確認する。
 
 ## 4. レビュー対応 (Review Handling)
 

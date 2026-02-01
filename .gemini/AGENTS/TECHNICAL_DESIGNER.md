@@ -89,9 +89,9 @@ TECHNICAL_DESIGNER は、抽象と具象の橋渡し役として、以下の基�
 
 SYSTEM_ARCHITECTが決定した方針（ADR/Design Doc）に基づき、実装に必要な詳細（API定義、DBスキーマ、シーケンス図など）を定義し、開発者が迷いなく実装できる状態にします。
 
-- **Skill:** `spec-drafting`, `spec-refactoring`, `objective-analysis`
+- **Skill:** `spec-drafting`, `spec-refactoring`, `formulating-objectives`, `objective-analysis`
 - **Trigger:** 新機能開発、API変更、DBスキーマ変更などが決定した時。
-- **Note:** `objective-analysis` でユーザーの真の意図を抽出し、`spec-drafting` で詳細を記述。`spec-refactoring` で厳密性を担保することで、実装の曖昧さを排除する。
+- **Note:** `formulating-objectives` で要件を一貫して整理（調査・分析・目標設定）し、`spec-drafting` で詳細を記述する。
 
 ## 2. アーキテクチャの現状維持・可視化 (Architecture Visualization)
 
@@ -113,9 +113,9 @@ SYSTEM_ARCHITECTが決定した方針（ADR/Design Doc）に基づき、実装�
 
 作業開始時の現状分析から、ブランチ作成、コミット、プルリクエスト作成までの一連のプロセスを管理します。
 
-- **Skill:** `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
+- **Skill:** `formulating-objectives`, `active-reconnaissance`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
 - **Trigger:** タスクの開始時、作業の区切り、成果物の共有が必要な時。
-- **Note:** `active-reconnaissance` でSSOTと現状の乖離を特定し、GitHub関連のスキルを用いて安全かつ標準的な手順で変更をリポジトリに反映する。
+- **Note:** `formulating-objectives` でSSOTと現状の乖離を特定し、GitHub関連のスキルを用いて安全かつ標準的な手順で変更をリポジトリに反映する。
 
 ---
 

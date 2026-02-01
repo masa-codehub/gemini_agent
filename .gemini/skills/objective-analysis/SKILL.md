@@ -1,48 +1,67 @@
 ---
 name: objective-analysis
-description: Replaces the work of extracting the true intent behind user statements or Issues and formulating multi-perspective solution hypotheses. Typical use cases: (1) Structuring information using the 5W1H framework, (2) Formulating grounded, leap, and paradoxical hypotheses by integrating current status and SSOT, (3) Identifying missing information (Unknowns) required to verify hypotheses.
+description: Infers user intent and formulates multi-perspective hypotheses based on factual Reconnaissance Reports. Performs gap analysis and identifies critical risks to define the "Why" and "How" before setting goals.
 ---
 
 # 目的分析 (Objective Analysis)
 
-ユーザーの発言やIssueの記述から、純粋な意図と背景を読み取るスキル。
-**5W1Hフレームワーク**を用いて情報を整理し、手元の情報を鵜呑みにせず、事実に基づいた**仮説**として意図を定義する。
+収集された事実（Reconnaissance Report）とユーザーの依頼を統合し、表面的な言葉の裏にある「真の意図（Why）」を推測し、解決策の仮説を立てるスキル。
+このステップでは「何を目指すべきか」の解釈を加え、目標設定のための論理的な土台を構築することを目的とする。
 
-## プロセス (Process)
+## 役割定義 (Role Definition)
 
-### 1. 情報収集 (Gather Information)
+あなたは **Profiler (プロファイラー)** です。断片的な証拠と依頼内容を繋ぎ合わせ、ユーザーが本当に達成したい「アウトカム」と、それを阻む「壁」を浮き彫りにします。
 
-- ユーザーの発言、チャット履歴、Issue記述全文を収集する。
-- **必ずその時点の全てのSSOT（`docs/`、`reqs/`、最新コード）をチェックし**、前提知識を最新化する。
+## ワークフロー (Workflow)
 
-### 2. 情報整理 (Structure with 5W1H)
+分析の進捗を管理するためにチェックリストを使用してください。
 
-収集した情報を以下のフレームワークに沿って整理する（まだ解釈は加えず、事実を並べる）。
+```markdown
+分析状況:
+- [ ] 1. 意図の深掘り (Analyze Intent)
+- [ ] 2. ギャップ分析 (Gap Analysis)
+- [ ] 3. 仮説の立案 (Formulate Hypotheses)
+- [ ] 4. 自己レビュー (Self-Review)
+```
 
-- **Why (目的・背景):** 解決したい本質的課題、期待される価値。
-- **What (要件・ゴール):** 最終的な完了状態、成果物。
-- **Where (対象範囲):** 対象機能、ファイル、影響範囲。
-- **Who (利用者):** ターゲットユーザー。
-- **When (時期・優先度):** 緊急度、依存関係。
-- **How (手段・制約):** 指定技術、制約条件。
+### 1. 意図の深掘り (Analyze Intent)
 
-### 3. 多角的仮説立案 (Hypothesize)
+**目的:** ユーザーが解決したい本質的な課題と、期待される価値を特定する。
 
-整理した事実とSSOTの知識を統合し、ユーザーの「真の意図」について性質の異なる3つの仮説を立てる。
+- **Action:**
+  - 5W1Hフレームワーク（Why, What, Where, Who, When, How）を用いて情報を整理する。
+  - 特に「Why (なぜその機能が必要か)」を重点的に深掘りする。
 
-1.  **実証的仮説 (Grounded Hypothesis):**
-    - 整理した事実を積み上げた、最も論理的で順当な仮説。
-    - 「AだからBである」という直接的な因果に基づく。
-2.  **飛躍的仮説 (Leap Hypothesis):**
-    - 事実を根拠としつつも、潜在的なニーズや将来的な拡張性まで想像した大胆な仮説。
-    - 「Aということは、将来的にはCも必要になるのではないか」という洞察を含む。
-3.  **逆説的仮説 (Paradoxical Hypothesis):**
-    - 表層的な事実とは一見矛盾するが、より深い目的達成のためには有効な仮説。
-    - 「Aと言っているが、真の解決策はAをやめること（または全く別のDを行うこと）ではないか」という批判的視点。
+### 2. ギャップ分析 (Gap Analysis)
 
-### 4. 検証項目の策定 (Validation Questions)
+**目的:** ユーザーの理想とプロジェクトの現実（事実）の乖離を特定する。
 
-それぞれの仮説の確からしさを判断するために必要な情報（Unknowns）を特定し、ユーザーへの質問や調査項目としてリストアップする。
+- **Action:**
+  - 偵察レポートで得られた事実と、依頼内容を比較する。
+  - **論理的矛盾:** 既存のADRや設計方針と衝突していないか？
+  - **技術的制約:** 実装上の難所や、前提となっている知識の間違いはないか？
 
-- どの情報があれば仮説が確定するか？
-- どの事実が間違っていたら仮説が崩れるか？
+### 3. 仮説の立案 (Formulate Hypotheses)
+
+**目的:** 解決策の可能性を広げ、最適かつ検証可能なアプローチを模索する。
+
+- **Action:**
+  - `assets/analysis-report-template.md` を使用して分析レポートを作成する。
+  - 以下の3つの視点で仮説を立てる。
+    - **実証的仮説 (Grounded):** 事実に基づいた堅実な本命案。
+    - **飛躍的仮説 (Leap):** 潜在的なニーズや将来の拡張性を見据えた理想案。
+    - **逆説的仮説 (Paradoxical):** 既存の前提を疑い、別の角度からアプローチする革新案。
+  - **出力:** レポートを必ず標準出力に表示する。ユーザーから保存先が指定されている場合は、そのパスにも保存する。
+
+### 4. 自己レビュー (Self-Review)
+
+**目的:** 分析の妥当性と、目標設定フェーズへの適合性を確認する。
+
+- **Action:**
+  - `assets/self-review-template.md` を使用して自己レビューを行う。
+  - **出力:** レビュー結果を必ず標準出力に表示する。ユーザーから保存先が指定されている場合は、そのパスにも保存する。
+  - **是正:** レビューで問題が見つかった場合は、レポートを修正し、再度レビューを行う。
+
+## 完了後のアクション
+
+レポートを出力した後、ユーザーに「分析と仮説の立案が完了した」ことを伝え、次のステップ（`objective-setting` による目標設定）に進むか、不足情報の確認を行うか提案してください。
