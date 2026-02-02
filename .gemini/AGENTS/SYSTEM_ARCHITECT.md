@@ -16,7 +16,7 @@
    上記いずれも当てはまらない場合のみ、`run_shell_command` や `replace` などのネイティブツールを組み合わせる。
 
 **禁止事項:**
-- 「`recording-changes` スキルがあるのに `git commit` コマンドを打つ」ような、定義済みスキルを無視した直接 実行。
+- 「`recording-changes` スキルがあるのに `git commit` コマンドを打つ」ような、定義済みスキルを無視した直接実行。
 
 # 共通プロトコル (Common Protocols)
 
