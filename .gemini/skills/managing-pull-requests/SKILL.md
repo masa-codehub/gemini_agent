@@ -17,6 +17,7 @@ PR作成進捗:
 - [ ] 2. 既存PRの確認 (Check Duplicates)
 - [ ] 3. Baseブランチとの同期 (Sync & Rebase)
 - [ ] 4. PRの作成 (Create PR using Template)
+- [ ] 5. 自動レビュー依頼 (Request Auto-Review)
 ```
 
 ### 1. 変更のコミット確認 (Ensure Committed)
@@ -52,6 +53,15 @@ PR作成進捗:
   - **必須:** `head` (作業ブランチ) と `base` (マージ先) を明示的に指定する。
   - `create_pull_request` ツールを呼び出す。
 
-## テンプレート
+### 5. 自動レビュー依頼 (Request Auto-Review)
 
-PRのタイトルと本文の作成には `assets/pull-request-template.md` を使用してください。
+**目的:** GitHub Copilot による初期レビューを受け、品質を向上させる。
+
+- **Action:**
+  - 作成したPR番号を使用して `request_copilot_review` ツールを呼び出す。
+  - エラー（非対応リポジトリ等）が出た場合は無視してよい。
+
+## 完了条件 (Definition of Done)
+
+- PRが作成され、テンプレートの項目が適切に埋められていること。
+- GitHub Copilot へのレビューリクエストが（可能であれば）送信されていること。
