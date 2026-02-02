@@ -49,6 +49,7 @@ ADR作成、システムコンテキストの更新、詳細仕様策定など�
 - 策定された指針が、後工程の執筆エージェントにとって十分な情報を含んでいるかを検証する。
 - **Action:**
   - タスクの種類に応じて、以下のテンプレートを使用して監査を行う。
+    - **System Context:** `assets/audit-context.md`
     - **ADR / Design Doc:** `assets/audit-architecture.md`
     - **Specification:** `assets/audit-specification.md`
     - **TDD Planning:** `assets/audit-tdd-plan.md`
