@@ -25,7 +25,7 @@ PR作成進捗:
 
 - **Action:**
   - `git status` で未コミットの変更がないか確認する。
-  - ある場合は `activate_skill{name: "github-commit"}` を呼び出してコミットする。
+  - ある場合は `activate_skill{name: "recording-changes"}` を呼び出してコミットする。
 
 ### 2. 既存PRの確認 (Check Duplicates)
 

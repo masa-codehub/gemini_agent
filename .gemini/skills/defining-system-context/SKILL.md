@@ -26,7 +26,7 @@ Context Creation Progress:
 ### 1. Preparation (ブランチ作成)
 - **Action:**
   - 作業用のFeature Branchを作成し、安全な作業環境を確保する。
-  - `activate_skill{name: "github-checkout-feature-branch"}`
+  - `activate_skill{name: "switching-feature-branch"}`
 
 ### 2. Scoping (方針策定・合意)
 - **Action:**
