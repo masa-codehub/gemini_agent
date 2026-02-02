@@ -18,14 +18,20 @@ ADRという抽象的な方針を、実行可能で矛盾のない「図解戦�
 
 ```markdown
 Planning Progress:
-- [ ] 1. Preparation & Context Load (準備とコンテキスト読込)
-- [ ] 2. Common Definitions Creation (共通定義の策定)
-- [ ] 3. Task Slicing & Drafting (タスク分割とIssue案作成)
-- [ ] 4. Self-Audit & Quality Check (自己監査)
-- [ ] 5. Plan Submission (承認依頼)
+- [ ] 1. Goal Setting (目標設定)
+- [ ] 2. Preparation & Context Load (準備とコンテキスト読込)
+- [ ] 3. Common Definitions Creation (共通定義の策定)
+- [ ] 4. Task Slicing & Drafting (タスク分割とIssue案作成)
+- [ ] 5. Self-Audit & Quality Check (自己監査)
+- [ ] 6. Plan Submission (承認依頼)
 ```
 
-### 1. Preparation & Context Load (準備とコンテキスト読込)
+### 1. Goal Setting (目標設定)
+- **Action:**
+  - `activate_skill{name: "setting-smart-goals"}` を実行する。
+  - 今回のアーキテクチャ更新計画が、「後続の **Spec Strategist** にとって、どの範囲の仕様策定を可能にするものか」をSMARTゴールとして定義する。
+
+### 2. Preparation & Context Load (準備とコンテキスト読込)
 - **Action:**
   - `activate_skill{name: "switching-feature-branch"}` を実行し、作業用の親ブランチ（例: `feature/arch-update-xxx`）を作成・チェックアウトする。
   - `activate_skill{name: "scoping-design-tasks"}` を実行し、ADRの意図を分析して **Design Brief** を作成する。これを後続ステップの入力とする。
