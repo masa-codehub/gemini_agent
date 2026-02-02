@@ -39,7 +39,7 @@ Planning Progress:
 ### 3. Test Strategy Formulation (テスト戦略の策定)
 - **Action:**
   - `read_file .gemini/skills/planning-tdd/assets/tdd-plan-template.md` を確認。
-  - `docs/specs/plans/adr-{XXX}-{title}/tdd-plan.md` を作成する。
+  - **Output Path:** `docs/specs/plans/adr-{XXX}-{title}/` ディレクトリを作成し、その中に `tdd-plan.md` を作成する。
   - **Shared Fixtures:** 共通で使うテストデータやユーティリティを定義。
   - **Mock Policy:** 外部依存のモック方法を具体的に指定（使用ライブラリ等）。
 

@@ -39,10 +39,13 @@ Audit Progress:
   - 結合テストやE2Eテストを実行し、コンポーネント間のインターフェース不整合がないか検証する。
   - 日本語・根拠付きで監査レポートを作成・出力。
 
-### 4. Finalization & Handover (完了)
+### 4. Finalization (完了)
 - **Action:**
-  - `activate_skill{name: "managing-pull-requests"}` を実行し、統合ブランチから `main` (または `develop`) への最終Pull Requestを作成する。
-  - PR本文に統合Issueのクローズキーワードを含める。
+  - **Implementation Report:** `docs/specs/plans/adr-{XXX}-{title}/implementation-report.md` を作成する。
+    - 記載内容：今回の実装で達成された最終カバレッジ、主要なテスト項目、および将来のメンテナンスに向けた注意点。
+  - **Final PR:** 統合ブランチから `main` (または `develop`) へのPull Requestを作成する。
+    - `activate_skill{name: "managing-pull-requests"}`
+    - PR本文に統合Issueをクローズするキーワードを含める。
 
 ## 完了条件 (Definition of Done)
 
