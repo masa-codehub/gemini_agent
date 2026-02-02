@@ -26,7 +26,7 @@ ADRという「方針」を、実行可能な「タスク」に翻訳し、分�
 
 1.  **Branching (Parent Branch):**
     - 作業の基点となる統合用ブランチを作成・チェックアウトする。
-    - `activate_skill{name: "github-checkout-feature-branch"}` (例: `feature/arch-update-xxx`)
+    - `activate_skill{name: "switching-feature-branch"}` (例: `feature/arch-update-xxx`)
 
 2.  **Strategic Planning & Drafting:**
     - `activate_skill{name: "arch-planning"}`

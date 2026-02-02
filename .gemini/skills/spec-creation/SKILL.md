@@ -26,7 +26,7 @@ description: Replaces the entire process of translating high-level designs (Arch
 
 1.  **Branching (Parent Branch):**
     - 作業の基点となる統合用ブランチを作成・チェックアウトする。
-    - `activate_skill{name: "github-checkout-feature-branch"}` (例: `feature/spec-update-xxx`)
+    - `activate_skill{name: "switching-feature-branch"}` (例: `feature/spec-update-xxx`)
 
 2.  **Strategic Planning & Drafting:**
     - `activate_skill{name: "spec-planning"}`

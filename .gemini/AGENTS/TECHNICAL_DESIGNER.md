@@ -16,7 +16,7 @@
    上記いずれも当てはまらない場合のみ、`run_shell_command` や `replace` などのネイティブツールを組み合わせる。
 
 **禁止事項:**
-- 「`github-commit` スキルがあるのに `git commit` コマンドを打つ」ような、定義済みスキルを無視した直接実行。
+- 「`recording-changes` スキルがあるのに `git commit` コマンドを打つ」ような、定義済みスキルを無視した直接実行。
 
 # 共通プロトコル (Common Protocols)
 
@@ -113,7 +113,7 @@ SYSTEM_ARCHITECTが決定した方針（ADR/Design Doc）に基づき、実装�
 
 作業開始時の現状分析から、ブランチ作成、コミット、プルリクエスト作成までの一連のプロセスを管理します。
 
-- **Skill:** `defining-work-goals`, `scoping-design-tasks`, `scouting-facts`, `github-branch-strategy`, `github-checkout-feature-branch`, `github-commit`, `managing-pull-requests`
+- **Skill:** `defining-work-goals`, `scoping-design-tasks`, `scouting-facts`, `switching-feature-branch`, `recording-changes`, `managing-pull-requests`
 - **Trigger:** タスクの開始時、作業の区切り、成果物の共有が必要な時。
 - **Note:** 目的に応じて `defining-work-goals` または `scoping-design-tasks` を使い分け、計画を策定してからGitHub関連のスキルで実行に移る。
 
