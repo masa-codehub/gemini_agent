@@ -32,6 +32,7 @@ Context Creation Progress:
 - **Action:**
   - `activate_skill{name: "scoping-design-tasks"}`
   - 現状分析 (`scouting-facts`)、論点整理、およびユーザーとの合意形成を行い、**Design Brief (設計指針)** を完成させる。
+  - **[DDD Modeling Guide]**: `read_file .gemini/skills/defining-system-context/references/ddd-modeling.md` を参照し、システム境界とコンテキストマップ（Context Map）の定義においてガイドラインを遵守するよう指示する。
   - **Focus:** 特に「システム境界」と「ビジネス価値」の定義に注力するよう指示する。
 
 ### 3. Execution (執筆・監査)
@@ -50,3 +51,8 @@ Context Creation Progress:
 
 - `docs/system-context.md` が更新され、ユーザーの合意内容（Design Brief）が反映されていること。
 - 変更内容を含むPull Requestが作成されていること。
+
+## 高度な使い方
+
+- **ドメインモデリング**: DDDに基づく境界定義や用語統一の手法については [references/ddd-modeling.md](references/ddd-modeling.md) を参照してください。
+

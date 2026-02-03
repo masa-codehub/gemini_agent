@@ -23,6 +23,8 @@ Drafting Progress:
 - [ ] 4. Visualization with Mermaid (図解作成)
 - [ ] 5. Visual Refactoring (視覚的最適化)
 - [ ] 6. Self-Audit (自己監査)
+- [ ] 7. Retrospective (振り返り)
+- [ ] 8. Pull Request Submission (PR作成)
 ```
 
 ### 1. Goal Setting (目標設定)
@@ -76,9 +78,25 @@ Drafting Progress:
   - 監査レポートを標準出力に表示する。
   - ユーザーから保存先が指定されている場合は、そのパスにも保存する。
 
+### 7. Retrospective (振り返り)
+**目的:** タスク完了後の学びと課題を整理し、アーキテクチャ設計プロセスの継続的改善を図る。
+
+- **Action:**
+  - `activate_skill{name: "conducting-retrospectives"}` を実行する。
+  - 成果物やプロセスの成功要因（Keep）や阻害要因（Problem）を分析し、次回の設計品質向上に向けた改善アクションを策定する。
+
+### 8. Pull Request Submission (PR作成)
+**目的:** 成果物をレビューに回し、統合ブランチへ反映させる。
+
+- **Action:**
+  - `activate_skill{name: "managing-pull-requests"}` を実行する。
+  - 修正内容と、自己監査および振り返りの結果をPRの記述に反映させる。
+
 ## 完了条件 (Definition of Done)
 
 - 構造設計と品質方針がドキュメントに記述されていること。
 - `planning-architecture` で定義された共通用語が正しく使用されていること。
 - Mermaid図面が視覚的に整理され、認知負荷が低い状態であること。
 - 自己監査レポートが作成され、すべてのチェックをパスしていること。
+- 振り返り（Retrospective）が実施され、レポートが標準出力に表示されていること。
+- **プルリクエスト（PR）が作成され、成果物が提出されていること。**
