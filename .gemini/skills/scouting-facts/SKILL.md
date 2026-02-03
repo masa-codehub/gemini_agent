@@ -38,7 +38,7 @@ description: Systematically investigates the current state of code and documents
 
 - **Action:**
   - 以下の手段を組み合わせて調査を行う。
-    - **ドキュメント確認:** `read_file docs/system-context.md`, `ls reqs/design/_approved/`
+    - **ドキュメント確認:** `read_file docs/system-context.md`, `ls reqs/design/_approved/`, `ls -R docs/architecture/plans/`
     - **コード検索:** `search_code --pattern "<keyword>"`
     - **ファイル読み込み:** `read_file <path>`
     - **ディレクトリ構造:** `ls -F <path>`
