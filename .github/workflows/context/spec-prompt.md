@@ -11,6 +11,9 @@ Activate the `drafting-specs` skill and follow its instructions to draft detaile
 2. **Follow Skill Workflow:** Strictly adhere to the workflow defined in the activated skill.
 
 ## Issue Context
-- **Title:** ${{ env.ISSUE_TITLE }}
+
+- **Title:** ${ISSUE_TITLE}
+
 - **Body:**
-${{ env.ISSUE_BODY }}
+
+${ISSUE_BODY}
