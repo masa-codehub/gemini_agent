@@ -1,39 +1,65 @@
 #!/bin/bash
+set -e
 
-echo "Processing Issue #${ISSUE_NUMBER}: $ISSUE_TITLE"
+# ラベル情報の取得 (環境変数 ISSUE_LABELS を使用)
+LABELS="${ISSUE_LABELS}"
 
-# Issueの内容を一時ファイルに保存 (パイプ入力用)
-echo -e "# Issue Info
+echo "Processing Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}"
+echo "Labels: ${LABELS}"
 
-Title: $ISSUE_TITLE
+# コンテキストファイルの選択
+CONTEXT_FILE=""
+MATCH_COUNT=0
 
-$ISSUE_BODY" > current_issue.md
+if [[ "$LABELS" == *"gemini:arch"* ]]; then
+  CONTEXT_FILE=".github/workflows/context/arch-prompt.md"
+  echo "Selected Skill: Architecture Drafting"
+  ((MATCH_COUNT++))
+fi
 
-# 0回目: ブランチ戦略の決定と切り替え
-echo "--- Phase 0: Branch Strategy & Checkout ---"
-BRANCH_COMMAND=$( {
-  cat .github/workflows/context/branch-strategy.md
-  cat current_issue.md
-  echo "指示の内容を宣言して。"
-} | gemini --yolo -m "gemini-3-flash-preview")
+if [[ "$LABELS" == *"gemini:spec"* ]]; then
+  CONTEXT_FILE=".github/workflows/context/spec-prompt.md"
+  echo "Selected Skill: Specification Drafting"
+  ((MATCH_COUNT++))
+fi
 
-# 現在のブランチがmainのままの場合は終了
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-if [ "$CURRENT_BRANCH" = "main" ]; then
-  echo "⚠️ 現在のブランチが 'main' のままです。ブランチ戦略に従って新しいブランチを作成してください。"
+if [[ "$LABELS" == *"gemini:tdd"* ]]; then
+  CONTEXT_FILE=".github/workflows/context/tdd-prompt.md"
+  echo "Selected Skill: TDD Implementation"
+  ((MATCH_COUNT++))
+fi
+
+# 複数ラベルまたは該当なしのチェック
+if [[ "$MATCH_COUNT" -gt 1 ]]; then
+  echo "Error: Multiple gemini labels detected. Please use only one label per issue."
+  exit 1
+elif [[ "$MATCH_COUNT" -eq 0 ]]; then
+  echo "No matching gemini label found. Skipping execution."
+  exit 0
+fi
+
+# ファイル存在確認
+if [[ ! -f "$CONTEXT_FILE" ]]; then
+  echo "Error: Context file not found: $CONTEXT_FILE"
   exit 1
 fi
 
-# 1回目: 初期実装
-echo "--- Phase 1: Initial Implementation ---"
-{
-  cat .github/workflows/context/architecture-drafting.md
-  cat current_issue.md
-} | gemini --yolo -m "gemini-3-flash-preview" > response.md
+# 環境変数のエクスポート（envsubst用）
+export ISSUE_NUMBER
+export ISSUE_TITLE
+export ISSUE_BODY
 
-# PR作成指示書とこれまでの履歴を渡して、GeminiにPR作成を任せる
-echo "--- Phase 4: PR Creation ---"
-{
-  cat .github/workflows/context/pr-creation.md
-  cat response.md
-} | gemini --yolo -m "gemini-3-flash-preview"
+# 一時ファイルのクリーンアップ設定
+trap 'rm -f prompt.md' EXIT
+
+# コンテキストの置換と実行
+# envsubst で許可された変数のみを展開して一時ファイルに保存（セキュリティ対策）
+envsubst '$ISSUE_NUMBER $ISSUE_TITLE $ISSUE_BODY' < "${CONTEXT_FILE}" > prompt.md
+
+echo "--- Gemini Execution Start ---"
+
+# geminiコマンドにプロンプトを渡し、モデルを指定して実行させる
+
+cat prompt.md | gemini --yolo -m "gemini-3-flash-preview"
+
+echo "--- Gemini Execution End ---"
