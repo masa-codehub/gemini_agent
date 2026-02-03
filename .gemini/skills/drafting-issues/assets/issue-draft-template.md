@@ -3,6 +3,7 @@ title: "タスクタイトル"
 labels: # △ 推奨: タスク種別・優先度・担当ロールなど必要なラベルを設定すること（詳細は metadata-logic-spec.md 参照）
   - "task"
   - "P1" # Priority: P0 (Critical), P1 (High), P2 (Medium), P3 (Low)
+  - "gemini:arch" # Agent: gemini:arch (Arch), gemini:spec (Spec), gemini:tdd (Impl). Only one allowed.
   - "BACKENDCODER" # Role: BACKENDCODER, SYSTEM_ARCHITECT, TECHNICAL_DESIGNER, etc.
 roadmap: "reqs/roadmap/active/roadmap-xxx.md" # ◯ 必須: 関連するロードマップへの相対パス（同期エンジンが使用）
 task_id: "T1-1" # ◯ 必須: ロードマップ WBS と一致するタスクID（同期エンジンが使用。例: T1-1）
