@@ -29,9 +29,12 @@ if [[ "$PR_LABELS" == *"gemini:arch"* ]]; then
 elif [[ "$PR_LABELS" == *"gemini:spec"* ]]; then
   TASK_TYPE="SPEC"
   CONTEXT_FILE=".github/workflows/context/review-spec-prompt.md"
-else
+elif [[ "$PR_LABELS" == *"gemini:tdd"* ]]; then
   TASK_TYPE="TDD"
   CONTEXT_FILE=".github/workflows/context/review-tdd-prompt.md"
+else
+  echo "No matching gemini label found. Skipping execution."
+  exit 0
 fi
 export TASK_TYPE
 
