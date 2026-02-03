@@ -17,7 +17,7 @@ GitHub Pull Request にレビューコメントが投稿された際、Gemini �
 3.  **Gemini 分析**:
     - `review-arch/spec/tdd-prompt.md` テンプレートを使用（フェーズに応じて動的に選択）。
     - `gemini_review_analyzer.sh` スクリプト内で環境変数を展開。
-    - `gemini-1.5-flash-latest` モデルで分析を実行。
+    - `gemini-3-flash-preview` モデルで分析を実行。
 4.  **結果投稿**:
     - 分析レポート（Markdown）を該当PRのコメントとして自動投稿。
 

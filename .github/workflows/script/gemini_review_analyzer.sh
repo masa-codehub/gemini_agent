@@ -75,7 +75,7 @@ echo "--- Gemini Analysis Start ---"
 
 # Gemini CLI を実行
 # --yolo: ユーザー確認なしで実行 (CI/CD用)
-cat "$PROMPT_FILE" | gemini --yolo -m "gemini-1.5-flash-latest" > "$RESPONSE_FILE"
+cat "$PROMPT_FILE" | gemini --yolo -m "gemini-3-flash-preview" > "$RESPONSE_FILE"
 
 echo "--- Gemini Analysis End ---"
 
