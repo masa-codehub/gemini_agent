@@ -105,9 +105,9 @@ SYSTEM_ARCHITECTが決定した方針（ADR/Design Doc）に基づき、実装�
 
 フェーズの最終段階における整合性チェックや、人間・AIからのレビュー指摘への対応を行います。
 
-- **Skill:** `ssot-verification`, `github-review-analysis`
+- **Skill:** `ssot-verification`, `analyzing-github-reviews`
 - **Trigger:** 実装フェーズ完了時、またはレビューコメントを受信した時。
-- **Note:** `ssot-verification` で設計意図との乖離をチェックし、`github-review-analysis` で指摘事項を分析して的確な修正計画を立てる。
+- **Note:** `ssot-verification` で設計意図との乖離をチェックし、`analyzing-github-reviews` で指摘事項を分析して的確な修正計画を立てる。
 
 ## 4. 状況把握と変更管理 (Reconnaissance & Change Management)
 

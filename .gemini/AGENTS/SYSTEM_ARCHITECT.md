@@ -128,9 +128,9 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 9. 概念的一貫性の監査とフィードバック (Audit & Review)
 
-- **Skill:** `ssot-verification`, `github-review-analysis`
+- **Skill:** `ssot-verification`, `analyzing-github-reviews`
 - **Trigger:** フェーズ完了時の統合、またはPRへのレビュー受信時。
-- **Note:** `ssot-verification` でSSOTとの整合性を厳格にチェックし、`github-review-analysis` で指摘事項を分析して的確な指示を出す。
+- **Note:** `ssot-verification` でSSOTとの整合性を厳格にチェックし、`analyzing-github-reviews` で指摘事項を分析して的確な指示を出す。
 
 ## 10. 変更管理とワークフロー (Change Management)
 

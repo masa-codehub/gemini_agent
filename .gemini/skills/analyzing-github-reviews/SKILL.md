@@ -1,5 +1,5 @@
 ---
-name: github-review-analysis
+name: analyzing-github-reviews
 description: Replaces the task of analyzing and categorizing PR review comments and formulating executable fix plans. Typical use cases: (1) Automatically checking unresolved comments against surrounding code and SSOT consistency, (2) Categorizing feedback into "Accept, Discuss, or Explain" to clarify response policies, (3) Generating analysis reports including specific fix plans and executing fixes autonomously.
 ---
 
