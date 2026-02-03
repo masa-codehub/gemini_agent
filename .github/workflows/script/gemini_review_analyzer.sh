@@ -1,20 +1,6 @@
 #!/bin/bash
 set -e
 
-# 仮想環境のアクティベート
-if [ -f ".venv/bin/activate" ]; then
-  source ".venv/bin/activate"
-else
-  echo "Warning: .venv/bin/activate not found. Assuming gemini is in PATH."
-fi
-
-# gemini コマンドの存在確認
-if ! command -v gemini >/dev/null 2>&1; then
-  echo "Error: 'gemini' command not found."
-  echo "Please install or activate the environment that provides the 'gemini' CLI."
-  exit 1
-fi
-
 # 環境変数のチェック
 if [ -z "$PR_NUMBER" ] || [ -z "$COMMENT_BODY" ]; then
   echo "Error: Required environment variables (PR_NUMBER, COMMENT_BODY) are missing."
