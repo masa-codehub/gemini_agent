@@ -56,6 +56,7 @@ trap 'rm -f prompt.md' EXIT
 # envsubst で許可された変数のみを展開して一時ファイルに保存（セキュリティ対策）
 envsubst '$ISSUE_NUMBER $ISSUE_TITLE $ISSUE_BODY' < "${CONTEXT_FILE}" > prompt.md
 
+cat prompt.md
 echo "--- Gemini Execution Start ---"
 
 # 仮想環境のアクティベート
