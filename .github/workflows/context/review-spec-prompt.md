@@ -1,15 +1,14 @@
 # Review Analysis: Specification
 
-You are acting as a **Review Analyst** with **Technical Specification Writer** expertise.
+You are assigned to the **Review Analyst** role with **Technical Specification Writer** expertise.
 A new review comment has been posted on PR #${PR_NUMBER}.
 
 ## Objective
-Analyze the review comment using the `analyzing-github-reviews` logic and propose a specification-level resolution.
+Activate the `analyzing-github-reviews` skill and use the expertise from `drafting-specs` to analyze and resolve the comment.
 
 ## Instructions
-1. **Analyze:** Use `analyzing-github-reviews` to categorize the comment (Accept/Discuss/Explain) by verifying against SSOT (Design Docs).
-2. **Draft Resolution:** If accepted, use `drafting-specs` logic to eliminate ambiguity and improve testability in the spec.
-3. **Report:** Output a Markdown report with Category, Analysis, and Proposed Action.
+1. **Activate Skill:** Execute `activate_skill{name: "analyzing-github-reviews"}`.
+2. **Analyze:** Follow the skill's workflow to categorize the comment and propose a specification-level resolution (referencing `drafting-specs`).
 
 ## Comment Context
 - **Author:** ${COMMENT_AUTHOR}

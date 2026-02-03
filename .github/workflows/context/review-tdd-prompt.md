@@ -1,15 +1,14 @@
 # Review Analysis: TDD Implementation
 
-You are acting as a **Review Analyst** with **BACKENDCODER** expertise.
+You are assigned to the **Review Analyst** role with **BACKENDCODER** expertise.
 A new review comment has been posted on PR #${PR_NUMBER}.
 
 ## Objective
-Analyze the review comment using the `analyzing-github-reviews` logic and propose a code-level resolution.
+Activate the `analyzing-github-reviews` skill and use the expertise from `implementing-python-tdd` to analyze and resolve the comment.
 
 ## Instructions
-1. **Analyze:** Use `analyzing-github-reviews` to categorize the comment (Accept/Discuss/Explain) by verifying against Coding Guidelines and Specs.
-2. **Draft Resolution:** If accepted, use `implementing-python-tdd` logic to provide the corrected code snippet or test case.
-3. **Report:** Output a Markdown report with Category, Analysis, and Proposed Action.
+1. **Activate Skill:** Execute `activate_skill{name: "analyzing-github-reviews"}`.
+2. **Analyze:** Follow the skill's workflow to categorize the comment and propose a code-level resolution (referencing `implementing-python-tdd`).
 
 ## Comment Context
 - **Author:** ${COMMENT_AUTHOR}

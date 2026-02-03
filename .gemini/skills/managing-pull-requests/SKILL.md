@@ -56,7 +56,6 @@ PR作成進捗:
     - Issueがない場合は、変更内容（アーキテクチャ、仕様、実装）に応じて適切なラベルを推測して付与する。
   - **必須:** `head` (作業ブランチ) と `base` (マージ先) を明示的に指定する。
   - `create_pull_request` ツールを呼び出す。
-  - PR作成後、`issue_write` (method='update') を使用してラベルを適用する。
 
 ### 5. 自動レビュー依頼 (Request Auto-Review)
 
