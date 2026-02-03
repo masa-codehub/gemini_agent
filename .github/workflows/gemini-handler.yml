@@ -25,6 +25,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Refresh Environment
+        run: |
+          echo "Refreshing environment by removing persistent artifacts..."
+          rm -rf .venv
+          # 必要に応じて他にもリフレッシュしたいディレクトリがあればここに追加
+
       - name: Initialize Environment
         run: bash ./.build/run.sh
 
