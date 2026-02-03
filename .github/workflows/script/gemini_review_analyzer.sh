@@ -21,18 +21,22 @@ if [ -z "$PR_NUMBER" ] || [ -z "$COMMENT_BODY" ]; then
   exit 1
 fi
 
-# タスクタイプの判定
-TASK_TYPE="TDD" # Default
+# タスクタイプの判定とプロンプトの選択
+CONTEXT_FILE=""
 if [[ "$PR_LABELS" == *"gemini:arch"* ]]; then
   TASK_TYPE="ARCH"
+  CONTEXT_FILE=".github/workflows/context/review-arch-prompt.md"
 elif [[ "$PR_LABELS" == *"gemini:spec"* ]]; then
   TASK_TYPE="SPEC"
+  CONTEXT_FILE=".github/workflows/context/review-spec-prompt.md"
+else
+  TASK_TYPE="TDD"
+  CONTEXT_FILE=".github/workflows/context/review-tdd-prompt.md"
 fi
 export TASK_TYPE
 
 echo "Task Type: $TASK_TYPE"
-
-CONTEXT_FILE=".github/workflows/context/review-analysis-prompt.md"
+echo "Selected Context: $CONTEXT_FILE"
 
 # プロンプトファイルの存在確認
 if [ ! -f "$CONTEXT_FILE" ]; then
