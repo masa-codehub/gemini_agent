@@ -1,39 +1,39 @@
 #!/bin/bash
+set -e
 
-echo "Processing Issue #${ISSUE_NUMBER}: $ISSUE_TITLE"
+# ラベル情報の取得 (環境変数 ISSUE_LABELS を使用)
+LABELS="${ISSUE_LABELS}"
 
-# Issueの内容を一時ファイルに保存 (パイプ入力用)
-echo -e "# Issue Info
+echo "Processing Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}"
+echo "Labels: ${LABELS}"
 
-Title: $ISSUE_TITLE
+# コンテキストファイルの選択
+CONTEXT_FILE=""
 
-$ISSUE_BODY" > current_issue.md
-
-# 0回目: ブランチ戦略の決定と切り替え
-echo "--- Phase 0: Branch Strategy & Checkout ---"
-BRANCH_COMMAND=$( {
-  cat .github/workflows/context/branch-strategy.md
-  cat current_issue.md
-  echo "指示の内容を宣言して。"
-} | gemini --yolo -m "gemini-3-flash-preview")
-
-# 現在のブランチがmainのままの場合は終了
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-if [ "$CURRENT_BRANCH" = "main" ]; then
-  echo "⚠️ 現在のブランチが 'main' のままです。ブランチ戦略に従って新しいブランチを作成してください。"
-  exit 1
+if [[ "$LABELS" == *"gemini:arch"* ]]; then
+  CONTEXT_FILE=".github/workflows/context/arch-prompt.md"
+  echo "Selected Skill: Architecture Drafting"
+elif [[ "$LABELS" == *"gemini:spec"* ]]; then
+  CONTEXT_FILE=".github/workflows/context/spec-prompt.md"
+  echo "Selected Skill: Specification Drafting"
+elif [[ "$LABELS" == *"gemini:tdd"* ]]; then
+  CONTEXT_FILE=".github/workflows/context/tdd-prompt.md"
+  echo "Selected Skill: TDD Implementation"
+else
+  echo "No matching gemini label found. Skipping execution."
+  exit 0
 fi
 
-# 1回目: 初期実装
-echo "--- Phase 1: Initial Implementation ---"
-{
-  cat .github/workflows/context/architecture-drafting.md
-  cat current_issue.md
-} | gemini --yolo -m "gemini-3-flash-preview" > response.md
+# 環境変数のエクスポート（envsubst用）
+export ISSUE_NUMBER
+export ISSUE_TITLE
+export ISSUE_BODY
 
-# PR作成指示書とこれまでの履歴を渡して、GeminiにPR作成を任せる
-echo "--- Phase 4: PR Creation ---"
-{
-  cat .github/workflows/context/pr-creation.md
-  cat response.md
-} | gemini --yolo -m "gemini-3-flash-preview"
+# コンテキストの置換と実行
+# envsubst でテンプレート内の環境変数を展開して一時ファイルに保存
+envsubst < "${CONTEXT_FILE}" > prompt.md
+
+echo "--- Gemini Execution Start ---"
+# geminiコマンドにプロンプトを渡し、実行させる
+cat prompt.md | gemini --yolo
+echo "--- Gemini Execution End ---"

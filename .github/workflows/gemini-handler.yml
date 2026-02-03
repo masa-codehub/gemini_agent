@@ -11,30 +11,29 @@ permissions:
 
 jobs:
   gemini-implementation:
-    # このジョブは、ユーザーが用意したサーバー(Self-Hosted Runner)上で実行されます
-    # 複数ランナーが稼働している場合、空いているランナーが順次処理します
+    # gemini:arch, gemini:spec, gemini:tdd のいずれかのラベルがついている場合のみ実行
+    if: |
+      contains(github.event.issue.labels.*.name, 'gemini:arch') ||
+      contains(github.event.issue.labels.*.name, 'gemini:spec') ||
+      contains(github.event.issue.labels.*.name, 'gemini:tdd')
     runs-on: [self-hosted]
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_MCP_PAT || secrets.GITHUB_TOKEN }}
       AGENT_ROLE: SYSTEM_ARCHITECT
 
     steps:
-      # 1. コードの取得: 最新のソースコードをRunner上にダウンロードします
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. 環境の初期化: Python依存ライブラリのインストールやリポジトリ用ツールのセットアップを行います
-      #    run.sh 内では pip install -e .[dev] や pre-commit のセットアップなどのみを行い、
-      #    Gemini CLI および gemini extensions は Self-Hosted Runner 側で事前インストールされている前提とします
       - name: Initialize Environment
         run: bash ./.build/run.sh
 
-      # 3. Geminiによる実装実行 (Implementer Loop):
-      #    最大3回のループを行い、実装と自己修正を繰り返します。
       - name: Gemini Implementer Phase
         id: implementer
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
+          # ラベル名をカンマ区切り文字列として渡す
+          ISSUE_LABELS: ${{ join(github.event.issue.labels.*.name, ',') }}
         run: bash ./.github/workflows/script/gemini_implementer.sh
