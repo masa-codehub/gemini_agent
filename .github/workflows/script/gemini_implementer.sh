@@ -1,5 +1,5 @@
 #!/bin/bash
-# set -e
+set -e
 
 # ラベル情報の取得 (環境変数 ISSUE_LABELS を使用)
 LABELS="${ISSUE_LABELS}"
@@ -14,19 +14,19 @@ MATCH_COUNT=0
 if [[ "$LABELS" == *"gemini:arch"* ]]; then
   CONTEXT_FILE=".github/workflows/context/arch-prompt.md"
   echo "Selected Skill: Architecture Drafting"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 if [[ "$LABELS" == *"gemini:spec"* ]]; then
   CONTEXT_FILE=".github/workflows/context/spec-prompt.md"
   echo "Selected Skill: Specification Drafting"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 if [[ "$LABELS" == *"gemini:tdd"* ]]; then
   CONTEXT_FILE=".github/workflows/context/tdd-prompt.md"
   echo "Selected Skill: TDD Implementation"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 # 複数ラベルまたは該当なしのチェック
@@ -56,7 +56,6 @@ trap 'rm -f prompt.md' EXIT
 # envsubst で許可された変数のみを展開して一時ファイルに保存（セキュリティ対策）
 envsubst '$ISSUE_NUMBER $ISSUE_TITLE $ISSUE_BODY' < "${CONTEXT_FILE}" > prompt.md
 
-cat prompt.md
 echo "--- Gemini Execution Start ---"
 
 # 仮想環境のアクティベート

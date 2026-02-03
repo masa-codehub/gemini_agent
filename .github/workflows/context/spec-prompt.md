@@ -1,7 +1,7 @@
 # Specification Drafting
 
 You are assigned to the `TECHNICAL_DESIGNER` role.
-The user has requested a specification update via GitHub Issue #${{ env.ISSUE_NUMBER }}.
+The user has requested a specification update via GitHub Issue #${ISSUE_NUMBER}.
 
 ## Objective
 Activate the `drafting-specs` skill and follow its instructions to draft detailed specifications.
