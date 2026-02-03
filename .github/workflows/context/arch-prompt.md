@@ -1,7 +1,7 @@
 # Architecture Drafting
 
 You are assigned to the `SYSTEM_ARCHITECT` role.
-The user has requested an architecture update via GitHub Issue #${{ env.ISSUE_NUMBER }}.
+The user has requested an architecture update via GitHub Issue #${ISSUE_NUMBER}.
 
 ## Objective
 Activate the `drafting-architecture` skill and follow its instructions to define and draft the system architecture.

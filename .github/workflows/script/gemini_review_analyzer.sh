@@ -13,19 +13,19 @@ MATCH_COUNT=0
 if [[ "$PR_LABELS" == *"gemini:arch"* ]]; then
   TASK_TYPE="ARCH"
   CONTEXT_FILE=".github/workflows/context/review-arch-prompt.md"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 if [[ "$PR_LABELS" == *"gemini:spec"* ]]; then
   TASK_TYPE="SPEC"
   CONTEXT_FILE=".github/workflows/context/review-spec-prompt.md"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 if [[ "$PR_LABELS" == *"gemini:tdd"* ]]; then
   TASK_TYPE="TDD"
   CONTEXT_FILE=".github/workflows/context/review-tdd-prompt.md"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 # 複数ラベルまたは該当なしのチェック
