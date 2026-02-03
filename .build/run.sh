@@ -24,9 +24,6 @@ if [ -d ".git" ]; then
     uv run pre-commit install
 fi
 
-# Gemini拡張機能のインストール
-gemini extensions install https://github.com/github/github-mcp-server --consent --auto-update
-
 # コンテキスト更新など
 if [ -f ".build/update_gemini_context.sh" ]; then
     bash .build/update_gemini_context.sh
@@ -64,5 +61,13 @@ EOT
     echo "設定を反映させるために、以下のコマンドを実行してください："
     echo "source $TARGET_FILE"
 fi
+
+# 仮想環境をアクティベート（このスクリプト内での実行用）
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+fi
+
+# Gemini拡張機能のインストール
+gemini extensions install https://github.com/github/github-mcp-server --consent --auto-update
 
 echo "=== Setup Complete ==="
