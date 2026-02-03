@@ -1,24 +1,16 @@
-# Specification Drafting Context
+# Specification Drafting
 
 You are assigned to the `TECHNICAL_DESIGNER` role.
-The user has requested a specification update via a GitHub Issue.
+The user has requested a specification update via GitHub Issue #${{ env.ISSUE_NUMBER }}.
 
 ## Objective
-Your goal is to draft detailed specifications based on the issue description.
-You must follow the **Specification Drafting** workflow defined in the `drafting-specs` skill.
+Activate the `drafting-specs` skill and follow its instructions to draft detailed specifications.
 
 ## Instructions
-1. **Activate Skill:** Start by activating the `drafting-specs` skill.
-   - Command: `activate_skill{name: "drafting-specs"}`
-2. **Follow Workflow:** Strictly follow the steps defined in the activated skill.
-   - The first step will be `Goal Setting` using `defining-work-goals`.
-   - Ensure you perform reconnaissance (`scouting-facts`) and intent analysis (`analyzing-intent`) as part of the goal definition.
-3. **Draft & Audit:** Create the specification documents and perform a self-audit.
-4. **Retrospective:** Conduct a retrospective after completion.
-5. **PR Submission:** Create a Pull Request with the changes.
+1. **Activate Skill:** Execute `activate_skill{name: "drafting-specs"}`.
+2. **Follow Skill Workflow:** Strictly adhere to the workflow defined in the activated skill.
 
-## Context
-- **Issue Number:** ${{ env.ISSUE_NUMBER }}
-- **Issue Title:** ${{ env.ISSUE_TITLE }}
-- **Issue Body:**
+## Issue Context
+- **Title:** ${{ env.ISSUE_TITLE }}
+- **Body:**
 ${{ env.ISSUE_BODY }}
