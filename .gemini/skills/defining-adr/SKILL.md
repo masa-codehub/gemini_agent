@@ -32,6 +32,7 @@ ADR Creation Progress:
 - **Action:**
   - `activate_skill{name: "scoping-design-tasks"}`
   - 現状分析、論点整理、およびユーザーとの合意形成を行い、**Design Brief (設計指針)** を完成させる。
+  - **[DDD Modeling Guide]**: `read_file .gemini/skills/defining-adr/references/ddd-modeling.md` を参照し、コンテキストの境界や用語定義に関わる決定を行う場合は、ガイドラインを遵守するよう指示する。
   - **Focus:** 特に「なぜ決めるのか（Context）」と「何を決めるのか（Decision）」、そして「トレードオフ」を明確にするよう指示する。
 
 ### 3. Execution (執筆・監査)
@@ -49,3 +50,7 @@ ADR Creation Progress:
 
 - 新規ADRファイルが作成され、ユーザーの合意内容（Design Brief）が反映されていること。
 - 変更内容を含むPull Requestが作成されていること。
+
+## 高度な使い方
+
+- **ドメインモデリング**: コンテキスト境界や用語定義に関わるADRを作成する際の指針については [references/ddd-modeling.md](references/ddd-modeling.md) を参照してください。

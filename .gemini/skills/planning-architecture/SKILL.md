@@ -39,6 +39,7 @@ Planning Progress:
 ### 3. Common Definitions Creation (共通定義の策定)
 - **Action:**
   - Step 1 で生成された **Design Brief** を参照し、定義すべき用語やシステムの境界を抽出する。
+  - **[DDD Modeling Guide]**: `read_file .gemini/skills/planning-architecture/references/ddd-modeling.md` を実行し、境界づけられたコンテキストやユビキタス言語の定義方法を確認する。
   - `read_file .gemini/skills/planning-architecture/assets/arch-plan-template.md` を実行してテンプレートを確認する。
   - **Output Path:** `docs/architecture/plans/adr-{XXX}-{title}/` ディレクトリを作成し、その中に `definitions.md` を作成する。
   - **Physical Mapping:** 抽象的なコンポーネント定義に対し、必ず**具体的なディレクトリやファイルパス**をマッピングする。
@@ -73,3 +74,7 @@ Planning Progress:
 - 作業用ブランチ上に、共通定義書と全てのIssue案（個別＋統合）が生成されていること。
 - 統合Issueにおいて、全ての個別Issueへの依存関係が定義されていること。
 - 計画承認用のPull Requestが作成されていること。
+
+## 高度な使い方
+
+- **ドメインモデリング**: DDDに基づく境界定義や用語統一の手法については [references/ddd-modeling.md](references/ddd-modeling.md) を参照してください。

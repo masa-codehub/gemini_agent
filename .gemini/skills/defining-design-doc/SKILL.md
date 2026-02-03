@@ -33,6 +33,7 @@ Design Doc Creation Progress:
 - **Action:**
   - `activate_skill{name: "scoping-design-tasks"}`
   - 現状分析、論点整理、およびユーザーとの合意形成を行い、**Design Brief (設計指針)** を完成させる。
+  - **[DDD Modeling Guide]**: `read_file .gemini/skills/defining-design-doc/references/ddd-modeling.md` を参照し、ドメインモデルやユビキタス言語の定義においてガイドラインを遵守するよう指示する。
   - **Focus:** 解決すべき課題（Why）、アプローチ（How）、および構造（Structure）の概要を明確にする。
 
 ### 3. Execution (執筆・監査)
@@ -50,3 +51,7 @@ Design Doc Creation Progress:
 
 - 新規Design Docファイルが作成され、Design Briefの内容が反映されていること。
 - 変更内容を含むPull Requestが作成されていること。
+
+## 高度な使い方
+
+- **ドメインモデリング**: DDDに基づく概念モデルの定義や用語統一の手法については [references/ddd-modeling.md](references/ddd-modeling.md) を参照してください。
