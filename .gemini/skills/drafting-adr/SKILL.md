@@ -19,17 +19,23 @@ description: Drafts and audits Architecture Decision Records (ADRs). Handles doc
 
 ```markdown
 Drafting Progress:
-- [ ] 1. Preparation (準備)
-- [ ] 2. Content Drafting (執筆)
-- [ ] 3. Self-Audit (自己監査と修正)
+- [ ] 1. Goal Setting (目標設定)
+- [ ] 2. Preparation (準備)
+- [ ] 3. Content Drafting (執筆)
+- [ ] 4. Self-Audit (自己監査と修正)
 ```
 
-### 1. Preparation (準備)
+### 1. Goal Setting (目標設定)
+- **Action:**
+  - `activate_skill{name: "setting-smart-goals"}` を実行する。
+  - Issueの記述から、「このADRによって、どのような意思決定を明確にし、どのようなリスクを回避するか」をSMARTゴールとして定義する。
+
+### 2. Preparation (準備)
 - **Action:**
   - `assets/adr-audit-checklist.md` を読み込み、記述と監査の基準を確認する。
   - `assets/adr.md` (ADRテンプレート) を読み込む。
 
-### 2. Content Drafting (執筆)
+### 3. Content Drafting (執筆)
 - **Action:**
   - Design Brief の内容を反映し、以下の要素を執筆する。
     - **Context:** 事実に基づく背景。
@@ -38,7 +44,7 @@ Drafting Progress:
   - **Output:**
     - `reqs/design/_inbox/adr-XXX-title.md` (新規作成)
 
-### 3. Self-Audit (自己監査と修正)
+### 4. Self-Audit (自己監査と修正)
 - **Action:**
   - `assets/adr-audit-checklist.md` に基づき、記述内容を厳格に監査する。
   - 各チェック項目の「根拠」欄に、判定理由（引用や確認結果）を記述する。

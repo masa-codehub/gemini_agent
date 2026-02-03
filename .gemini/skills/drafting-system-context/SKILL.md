@@ -19,17 +19,23 @@ description: Drafts and audits the system-context.md based on the Design Brief. 
 
 ```markdown
 Drafting Progress:
-- [ ] 1. Preparation (準備)
-- [ ] 2. Content Drafting (テキストと図の執筆)
-- [ ] 3. Self-Audit (自己監査と修正)
+- [ ] 1. Goal Setting (目標設定)
+- [ ] 2. Preparation (準備)
+- [ ] 3. Content Drafting (テキストと図の執筆)
+- [ ] 4. Self-Audit (自己監査と修正)
 ```
 
-### 1. Preparation (準備)
+### 1. Goal Setting (目標設定)
+- **Action:**
+  - `activate_skill{name: "setting-smart-goals"}` を実行。
+  - 「システムの境界、外部システム、ユーザーとの関係を、誰が読んでも誤解のない形で定義すること」をSMARTゴールとして定義。
+
+### 2. Preparation (準備)
 - **Action:**
   - `assets/drafting-checklist.md` を読み込み、記述と監査の基準を確認する。
   - `assets/system-context-template.md` を読み込み、執筆のベースとする。
 
-### 2. Content Drafting (テキストと図の執筆)
+### 3. Content Drafting (テキストと図の執筆)
 - **Action:**
   - Design Brief の内容を反映し、テキスト（価値、境界、用語集）を執筆する。
   - **Guidelines:** 詳細な執筆基準と具体例については [references/guidelines.md](references/guidelines.md) を参照すること。
@@ -37,7 +43,7 @@ Drafting Progress:
 - **Output:**
   - `docs/system-context.md` のドラフト。
 
-### 3. Self-Audit (自己監査と修正)
+### 4. Self-Audit (自己監査と修正)
 - **Action:**
   - `assets/drafting-checklist.md` に基づき、記述内容と図を厳格に監査する。
   - 各チェック項目の「根拠」欄に、判定理由（引用や確認結果）を記述する。

@@ -18,23 +18,29 @@ description: Drafts and audits Design Docs. Handles documentation of context, de
 
 ```markdown
 Drafting Progress:
-- [ ] 1. Preparation (準備)
-- [ ] 2. Content Drafting (執筆)
-- [ ] 3. Self-Audit (自己監査と修正)
+- [ ] 1. Goal Setting (目標設定)
+- [ ] 2. Preparation (準備)
+- [ ] 3. Content Drafting (執筆)
+- [ ] 4. Self-Audit (自己監査と修正)
 ```
 
-### 1. Preparation (準備)
+### 1. Goal Setting (目標設定)
+- **Action:**
+  - `activate_skill{name: "setting-smart-goals"}` を実行。
+  - Issueの内容から、「このDesign Docによってどのような設計課題を解決し、どのような成果物を定義するか」をSMARTに定義。
+
+### 2. Preparation (準備)
 - **Action:**
   - `assets/design-doc-audit-checklist.md` を読み込み、記述と監査の基準を確認する。
   - `assets/design-doc.md` (テンプレート) を読み込む。
 
-### 2. Content Drafting (執筆)
+### 3. Content Drafting (執筆)
 - **Action:**
   - Design Brief の内容を反映し、Design Docを作成する。
   - **Output:**
     - `reqs/design/_inbox/design-XXX-title.md` (新規作成)
 
-### 3. Self-Audit (自己監査と修正)
+### 4. Self-Audit (自己監査と修正)
 - **Action:**
   - `assets/design-doc-audit-checklist.md` に基づき、記述内容を厳格に監査する。
   - 各チェック項目の「根拠」欄に、判定理由（引用や確認結果）を記述する。
