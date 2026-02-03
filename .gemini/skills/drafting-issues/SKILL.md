@@ -35,6 +35,7 @@ description: Generates objective-oriented and verifiable Issue drafts based on t
 
 **目的:** システム連携に必要な属性情報を定義する。
 
+- **labels:** `references/issue-labels.md` を参照し、タスクの内容に最適な自動化ラベル（`gemini:arch`, `gemini:spec`, `gemini:tdd`）を選択して設定する（単一選択）。
 - **title:** `[Domain] Action + Object` (例: `[Payment] Update Sequence for Async Retry`)
 - **roadmap:** 参照すべき **Common Definitions Doc のパス** (例: `docs/architecture/plans/20240101-payment.md`)。
 - **task_id:** Planning段階で振られた一意なID（例: `T-01`）。

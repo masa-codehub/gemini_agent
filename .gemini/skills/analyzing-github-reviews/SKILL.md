@@ -24,10 +24,16 @@ Review Analysis Progress:
 - **Action:**
   - `pull_request_read(method="get_review_comments")` を実行し、未解決のコメントを取得する。
   - 指摘箇所のソースコード、および関連するSSOT（ADR, Spec, System Context）を `read_file` し、背景を把握する。
+  - **SSOT Verification:**
+    - `activate_skill{name: "auditing-ssot"}` を実行し、指摘内容が既存の決定事項（SSOT）と整合しているか、あるいは矛盾していないかを検証する。
+    - 監査対象は「レビュアーの指摘内容（および修正提案）」とする。
 
 ### 2. Categorization & Analysis
 - **Action:**
-  - `references/categorization-criteria.md` を参照し、各コメントを「Accept/Discuss/Explain」に分類する。
+  - `references/categorization-criteria.md` および **前工程の SSOT 監査レポート** を参照し、各コメントを分類する。
+    - **Accept:** 指摘が正しく、かつ SSOT と整合している場合（バグ、規約違反など）。
+    - **Explain:** 指摘は一見正しいが、SSOT（ADR/System Context）の決定事項と矛盾する場合、または SSOT 側が意図的にその実装を選択している場合。
+    - **Discuss:** 指摘の意図が不明確、または SSOT に定義がなく判断が難しい場合。
   - **重要:** 「なぜその指摘が必要になったのか（説明不足、規約の誤解、設計の不備など）」という真因も併せて分析する。
 
 ### 3. Retrospective for Assetization
@@ -40,11 +46,11 @@ Review Analysis Progress:
 - **Action:**
   - `assets/analysis-report-template.md` を使用して、分析レポートと改善アクション案を作成する。
   - **Output Path:**
-    - 関連する計画ディレクトリ（`docs/*/plans/*/`）を特定し、その配下の `reviews/pr-<Number>-analysis.md` に保存する。
-    - 特定できない場合は `docs/reviews/pr-<Number>-analysis.md` を使用する。
+    - 関連する計画ディレクトリ（`docs/*/plans/*/`）を特定し、その配下に `reviews/` ディレクトリが存在しない場合は **作成（`mkdir -p`）** したうえで、その中の `pr-<Number>-analysis.md` に保存する。
+    - 特定できない場合は `docs/reviews/` ディレクトリを（存在しなければ **作成** して）使用し、その配下の `pr-<Number>-analysis.md` に保存する。
   - **Persistence:**
     - `activate_skill{name: "recording-changes"}` を実行して、作成したレポートをコミットする。
-    - コミット後、必ずリモートブランチへ **Push** を行い、レポートを永続化する。
+    - コミット後、必ず **`run_shell_command{command: "git push origin HEAD"}`** を実行し、レポートをリモートブランチへ永続化する。
   - レポートの内容を**標準出力に表示**する。
   - ユーザーに対し、各項目への最終的な対応方針（Accept項目の修正担当の割り振り、Discuss項目の論点、等）を提示する。
 

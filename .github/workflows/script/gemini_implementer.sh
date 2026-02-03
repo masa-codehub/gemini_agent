@@ -14,19 +14,19 @@ MATCH_COUNT=0
 if [[ "$LABELS" == *"gemini:arch"* ]]; then
   CONTEXT_FILE=".github/workflows/context/arch-prompt.md"
   echo "Selected Skill: Architecture Drafting"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 if [[ "$LABELS" == *"gemini:spec"* ]]; then
   CONTEXT_FILE=".github/workflows/context/spec-prompt.md"
   echo "Selected Skill: Specification Drafting"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 if [[ "$LABELS" == *"gemini:tdd"* ]]; then
   CONTEXT_FILE=".github/workflows/context/tdd-prompt.md"
   echo "Selected Skill: TDD Implementation"
-  ((MATCH_COUNT++))
+  ((++MATCH_COUNT))
 fi
 
 # 複数ラベルまたは該当なしのチェック
@@ -57,6 +57,20 @@ trap 'rm -f prompt.md' EXIT
 envsubst '$ISSUE_NUMBER $ISSUE_TITLE $ISSUE_BODY' < "${CONTEXT_FILE}" > prompt.md
 
 echo "--- Gemini Execution Start ---"
+
+# 仮想環境のアクティベート
+if [ -f ".venv/bin/activate" ]; then
+  source ".venv/bin/activate"
+else
+  echo "Warning: .venv/bin/activate not found. Assuming gemini is in PATH."
+fi
+
+# gemini コマンドの存在確認
+if ! command -v gemini >/dev/null 2>&1; then
+  echo "Error: 'gemini' command not found."
+  echo "Please install or activate the environment that provides the 'gemini' CLI (e.g., create and activate .venv with gemini installed)."
+  exit 1
+fi
 
 # geminiコマンドにプロンプトを渡し、モデルを指定して実行させる
 

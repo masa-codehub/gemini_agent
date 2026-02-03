@@ -1,7 +1,7 @@
 # TDD Implementation
 
 You are assigned to the `BACKENDCODER` role.
-The user has requested code implementation via GitHub Issue #${{ env.ISSUE_NUMBER }}.
+The user has requested code implementation via GitHub Issue #${ISSUE_NUMBER}.
 
 ## Objective
 Activate the `implementing-python-tdd` skill and follow its instructions to implement the feature or fix the bug.

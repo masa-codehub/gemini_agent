@@ -50,6 +50,10 @@ PR作成進捗:
 
 - **Action:**
   - `assets/pull-request-template.md` を参照し、`title` と `body` を作成する。
+  - **Labeling (重要):** 
+    - 関連するIssueがある場合、そのIssueに付与されている `gemini:*` ラベル（例: `gemini:arch`, `gemini:spec`, `gemini:tdd`）を確認する。
+    - **必ず** 同じラベルをPRにも適用する（後続の自動化ワークフロー `gemini-reviewer` のトリガーとなるため）。
+    - Issueがない場合は、変更内容（アーキテクチャ、仕様、実装）に応じて適切なラベルを推測して付与する。
   - **必須:** `head` (作業ブランチ) と `base` (マージ先) を明示的に指定する。
   - `create_pull_request` ツールを呼び出す。
 
