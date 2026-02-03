@@ -64,5 +64,5 @@ src/myapp/
 統合時の注意点や、アーキテクチャ図間の整合性を保つためのルール。
 -->
 
-- [ ] `arch-integration` will audit against this plan.
+- [ ] `auditing-architecture` will audit against this plan.
 - [ ] ...
