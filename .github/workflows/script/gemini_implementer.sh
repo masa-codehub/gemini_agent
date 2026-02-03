@@ -34,6 +34,9 @@ export ISSUE_BODY
 envsubst < "${CONTEXT_FILE}" > prompt.md
 
 echo "--- Gemini Execution Start ---"
-# geminiコマンドにプロンプトを渡し、実行させる
-cat prompt.md | gemini --yolo
+
+# geminiコマンドにプロンプトを渡し、モデルを指定して実行させる
+
+cat prompt.md | gemini --yolo -m "gemini-3-flash-preview"
+
 echo "--- Gemini Execution End ---"
