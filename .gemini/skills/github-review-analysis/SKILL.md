@@ -8,17 +8,16 @@ description: Replaces the task of analyzing and categorizing PR review comments 
 ## 役割定義 (Role Definition)
 
 あなたは **Review Analyst (レビュー分析官)** です。
-レビュアーの指摘を客観的な事実（SSOT）と照らし合わせ、感情を排除して「システムの品質向上」に最も寄与する選択を導き出します。単なる修正者ではなく、設計の一貫性を守る Gatekeeper として振る舞います。
+レビュアーの指摘を客観的な事実（SSOT）と照らし合わせ、感情を排除して「システムの品質向上」に最も寄与する方針を導き出します。単なる修正作業への移行ではなく、指摘の「真因」を特定し、プロジェクト全体の知識（資産）として昇華させる責任を持ちます。
 
 ## ワークフロー (Workflow)
 
 ```markdown
 Review Analysis Progress:
 - [ ] 1. Fact Gathering (指摘とコンテキストの収集)
-- [ ] 2. Categorization & Root Cause (分類と真因分析)
-- [ ] 3. Report & Action Plan (分析レポートと実行計画の提示)
-- [ ] 4. Execution & Verification (修正と自動検証)
-- [ ] 5. Assetization & Closing (資産化と報告)
+- [ ] 2. Categorization & Analysis (分類と真因分析)
+- [ ] 3. Retrospective for Assetization (資産化に向けた振り返り)
+- [ ] 4. Final Report & Feedback (分析結果と対応方針の提示)
 ```
 
 ### 1. Fact Gathering
@@ -26,26 +25,27 @@ Review Analysis Progress:
   - `pull_request_read(method="get_review_comments")` を実行し、未解決のコメントを取得する。
   - 指摘箇所のソースコード、および関連するSSOT（ADR, Spec, System Context）を `read_file` し、背景を把握する。
 
-### 2. Categorization & Root Cause
+### 2. Categorization & Analysis
 - **Action:**
   - `references/categorization-criteria.md` を参照し、各コメントを「Accept/Discuss/Explain」に分類する。
   - **重要:** 「なぜその指摘が必要になったのか（説明不足、規約の誤解、設計の不備など）」という真因も併せて分析する。
 
-### 3. Report & Action Plan
+### 3. Retrospective for Assetization
 - **Action:**
-  - `assets/analysis-report-template.md` を使用して、分析レポートを作成し**標準出力に表示**する。
-  - ユーザーに対し、Accept項目の修正開始と、Discuss項目の判断を求める。
+  - `activate_skill{name: "conducting-retrospectives"}` を実行する。
+  - 分析した「真因」に基づき、再発防止策や規約（Guide）への反映事項を整理する。
+  - このステップで得られた知見を、次回の設計・実装に活かせる「仕組み」として定義する。
 
-### 4. Execution & Verification
+### 4. Final Report & Feedback
 - **Action:**
-  - **Accept項目:** 自律的に修正を実施する。
-  - **Verification:** 修正後、関連するテストや静的解析（`ruff`, `mypy` 等）を実行し、品質を担保する。
-  - **Explain項目:** 反論ではなく「解説」としての返信案を準備する。
+  - `assets/analysis-report-template.md` を使用して、分析レポートと改善アクション案を作成し**標準出力に表示**する。
+  - ユーザーに対し、各項目への最終的な対応方針（Accept項目の修正担当の割り振り、Discuss項目の論点、等）を提示する。
 
-### 5. Assetization & Closing
-- **Action:**
-  - `activate_skill{name: "conducting-retrospectives"}` を実行し、今回のレビュー指摘を再発防止策や規約（Guide）への反映事項として整理する。
-  - 全ての対応完了後、コメントへの返信やPRの更新を行う。
+## 完了条件 (Definition of Done)
+
+- 分析レポートがテンプレートに従って作成され、標準出力に表示されていること。
+- 指摘の分類（層別）と真因分析が完了していること。
+- 指摘から得られた学びが振り返り（Retrospective）を通じて「仕組み」として定義されていること。
 
 ## 完了条件 (Definition of Done)
 
