@@ -1,6 +1,6 @@
 ---
 name: analyzing-github-reviews
-description: Replaces the task of analyzing and categorizing PR review comments and formulating executable fix plans. Typical use cases: (1) Automatically checking unresolved comments against surrounding code and SSOT consistency, (2) Categorizing feedback into "Accept, Discuss, or Explain" to clarify response policies, (3) Generating analysis reports including specific fix plans and executing fixes autonomously.
+description: Replaces the task of analyzing and categorizing PR review comments and formulating executable fix plans. Typical use cases: (1) Automatically checking unresolved comments against surrounding code and SSOT consistency, (2) Categorizing feedback into "Accept, Discuss, or Explain" to clarify response policies, (3) Generating analysis reports including specific fix plans and recommended implementation steps (without executing fixes autonomously).
 ---
 
 # GitHub Review Analysis
@@ -46,12 +46,6 @@ Review Analysis Progress:
 - 分析レポートがテンプレートに従って作成され、標準出力に表示されていること。
 - 指摘の分類（層別）と真因分析が完了していること。
 - 指摘から得られた学びが振り返り（Retrospective）を通じて「仕組み」として定義されていること。
-
-## 完了条件 (Definition of Done)
-
-- 分析レポートがテンプレートに従って作成され、標準出力に表示されていること。
-- Accept項目が全て修正され、自動検証（Lint/Test）をパスしていること。
-- 指摘から得られた学びが振り返り（Retrospective）に記録されていること。
 
 ## 高度な使い方
 
