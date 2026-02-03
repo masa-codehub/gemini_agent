@@ -40,11 +40,11 @@ Review Analysis Progress:
 - **Action:**
   - `assets/analysis-report-template.md` を使用して、分析レポートと改善アクション案を作成する。
   - **Output Path:**
-    - 関連する計画ディレクトリ（`docs/*/plans/*/`）を特定し、その配下の `reviews/pr-<Number>-analysis.md` に保存する。
-    - 特定できない場合は `docs/reviews/pr-<Number>-analysis.md` を使用する。
+    - 関連する計画ディレクトリ（`docs/*/plans/*/`）を特定し、その配下に `reviews/` ディレクトリが存在しない場合は **作成（`mkdir -p`）** したうえで、その中の `pr-<Number>-analysis.md` に保存する。
+    - 特定できない場合は `docs/reviews/` ディレクトリを（存在しなければ **作成** して）使用し、その配下の `pr-<Number>-analysis.md` に保存する。
   - **Persistence:**
     - `activate_skill{name: "recording-changes"}` を実行して、作成したレポートをコミットする。
-    - コミット後、必ずリモートブランチへ **Push** を行い、レポートを永続化する。
+    - コミット後、必ず **`run_shell_command{command: "git push origin HEAD"}`** を実行し、レポートをリモートブランチへ永続化する。
   - レポートの内容を**標準出力に表示**する。
   - ユーザーに対し、各項目への最終的な対応方針（Accept項目の修正担当の割り振り、Discuss項目の論点、等）を提示する。
 
