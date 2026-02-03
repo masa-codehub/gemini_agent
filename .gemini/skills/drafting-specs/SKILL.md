@@ -23,6 +23,8 @@ Drafting Progress:
 - [ ] 3. Detailed Drafting (詳細記述)
 - [ ] 4. Refactoring & Ambiguity Check (リファクタリングと曖昧さ排除)
 - [ ] 5. Self-Audit (自己監査)
+- [ ] 6. Retrospective (振り返り)
+- [ ] 7. Pull Request Submission (PR作成)
 ```
 
 ### 1. Goal Setting (目標設定)
@@ -59,8 +61,24 @@ Drafting Progress:
 - **Output:**
   - 監査レポートを標準出力に表示する（保存先指定があればファイル出力）。
 
+### 6. Retrospective (振り返り)
+**目的:** 仕様策定プロセスの成果と課題を振り返り、より厳密で効率的な仕様記述のための知見を蓄積する。
+
+- **Action:**
+  - `activate_skill{name: "conducting-retrospectives"}` を実行する。
+  - 仕様の曖昧さ、TDD適合性、ドメイン定義の正確性などを軸に振り返り、改善アクションを策定する。
+
+### 7. Pull Request Submission (PR作成)
+**目的:** 仕様書をレビューに回し、統合ブランチへ反映させる。
+
+- **Action:**
+  - `activate_skill{name: "managing-pull-requests"}` を実行する。
+  - 仕様の主要なポイントと、検証基準（Verify Criteria）の網羅性をPRの記述で強調する。
+
 ## 完了条件 (Definition of Done)
 
 - 仕様書から曖昧な表現が排除されていること。
 - Common Definitions に準拠していること。
 - 自己監査レポートが作成され、すべてのチェックをパスしていること。
+- 振り返り（Retrospective）が実施され、レポートが標準出力に表示されていること。
+- **プルリクエスト（PR）が作成され、成果物が提出されていること。**
