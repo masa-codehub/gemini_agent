@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+# set -e
 
 # ラベル情報の取得 (環境変数 ISSUE_LABELS を使用)
 LABELS="${ISSUE_LABELS}"
