@@ -29,8 +29,8 @@ Drafting Progress:
 
 ### 1. Goal Setting (目標設定)
 - **Action:**
-  - `activate_skill{name: "setting-smart-goals"}` を実行する。
-  - Issueの記述から、「この仕様書によって、実装者がどの範囲のテストコードを書けるようになるか」をSMARTゴールとして定義する。
+  - `activate_skill{name: "defining-work-goals"}` を実行する。
+  - 現状の調査、意図の分析を経て、この仕様策定タスクのSMARTゴールを策定する。
 
 ### 2. Template Selection & Preparation (テンプレート選択と準備)
 - **Action:**

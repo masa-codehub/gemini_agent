@@ -31,8 +31,8 @@ Drafting Progress:
 **目的:** タスクの意図を正確に把握し、アウトプットの達成基準を明確にする。
 
 - **Action:**
-  - `activate_skill{name: "setting-smart-goals"}` を実行する。
-  - Issueの記述から、「この図面は誰（例: Spec Strategist）のために、どのような情報（例: API境界、データフロー）を確定させるものか」をSMARTゴールとして定義する。
+  - `activate_skill{name: "defining-work-goals"}` を実行する。
+  - 現状の調査、意図の分析を経て、このアーキテクチャ図面作成タスクのSMARTゴールを策定する。
 
 ### 2. Template Selection & Preparation (テンプレート選択と準備)
 **目的:** Issueの要件に基づき、最適な表現形式を選択する。

@@ -33,8 +33,8 @@ Implementation Progress:
 ### 1. Goal Setting (目標設定)
 
 - **Action:**
-  - `activate_skill{name: "setting-smart-goals"}` を実行。
-  - Issueの内容から、「どのモジュールのどの機能を実装し、どのテスト項目をパスさせるか」をSMARTに定義。
+  - `activate_skill{name: "defining-work-goals"}` を実行。
+  - 現状の調査、意図の分析を経て、この実装タスクのSMARTゴールを策定する。
 
 ### 2. Environment Setup (環境確認)
 
