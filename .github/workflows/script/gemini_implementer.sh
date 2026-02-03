@@ -58,6 +58,13 @@ envsubst '$ISSUE_NUMBER $ISSUE_TITLE $ISSUE_BODY' < "${CONTEXT_FILE}" > prompt.m
 
 echo "--- Gemini Execution Start ---"
 
+# 仮想環境のアクティベート
+if [ -f ".venv/bin/activate" ]; then
+  source .venv/bin/activate
+else
+  echo "Warning: .venv/bin/activate not found. Assuming gemini is in PATH."
+fi
+
 # geminiコマンドにプロンプトを渡し、モデルを指定して実行させる
 
 cat prompt.md | gemini --yolo -m "gemini-3-flash-preview"
