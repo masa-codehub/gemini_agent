@@ -19,7 +19,7 @@ jobs:
     runs-on: [self-hosted]
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_MCP_PAT || secrets.GITHUB_TOKEN }}
-      AGENT_ROLE: SYSTEM_ARCHITECT
+      AGENT_ROLE: ${{ contains(github.event.issue.labels.*.name, 'gemini:arch') && 'TECHNICAL_DESIGNER' || contains(github.event.issue.labels.*.name, 'gemini:spec') && 'TECHNICAL_DESIGNER' || contains(github.event.issue.labels.*.name, 'gemini:tdd') && 'BACKENDCODER' || 'SYSTEM_ARCHITECT' }}
 
     steps:
       - name: Checkout Code
