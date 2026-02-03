@@ -24,10 +24,16 @@ Review Analysis Progress:
 - **Action:**
   - `pull_request_read(method="get_review_comments")` を実行し、未解決のコメントを取得する。
   - 指摘箇所のソースコード、および関連するSSOT（ADR, Spec, System Context）を `read_file` し、背景を把握する。
+  - **SSOT Verification:**
+    - `activate_skill{name: "auditing-ssot"}` を実行し、指摘内容が既存の決定事項（SSOT）と整合しているか、あるいは矛盾していないかを検証する。
+    - 監査対象は「レビュアーの指摘内容（および修正提案）」とする。
 
 ### 2. Categorization & Analysis
 - **Action:**
-  - `references/categorization-criteria.md` を参照し、各コメントを「Accept/Discuss/Explain」に分類する。
+  - `references/categorization-criteria.md` および **前工程の SSOT 監査レポート** を参照し、各コメントを分類する。
+    - **Accept:** 指摘が正しく、かつ SSOT と整合している場合（バグ、規約違反など）。
+    - **Explain:** 指摘は一見正しいが、SSOT（ADR/System Context）の決定事項と矛盾する場合、または SSOT 側が意図的にその実装を選択している場合。
+    - **Discuss:** 指摘の意図が不明確、または SSOT に定義がなく判断が難しい場合。
   - **重要:** 「なぜその指摘が必要になったのか（説明不足、規約の誤解、設計の不備など）」という真因も併せて分析する。
 
 ### 3. Retrospective for Assetization
