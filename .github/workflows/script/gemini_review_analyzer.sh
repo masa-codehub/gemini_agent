@@ -9,23 +9,52 @@ fi
 
 # タスクタイプの判定とプロンプトの選択
 CONTEXT_FILE=""
+MATCH_COUNT=0
 if [[ "$PR_LABELS" == *"gemini:arch"* ]]; then
   TASK_TYPE="ARCH"
   CONTEXT_FILE=".github/workflows/context/review-arch-prompt.md"
-elif [[ "$PR_LABELS" == *"gemini:spec"* ]]; then
+  ((MATCH_COUNT++))
+fi
+
+if [[ "$PR_LABELS" == *"gemini:spec"* ]]; then
   TASK_TYPE="SPEC"
   CONTEXT_FILE=".github/workflows/context/review-spec-prompt.md"
-elif [[ "$PR_LABELS" == *"gemini:tdd"* ]]; then
+  ((MATCH_COUNT++))
+fi
+
+if [[ "$PR_LABELS" == *"gemini:tdd"* ]]; then
   TASK_TYPE="TDD"
   CONTEXT_FILE=".github/workflows/context/review-tdd-prompt.md"
-else
+  ((MATCH_COUNT++))
+fi
+
+# 複数ラベルまたは該当なしのチェック
+if [[ "$MATCH_COUNT" -gt 1 ]]; then
+  echo "Error: Multiple gemini labels detected. Please use only one label per pull request."
+  exit 1
+elif [[ "$MATCH_COUNT" -eq 0 ]]; then
   echo "No matching gemini label found. Skipping execution."
   exit 0
 fi
+
 export TASK_TYPE
 
 echo "Task Type: $TASK_TYPE"
 echo "Selected Context: $CONTEXT_FILE"
+
+# 必須ツールの存在確認
+for cmd in gemini gh envsubst; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "Error: Required command '$cmd' not found. Please ensure it is installed in the runner environment."
+    exit 1
+  fi
+done
+
+# GitHub CLI 認証状態の確認
+if ! gh auth status >/dev/null 2>&1; then
+  echo "Error: GitHub CLI is not authenticated or GITHUB_TOKEN is invalid."
+  exit 1
+fi
 
 # プロンプトファイルの存在確認
 if [ ! -f "$CONTEXT_FILE" ]; then
@@ -33,27 +62,27 @@ if [ ! -f "$CONTEXT_FILE" ]; then
   exit 1
 fi
 
-# 一時ファイルのクリーンアップ設定
-trap 'rm -f prompt.md response.md' EXIT
+# 一時ファイルの作成 (一意なパス)
+PROMPT_FILE="$(mktemp "${RUNNER_TEMP:-/tmp}/prompt.XXXXXX.md")"
+RESPONSE_FILE="$(mktemp "${RUNNER_TEMP:-/tmp}/response.XXXXXX.md")"
+trap 'rm -f "$PROMPT_FILE" "$RESPONSE_FILE"' EXIT
 
-# プロンプトの生成 (envsubst で変数展開)
-# 注意: COMMENT_BODY や DIFF_HUNK には改行や特殊文字が含まれる可能性があるため、
-# 厳密にはここでの単純な envsubst はリスクがあるが、今回は簡易実装とする。
-# 本番運用ではPythonスクリプト等で安全に置換することを推奨。
-envsubst < "${CONTEXT_FILE}" > prompt.md
+# プロンプトの生成 (envsubst でホワイトリスト展開)
+export PR_NUMBER COMMENT_AUTHOR COMMENT_BODY FILE_PATH LINE_NUMBER DIFF_HUNK GITHUB_REPOSITORY TASK_TYPE
+envsubst '$PR_NUMBER $COMMENT_AUTHOR $COMMENT_BODY $FILE_PATH $LINE_NUMBER $DIFF_HUNK $GITHUB_REPOSITORY $TASK_TYPE' < "${CONTEXT_FILE}" > "$PROMPT_FILE"
 
 echo "--- Gemini Analysis Start ---"
 
 # Gemini CLI を実行
 # --yolo: ユーザー確認なしで実行 (CI/CD用)
-cat prompt.md | gemini --yolo -m "gemini-3-flash-preview" > response.md
+cat "$PROMPT_FILE" | gemini --yolo -m "gemini-1.5-flash-latest" > "$RESPONSE_FILE"
 
 echo "--- Gemini Analysis End ---"
 
 # GitHub CLI でコメントを投稿
-if [ -f "response.md" ] && [ -s "response.md" ]; then
+if [ -f "$RESPONSE_FILE" ] && [ -s "$RESPONSE_FILE" ]; then
   echo "Posting comment to PR #${PR_NUMBER}..."
-  gh pr comment "$PR_NUMBER" --body-file response.md
+  gh pr comment "$PR_NUMBER" --body-file "$RESPONSE_FILE"
 else
   echo "Error: Gemini produced empty response."
   exit 1

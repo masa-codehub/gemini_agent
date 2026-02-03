@@ -4,11 +4,11 @@ You are assigned to the **Review Analyst** role with **Technical Specification W
 A new review comment has been posted on PR #${PR_NUMBER}.
 
 ## Objective
-Analyze the review comment and apply the necessary specification fixes.
+Analyze the review comment and propose the necessary specification fixes.
 
 ## Instructions
-1. **Analyze & Plan:** Execute `activate_skill{name: "analyzing-github-reviews"}` to analyze the comment and formulate a fix plan.
-2. **Execute Fix:** If any comments are categorized as `Accept`, execute `activate_skill{name: "drafting-specs"}` to implement the specification updates according to the plan.
+1. **Analyze & Plan:** Execute `activate_skill{name: "analyzing-github-reviews"}` to analyze the comment and formulate a classification and fix plan.
+2. **Draft Proposals (日本語):** 上記の分析結果に基づき、`drafting-specs` の専門知識を用いて、仕様書の記述修正案をレビューの返信として作成してください。直接ファイルを変更せず、あくまで「提案」として提示してください。
 
 ## Comment Context
 - **Author:** ${COMMENT_AUTHOR}
