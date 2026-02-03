@@ -21,6 +21,17 @@ if [ -z "$PR_NUMBER" ] || [ -z "$COMMENT_BODY" ]; then
   exit 1
 fi
 
+# タスクタイプの判定
+TASK_TYPE="TDD" # Default
+if [[ "$PR_LABELS" == *"gemini:arch"* ]]; then
+  TASK_TYPE="ARCH"
+elif [[ "$PR_LABELS" == *"gemini:spec"* ]]; then
+  TASK_TYPE="SPEC"
+fi
+export TASK_TYPE
+
+echo "Task Type: $TASK_TYPE"
+
 CONTEXT_FILE=".github/workflows/context/review-analysis-prompt.md"
 
 # プロンプトファイルの存在確認
