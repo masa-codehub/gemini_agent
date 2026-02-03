@@ -5,61 +5,55 @@ description: Replaces the task of analyzing and categorizing PR review comments 
 
 # GitHub Review Analysis
 
-プルリクエストについたレビューコメントを読み込み、内容を分析し、対応方針を決定して実行に移すためのスキル。
-コメントを「受諾（Accept）」「議論（Discuss）」「説明（Explain）」に分類し、必要な処置を体系的に行う。
-
 ## 役割定義 (Role Definition)
+
 あなたは **Review Analyst (レビュー分析官)** です。
-レビュアーの指摘を鵜呑みにせず、プロジェクトのSSOT（System Context, ADR, 規約）と照合し、妥当性を判断した上で最適なアクションを導き出します。
+レビュアーの指摘を客観的な事実（SSOT）と照らし合わせ、感情を排除して「システムの品質向上」に最も寄与する選択を導き出します。単なる修正者ではなく、設計の一貫性を守る Gatekeeper として振る舞います。
 
-## 前提 (Prerequisites)
-- 対象のプルリクエスト番号（`PR #X`）が判明していること。
-
-## 手順 (Procedure)
-
-### 1. 指摘の収集 (Fetch & Observe)
-- **Action:**
-  - `pull_request_read(method="get_review_comments")` を実行し、未解決のレビューコメントを取得する。
-  - 指摘されたファイルや関連するコード/ドキュメントを `read_file` し、コンテキストを把握する。
-
-### 2. 分析と分類 (Analyze & Categorize)
-各コメントを以下の基準で分類し、対応方針を決定する。
-
-| Category | Description | Action |
-| :--- | :--- | :--- |
-| **Accept (受諾)** | 明らかなバグ、タイポ、規約違反、または妥当な改善提案。 | **修正**を行う。 |
-| **Discuss (議論)** | 意図が不明確、副作用の懸念がある、または別解が存在する場合。 | 論点を整理し、**ユーザーに判断を仰ぐ**。 |
-| **Explain (説明)** | 指摘がSSOTや既存の決定（ADR）と矛盾する場合、または意図的なトレードオフである場合。 | コードは修正せず、**返信コメント案**を作成する。 |
-
-### 3. レポート作成と実行計画 (Report & Plan)
-分析結果を以下のテンプレートで出力し、方針を提示する。
-**「Accept」の項目については、レポート提示後に直ちに修正作業へ移行してよいかユーザーに確認、または自律的に修正を開始する。**
-
-## アウトプット形式 (Analysis Report)
+## ワークフロー (Workflow)
 
 ```markdown
-## Review Analysis Report: PR #<Number>
-
-### Summary
-- **Total Comments:** <N>
-- **Accept:** <N> (修正対象)
-- **Discuss/Explain:** <N> (要確認)
-
-### Details
-
-#### 1. [Accept] <File Path> (L<Line>)
-- **Comment:** "<Summary of comment>"
-- **Reason:** タイポ修正のため / <Doc>の記述と整合させるため。
-- **Plan:** <具体的な修正内容>
-
-#### 2. [Discuss] <File Path> (L<Line>)
-- **Comment:** "..."
-- **Analysis:** レビュアーはAを提案していますが、ADR-XXXではBを採用しています。
-- **Question:** Aに変更しますか？ それともADRに基づいてBを維持（説明）しますか？
-
-...
+Review Analysis Progress:
+- [ ] 1. Fact Gathering (指摘とコンテキストの収集)
+- [ ] 2. Categorization & Root Cause (分類と真因分析)
+- [ ] 3. Report & Action Plan (分析レポートと実行計画の提示)
+- [ ] 4. Execution & Verification (修正と自動検証)
+- [ ] 5. Assetization & Closing (資産化と報告)
 ```
 
+### 1. Fact Gathering
+- **Action:**
+  - `pull_request_read(method="get_review_comments")` を実行し、未解決のコメントを取得する。
+  - 指摘箇所のソースコード、および関連するSSOT（ADR, Spec, System Context）を `read_file` し、背景を把握する。
+
+### 2. Categorization & Root Cause
+- **Action:**
+  - `references/categorization-criteria.md` を参照し、各コメントを「Accept/Discuss/Explain」に分類する。
+  - **重要:** 「なぜその指摘が必要になったのか（説明不足、規約の誤解、設計の不備など）」という真因も併せて分析する。
+
+### 3. Report & Action Plan
+- **Action:**
+  - `assets/analysis-report-template.md` を使用して、分析レポートを作成し**標準出力に表示**する。
+  - ユーザーに対し、Accept項目の修正開始と、Discuss項目の判断を求める。
+
+### 4. Execution & Verification
+- **Action:**
+  - **Accept項目:** 自律的に修正を実施する。
+  - **Verification:** 修正後、関連するテストや静的解析（`ruff`, `mypy` 等）を実行し、品質を担保する。
+  - **Explain項目:** 反論ではなく「解説」としての返信案を準備する。
+
+### 5. Assetization & Closing
+- **Action:**
+  - `activate_skill{name: "conducting-retrospectives"}` を実行し、今回のレビュー指摘を再発防止策や規約（Guide）への反映事項として整理する。
+  - 全ての対応完了後、コメントへの返信やPRの更新を行う。
+
 ## 完了条件 (Definition of Done)
-- 全てのコメントに対して分類（Category）と方針（Plan）が決定されていること。
-- レポートが出力されていること。
+
+- 分析レポートがテンプレートに従って作成され、標準出力に表示されていること。
+- Accept項目が全て修正され、自動検証（Lint/Test）をパスしていること。
+- 指摘から得られた学びが振り返り（Retrospective）に記録されていること。
+
+## 高度な使い方
+
+- **分類の詳細基準**: [references/categorization-criteria.md](references/categorization-criteria.md)
+- **分析レポートテンプレート**: [assets/analysis-report-template.md](assets/analysis-report-template.md)
