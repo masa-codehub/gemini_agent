@@ -36,7 +36,7 @@ Audit Progress:
 **目的:** 実装されたアーキテクチャが、ADR（SSOT）の意図およびシステムコンテキストと整合しているか検証する。
 
 - **Action:**
-  - `activate_skill{name: "ssot-verification"}` を実行する（または手動でADRと比較する）。
+  - `activate_skill{name: "auditing-ssot"}` を実行する（または手動でADRと比較する）。
   - **Consistency Check:**
     - コンポーネント名や境界が、`docs/architecture/plans/` の共通定義と完全一致しているか。
     - 図面間の依存関係に矛盾がないか（例：C4 Container図とSequence図での呼び出し関係の不一致）。
