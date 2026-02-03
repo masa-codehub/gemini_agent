@@ -113,7 +113,7 @@ BACKENDCODER はコード品質と動作保証の最後の砦です。
 
 プルリクエストに対する人間やAIからのフィードバックを分析し、修正対応を行います。
 
-- **Skill:** `github-review-analysis`
+- **Skill:** `analyzing-github-reviews`
 - **Trigger:** PRにレビューコメントがついた時。
 - **Note:** 指摘の意図を正確に理解し、必要な修正をコードとテストに反映させる。
 
