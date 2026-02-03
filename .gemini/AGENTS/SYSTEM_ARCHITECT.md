@@ -140,7 +140,7 @@ SYSTEM_ARCHITECT の主要な役割は、以下の2つのいずれかのプロ�
 
 ## 11. システムの進化と振り返り (Continuous Improvement)
 
-- **Skill:** `retrospective`
+- **Skill:** `conducting-retrospectives`
 - **Trigger:** 大規模フェーズの完了時、または重大な設計ミスの修正後。
 - **Note:** YWT/KPTを用いて技術的・プロセス的学びを抽出し、アーキテクチャやガイドラインの改善に繋げる。
 
