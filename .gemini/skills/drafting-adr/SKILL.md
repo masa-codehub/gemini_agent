@@ -27,8 +27,8 @@ Drafting Progress:
 
 ### 1. Goal Setting (目標設定)
 - **Action:**
-  - `activate_skill{name: "setting-smart-goals"}` を実行する。
-  - Issueの記述から、「このADRによって、どのような意思決定を明確にし、どのようなリスクを回避するか」をSMARTゴールとして定義する。
+  - `activate_skill{name: "defining-work-goals"}` を実行する。
+  - 現状の調査、意図の分析を経て、このADR執筆タスクのSMARTゴールを策定する。
 
 ### 2. Preparation (準備)
 - **Action:**

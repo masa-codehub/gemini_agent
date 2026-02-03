@@ -27,8 +27,8 @@ Drafting Progress:
 
 ### 1. Goal Setting (目標設定)
 - **Action:**
-  - `activate_skill{name: "setting-smart-goals"}` を実行。
-  - 「システムの境界、外部システム、ユーザーとの関係を、誰が読んでも誤解のない形で定義すること」をSMARTゴールとして定義。
+  - `activate_skill{name: "defining-work-goals"}` を実行。
+  - 現状の調査、意図の分析を経て、このシステムコンテキスト執筆タスクのSMARTゴールを策定する。
 
 ### 2. Preparation (準備)
 - **Action:**

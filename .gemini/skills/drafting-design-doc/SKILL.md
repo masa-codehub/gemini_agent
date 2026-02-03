@@ -26,8 +26,8 @@ Drafting Progress:
 
 ### 1. Goal Setting (目標設定)
 - **Action:**
-  - `activate_skill{name: "setting-smart-goals"}` を実行。
-  - Issueの内容から、「このDesign Docによってどのような設計課題を解決し、どのような成果物を定義するか」をSMARTに定義。
+  - `activate_skill{name: "defining-work-goals"}` を実行。
+  - 現状の調査、意図の分析を経て、このDesign Doc執筆タスクのSMARTゴールを策定する。
 
 ### 2. Preparation (準備)
 - **Action:**
