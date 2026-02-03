@@ -1,94 +1,96 @@
 ---
 name: implementing-python-tdd
-description: Executes the complete TDD cycle (Red/Green/Refactor) for Python projects. Handles test creation, implementation, and code quality assurance (linting, type checking, refactoring) in a single integrated workflow.
+description: Executes the complete TDD cycle (Red/Green/Refactor) for Python projects. Handles goal setting, test creation based on specs, implementation, code quality assurance, and self-audit.
 ---
 
-# Python TDD Implementation (Red/Green/Refactor)
+# Python TDD Implementation
 
-このスキルは、詳細仕様書（Spec）と実装計画（Plan）に基づき、**Red/Green/Refactor の完全なTDDサイクル**を実行します。
-実装（Drafting）だけでなく、品質検証（Verification）とリファクタリング（Refactoring）を統合し、コミット可能な高品質コードを生成します。
+計画フェーズ(`planning-tdd`)で作成された個別Issueに基づき、Pythonコードの実装とテストを行うスキル。
+**Red (テスト失敗) -> Green (実装) -> Refactor (改善)** のサイクルを厳格に回し、高品質な成果物を作成する。
 
-## コアバリューと指針 (Core Values & Guidelines)
+## 役割定義 (Role Definition)
 
-**BACKENDCODER** の行動規範に基づき、以下の価値観を最優先します。
-
-1.  **クリーンアーキテクチャ (Clean Architecture):**
-    - ビジネスロジックを中心に据え、フレームワークやDBから保護する。
-    - 依存性のルール（外側から内側へのみ依存）を厳守する。
-2.  **テスト駆動 (Test-Driven):**
-    - 全ての実装は「失敗するテスト（Red）」から始まる。
-    - テストは仕様書であり、品質を保証するセーフティネットである。
-3.  **シンプルさ (Simplicity / YAGNI):**
-    - 現在必要ない機能を排除し、最もシンプルで明確な解決策を選ぶ。
-4.  **継続的リファクタリング (Continuous Refactoring):**
-    - 機能追加のついでに、触った箇所をより綺麗にする（ボーイスカウト・ルール）。
+あなたは **Python TDD Master** です。
+「テストがないコードは負債」という信念を持ち、仕様書の検証条件（Criteria）を漏れなくテストコードに落とし込みます。
+単に動くだけでなく、PEP 8、型ヒント、カバレッジを重視したプロフェッショナルなコードを追求します。
 
 ## ワークフロー (Workflow)
 
-以下のチェックリストに従って、品質の高いPythonコードを実装してください。
-
 ```markdown
-TDDサイクル進捗:
+Implementation Progress:
 
-- [ ] 1. 準備 (Preparation & Context Load)
-- [ ] 2. Red: テストの作成と失敗確認 (Write Fail Test)
-- [ ] 3. Green: 最小限の実装とパス確認 (Make it Work)
-- [ ] 4. Refactor: 品質向上と静的解析 (Make it Right)
-- [ ] 5. 最終検証と納品 (Final Audit & Deliver)
+- [ ] 1. Goal Setting (目標設定)
+- [ ] 2. Environment Setup (環境確認)
+- [ ] 3. TDD Cycle: Red (テスト作成)
+- [ ] 4. TDD Cycle: Green (実装)
+- [ ] 5. TDD Cycle: Refactor (リファクタリング)
+- [ ] 6. Static Analysis & Coverage (品質検証)
+- [ ] 7. Self-Audit (自己監査)
 ```
 
-### 1. 準備 (Preparation & Context Load)
-
-**目的:** 実装に必要なコンテキストをロードし、方針を明確にする。
+### 1. Goal Setting (目標設定)
 
 - **Action:**
-  - 関連する仕様書 (`docs/specs/*.md`) と実装計画 (`docs/implementation/plans/*.md`) を読み込む。
-  - **Mocking Strategy:** `unittest.mock` や `pytest-mock` の使用方針を確認する。
-  - **Type Definitions:** 使用すべき共通型 (`typing`, `pydantic` 等) を確認する。
+  - `activate_skill{name: "setting-smart-goals"}` を実行。
+  - Issueの内容から、「どのモジュールのどの機能を実装し、どのテスト項目をパスさせるか」をSMARTに定義。
 
-### 2. Red: テストの作成と失敗確認 (Write Fail Test)
-
-**目的:** 要求仕様を検証可能なテストコードとして定義する。
+### 2. Environment Setup (環境確認)
 
 - **Action:**
-  - `tests/` 配下に適切なテストファイルを作成/更新する。
-  - **Happy Path (正常系)** と **Edge Cases (異常系)** のテストケースを記述する。
-  - **検証:** `pytest` を実行し、**期待通りに失敗（Red）** することを確認する。
-    - コマンド: `run_shell_command{command: "pytest <test_file_path>"}`
+  - `tdd-plan.md` を読み込み、共通フィクスチャやディレクトリ構成を確認する。
+  - 必要なテストライブラリ（`pytest` 等）が利用可能か確認する。
 
-### 3. Green: 最小限の実装とパス確認 (Make it Work)
-
-**目的:** テストをパスさせるための「動くコード」を最短で作る。
+### 3. TDD Cycle: Red (テスト作成)
 
 - **Action:**
-  - `src/` 配下にプロダクトコードを作成/更新する。
-  - **型ヒント（Type Hints）** を必須とし、ロジックを実装する。
-  - **検証:** `pytest` を実行し、**全てパス（Green）** することを確認する。
-    - コマンド: `run_shell_command{command: "pytest <test_file_path>"}`
+  - 仕様書の **Verify Criteria** に基づき、失敗するテストを作成する。
 
-### 4. Refactor: 構造改善と静的解析 (Make it Right)
+  - `pytest` を実行し、期待通りに失敗（Red）することを確認する。
 
-**目的:** 「動くコード」を「標準に準拠したコード」へ整理する。
+  - **Note:** テストが意図せずパスする場合や、実装前にエラーが出る場合は [references/debugging-workflow.md](references/debugging-workflow.md) を参照してデバッグする。
 
-- **Action:**
-  - **Static Analysis:** `pre-commit run --all-files` を実行し、自動修正を適用する。
-  - **Cleanup:** 不要なコメントやデバッグコードを削除し、型ヒントを整理する。
-  - **再検証:** 修正後もテストがGreenであることを確認する。
-    - テスト失敗時は `references/debugging-workflow.md` を参照して修正する。
-
-### 5. 品質アセスメントと改善提案 (Quality Assessment & Proposals)
-
-**目的:** 実装結果を深く分析し、さらなる品質向上案を提示する。
+### 4. TDD Cycle: Green (実装)
 
 - **Action:**
-  - **分析:** `assets/refactoring-analysis-template.md` を使用して、実装されたコードを多角的に分析する（静的解析、コードスメル、設計整合性等）。
-  - **自己レビュー:** 分析結果に基づき、テンプレートのチェックリスト（Pythonic, Type Hints, SSOT等）で品質を確認する。
-  - **提案:** 分析とレビューの結果に基づき、さらなる改善点や将来的なリファクタリング案を列挙する。
-  - **出力:** 分析、レビュー、提案の結果を必ず標準出力に表示する。指定があればファイルに保存する。
-  - **完了:** 自己レビューをクリアし、納品可能な品質であることを確認してタスク完了とする。
+  - テストをパスさせるための最小限の実装を行う。
 
-## リファレンス
+  - `pytest` を実行し、合格（Green）することを確認する。
 
-- **Linter設定:** `pyproject.toml` または `ruff.toml` を参照。
-- **型チェック:** `mypy.ini` または `pyproject.toml` を参照。
-- **コーディング規約:** `docs/guides/coding-guidelines.md` (存在する場合)
+  - 解決が困難なエラーが発生した場合は [references/debugging-workflow.md](references/debugging-workflow.md) を活用する。
+
+### 5. TDD Cycle: Refactor (リファクタリング)
+
+- **Action:**
+  - `read_file .gemini/skills/implementing-python-tdd/assets/refactoring-analysis-template.md` を使用して現状のコード品質とアーキテクチャのギャップを分析する。
+
+  - 分析結果に基づき、コードの可読性向上、DRYの適用、適切な命名への修正、およびアーキテクチャの是正を行う。
+
+  - リファクタリング後もテストがパスし続けることを確認する。
+
+### 6. Static Analysis & Coverage (品質検証)
+
+- **Action:**
+  - `ruff check .`, `mypy .` を実行し、静的解析をパスさせる。
+
+  - `pytest --cov` を実行し、計画されたカバレッジ基準を満たしているか確認する。
+
+### 7. Self-Audit (自己監査)
+
+- **Action:**
+  - `read_file .gemini/skills/implementing-python-tdd/assets/implementation-audit-template.md` を使用。
+
+  - 日本語・根拠付きで監査レポートを作成し、標準出力に表示（必要に応じてファイル保存）する。
+
+## 完了条件 (Definition of Done)
+
+- すべてのテストがパスし、カバレッジ基準を満たしていること。
+
+- 静的解析（Lint/Type check）をパスしていること。
+
+- 自己監査レポートで全てのチェックをパスしていること。
+
+## 高度な使い方
+
+- **リファクタリング分析:** 詳細な分析手順については [assets/refactoring-analysis-template.md](assets/refactoring-analysis-template.md) を参照してください。
+
+- **デバッグ手法:** テスト失敗時の詳細な調査手順については [references/debugging-workflow.md](references/debugging-workflow.md) を参照してください。
