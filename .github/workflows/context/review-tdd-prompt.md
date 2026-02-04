@@ -8,7 +8,8 @@ Analyze the review comment and propose appropriate code-level resolutions.
 
 ## Instructions
 1. **Analyze & Plan:** Execute `activate_skill{name: "analyzing-github-reviews"}` to analyze the comment and formulate a fix plan (including test strategy).
-2. **Draft Proposals (日本語):** 上記の分析結果に基づき、`implementing-python-tdd` の原則に従って具体的な修正コード案やテストケース案をレビューの返信として作成してください。直接ファイルを変更せず、あくまで「提案」として提示してください。
+2. **Draft Proposals:** Based on the analysis, execute `activate_skill{name: "implementing-python-tdd"}` to formulate specific code modification proposals or test case additions as a review response. Present these as "proposals" rather than direct file modifications.
+3. **Record & Finalize:** Execute `activate_skill{name: "recording-changes"}` to explicitly record the analysis results and any generated reports before finalizing the process.
 
 ## Comment Context
 - **Author:** ${COMMENT_AUTHOR}
