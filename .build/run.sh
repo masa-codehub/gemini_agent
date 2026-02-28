@@ -2,69 +2,72 @@
 
 echo "=== Environment Setup ==="
 
-# uvの設定
+# ★ 追加設定: uv の暴走（リソース食いつぶし）を防ぐ
+# 並列数を 4 程度に制限（デフォルトはCPU全開なので、Dockerだと落ちやすい）
 export UV_CONCURRENT_DOWNLOADS=4
 export UV_CONCURRENT_BUILDS=2
 export UV_CONCURRENT_INSTALLS=4
+
+# ★ 追加設定: 警告が出ていたハードリンク問題を明示的に解決
 export UV_LINK_MODE=copy
 
-# ツール（rsyncなど）の確認とインストール
-if ! command -v rsync &> /dev/null; then
-    echo "rsync not found. Installing..."
-    if command -v apt-get &> /dev/null; then
-        sudo apt-get update -qq && sudo apt-get install -y -qq rsync
-    fi
-fi
-
-# --- GitHub 認証・ユーザー設定 ---
-if [ -f ".build/setup_github.sh" ]; then
-    source ".build/setup_github.sh"
-    # setup_github.sh で設定された git config と一時ファイルをクリーンアップする
-    # CI環境（GITHUB_ACTIONS=true）では、後続のステップ（pre-commit等）で認証が必要なため解除しない
-    if [ -n "$TMP_GITCONFIG" ] && [ "$GITHUB_ACTIONS" != "true" ]; then
-        trap 'git config --global --unset-all include.path "$TMP_GITCONFIG" || true; rm -f "$TMP_GITCONFIG"' EXIT
-    fi
-fi
-
-# 1. 依存関係の同期（毎回実行: 変更がなければ高速）
+# 1. 依存関係の同期
 if [ -f "pyproject.toml" ]; then
     echo "Syncing dependencies..."
-    # setup_github.sh で設定された git config が自動的に適用される
+    # --all-extras: dev依存なども含めて全部入れる
     uv sync --all-extras
 fi
 
-# 2. .gemini サブモジュールの更新（毎回実行: 変更がなければ高速）
-if [ -d ".git" ] && [ -f ".gitmodules" ]; then
-    echo "Updating submodules..."
-    # setup_github.sh で設定された git config が自動的に適用される
-    git submodule update --init --recursive || echo "Warning: Failed to update submodules."
-fi
-
-# 3. Git フックのセットアップ
+# 2. pre-commit のインストール
 if [ -d ".git" ]; then
-    echo "Installing/Updating pre-commit hooks..."
-    # 非対話環境でのハングを防ぐため credential.helper を無効化
-    GIT_CONFIG_PARAMETERS="'credential.helper='" uv run pre-commit install
+    echo "Installing pre-commit hooks..."
+    uv run pre-commit install
 fi
 
-# 4. 仮想環境の設定（.bashrc への追記など）
-# SETUP_VENV_BASHRC=1 が指定されている場合のみ実行（副作用の抑制）
-if [ "$SETUP_VENV_BASHRC" = "1" ] && [ -f ".build/setup_venv.sh" ]; then
-    source .build/setup_venv.sh
-fi
-
-# --- 仮想環境のアクティベート（常に実行） ---
-if [ -f ".venv/bin/activate" ]; then
-    source ".venv/bin/activate"
-fi
-
-# --- 毎回実行が必要な更新処理 ---
-# コンテキスト更新
+# コンテキスト更新など
 if [ -f ".build/update_gemini_context.sh" ]; then
     bash .build/update_gemini_context.sh
 fi
 
+# 仮想環境のアクティベート
+echo "Activating virtual environment..."
+
+# 設定対象のファイル
+TARGET_FILE="$HOME/.bashrc"
+# 重複チェック用のマーカー（この文字列があれば追記しない）
+MARKER="# === AUTO-ACTIVATE-VENV ==="
+
+echo "Checking $TARGET_FILE ..."
+
+# ファイル内にマーカーが存在するか検索
+if grep -qF "$MARKER" "$TARGET_FILE"; then
+    echo "✅ 設定は既に $TARGET_FILE に存在します。追記をスキップしました。"
+else
+    echo "✍️  $TARGET_FILE に設定を追記します..."
+
+    # ファイルの末尾に追記
+    cat <<EOT >> "$TARGET_FILE"
+
+$MARKER
+# カレントディレクトリに .venv があれば自動で activate する
+if [ -z "\$VIRTUAL_ENV" ]; then
+    if [ -d ".venv" ] && [ -f ".venv/bin/activate" ]; then
+        source .venv/bin/activate
+    fi
+fi
+EOT
+
+    echo "🎉 完了しました！"
+    echo "設定を反映させるために、以下のコマンドを実行してください："
+    echo "source $TARGET_FILE"
+fi
+
+# 仮想環境をアクティベート（このスクリプト内での実行用）
+if [ -f ".venv/bin/activate" ]; then
+    source .venv/bin/activate
+fi
+
 # Gemini拡張機能のインストール
-gemini extensions install https://github.com/github/github-mcp-server --consent --auto-update || true
+gemini extensions install https://github.com/github/github-mcp-server --consent --auto-update
 
 echo "=== Setup Complete ==="
