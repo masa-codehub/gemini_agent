@@ -5,38 +5,26 @@ set -e
 LABELS="${ISSUE_LABELS}"
 
 echo "Processing Issue #${ISSUE_NUMBER}: ${ISSUE_TITLE}"
-echo "Labels: ${LABELS}"
+echo "Debug: LABELS='${LABELS}'"
 
-# コンテキストファイルの選択
-CONTEXT_FILE=""
-MATCH_COUNT=0
-
-if [[ "$LABELS" == *"gemini:arch"* ]]; then
-  CONTEXT_FILE=".github/workflows/context/arch-prompt.md"
-  echo "Selected Skill: Architecture Drafting"
-  ((++MATCH_COUNT))
+# 仮想環境のアクティベート (ick コマンドを使うために先に実行)
+if [ -f ".venv/bin/activate" ]; then
+  source ".venv/bin/activate"
 fi
 
-if [[ "$LABELS" == *"gemini:spec"* ]]; then
-  CONTEXT_FILE=".github/workflows/context/spec-prompt.md"
-  echo "Selected Skill: Specification Drafting"
-  ((++MATCH_COUNT))
-fi
+# ick dispatch でロール（エージェント名）とコンテキストファイル（プロンプト）を決定
+# 設定ファイルは .github/issue-kit-config.json をデフォルトで使用
+ROLE=$(ick dispatch --labels "$LABELS" || echo "UNKNOWN")
+CONTEXT_FILE=$(ick dispatch --labels "$LABELS" --get-context || echo "UNKNOWN")
 
-if [[ "$LABELS" == *"gemini:tdd"* ]]; then
-  CONTEXT_FILE=".github/workflows/context/tdd-prompt.md"
-  echo "Selected Skill: TDD Implementation"
-  ((++MATCH_COUNT))
-fi
-
-# 複数ラベルまたは該当なしのチェック
-if [[ "$MATCH_COUNT" -gt 1 ]]; then
-  echo "Error: Multiple gemini labels detected. Please use only one label per issue."
+if [ "$ROLE" = "UNKNOWN" ] || [ "$CONTEXT_FILE" = "UNKNOWN" ]; then
+  echo "Error: No matching gemini role or context file found for labels: $LABELS"
   exit 1
-elif [[ "$MATCH_COUNT" -eq 0 ]]; then
-  echo "No matching gemini label found. Skipping execution."
-  exit 0
 fi
+
+echo "Selected Agent Role: $ROLE"
+echo "Selected Context File: $CONTEXT_FILE"
+
 
 # ファイル存在確認
 if [[ ! -f "$CONTEXT_FILE" ]]; then
@@ -53,17 +41,9 @@ export ISSUE_BODY
 trap 'rm -f prompt.md' EXIT
 
 # コンテキストの置換と実行
-# envsubst で許可された変数のみを展開して一時ファイルに保存（セキュリティ対策）
 envsubst '$ISSUE_NUMBER $ISSUE_TITLE $ISSUE_BODY' < "${CONTEXT_FILE}" > prompt.md
 
 echo "--- Gemini Execution Start ---"
-
-# 仮想環境のアクティベート
-if [ -f ".venv/bin/activate" ]; then
-  source ".venv/bin/activate"
-else
-  echo "Warning: .venv/bin/activate not found. Assuming gemini is in PATH."
-fi
 
 # gemini コマンドの存在確認
 if ! command -v gemini >/dev/null 2>&1; then
@@ -73,7 +53,7 @@ if ! command -v gemini >/dev/null 2>&1; then
 fi
 
 # geminiコマンドにプロンプトを渡し、モデルを指定して実行させる
-
 cat prompt.md | gemini --yolo -m "gemini-3-flash-preview"
 
 echo "--- Gemini Execution End ---"
+
