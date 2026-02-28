@@ -9,11 +9,6 @@ services:
       - uv_cache:${ROOT:-/root}/.cache/uv
       - gemini_auth:${ROOT:-/root}/.gemini
     working_dir: ${CONTAINER_VOLUME:-/app}
-    # environment:
-    #   - AGENT_NAME=${AGENT_NAME:-your_agent_name}
-    #   - AGENT_ROLE=${AGENT_ROLE:-your_delta_role}
-    #   - AGENT_PORT=${AGENT_PORT:-your_delta_port}
-    #   - GITHUB_MCP_PAT=${GITHUB_MCP_PAT:-my_github_token}
     env_file:
       - .env
     # command: ["bash", "run.sh"]
