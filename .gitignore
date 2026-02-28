@@ -210,14 +210,7 @@ logs/
 messages/
 
 # Track package-lock.json
-!package-lock.json
-
-# Gemini Agent artifacts
+!package-lock.json.gemini/todo.md
+current_issue.md
+loop_context_*.md
 prompt.md
-.gemini/todo.md
-
-
-
-# Local lint outputs
-lint_out.txt
-temp_lint.txt
