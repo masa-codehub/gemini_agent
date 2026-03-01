@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/masa-codehub/gemini_agent/compare/v0.1.0...v0.1.1) (2026-03-01)
+
+
+### Bug Fixes
+
+* correct invalid steps nesting in github workflows ([376bcca](https://github.com/masa-codehub/gemini_agent/commit/376bccae7eccf089b24f7420b98e040a7665a789))
+
 ## 0.1.0 (2026-03-01)
 
 
