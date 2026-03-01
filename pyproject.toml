@@ -24,6 +24,22 @@ dependencies = [
 # [project.scripts]
 # プロジェクト名 = "パッケージ名.cli:main"
 
+# [project.urls]
+# Repository = "https://github.com/masa-codehub/<repository>"
+
+# ===================================================================
+# 1.5 Sync Configuration
+# ===================================================================
+[tool.sync]
+# The target repository for public syncing
+# This value is used by .github/workflows/sync-repositories.yml
+# public_repo = "<owner>/<repo>"
+# 公開用リポジトリがある場合に記述する
+# The target repository for template syncing
+# This value is used by .github/workflows/sync-repositories.yml
+# template_repo = "masa-codehub/gemini_agent"
+# テンプレートへ反映する場合に記述する
+
 # ===================================================================
 # 2. 共通開発環境設定 (標準的なツールセット)
 # ===================================================================
