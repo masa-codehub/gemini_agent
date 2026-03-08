@@ -1,0 +1,16 @@
+# 公開用リポジトリに同期「しない」ファイルやディレクトリのリスト
+# rsyncの--excludeオプションに渡されるため、パターンマッチが使用可能です
+exclude:
+  - ".git/"
+  - ".github/workflows/release-please.yml"
+  - ".github/workflows/sync-to-public.yml"
+  - ".github/sync-config.yml"
+  - ".gemini/"
+  - "reqs/"
+  - "tests/"
+  - ".gitmodules"
+  - "CHANGELOG.md"
+  # 必要に応じて公開したくない設計ドキュメント等のディレクトリを追加してください
+  # 例:
+  # - "reqs/"
+  # - "docs/internal/"
