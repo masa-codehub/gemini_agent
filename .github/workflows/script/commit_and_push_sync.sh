@@ -31,10 +31,19 @@ fi
 
 # SKIP_TAGが 'true' でない場合のみタグを打つ
 if [ "${SKIP_TAG}" != "true" ]; then
-  # タグの作成とプッシュ（タグはPRマージ後に別途手動か別の仕組みで打つ必要が出る場合がありますが、ここでは一旦PRブランチに対してタグを打つか、エラーを回避するため一旦タグプッシュは残しておきます。ただし、mainにマージされる前にタグが存在することになります）
-  # Branch protection に tag protection がなければこれは成功します。
-  git tag "${RELEASE_TAG_NAME}" -f
-  git push origin "${RELEASE_TAG_NAME}" -f
+  # タグの作成とプッシュは、安全のため main ブランチ上でのみ実施する
+  CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  if [ "${CURRENT_BRANCH}" = "main" ]; then
+    # 既存のタグを上書きしないように -f は使用しない
+    if git rev-parse "${RELEASE_TAG_NAME}" >/dev/null 2>&1; then
+      echo "Tag '${RELEASE_TAG_NAME}' already exists. Skipping tag creation."
+    else
+      git tag "${RELEASE_TAG_NAME}"
+      git push origin "${RELEASE_TAG_NAME}"
+    fi
+  else
+    echo "Current branch is '${CURRENT_BRANCH}', not 'main'. Skipping tag creation and push for ${RELEASE_TAG_NAME}."
+  fi
 else
   echo "SKIP_TAG is set to true. Skipping tag creation for this repository."
 fi
