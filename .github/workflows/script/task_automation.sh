@@ -31,8 +31,11 @@ echo "Config Path : $CONFIG_PATH"
 echo "Issue No    : ${ISSUE_NO:-(none)}"
 echo "===================================="
 
+# issue-kit のバージョン (タグまたはコミット SHA)。環境変数 ISSUE_KIT_REF で上書き可能。
+ISSUE_KIT_REF="${ISSUE_KIT_REF:-@main}"
+
 # issue-kit の実行コマンド定義 (pyproject.toml には依存せず、常に指定リポジトリからオンデマンドで実行する)
-ISSUE_KIT_CMD="uv tool run --from git+https://github.com/masa-codehub/issue_creator_kit.git issue-kit"
+ISSUE_KIT_CMD="uv tool run --from git+https://github.com/masa-codehub/issue_creator_kit.git${ISSUE_KIT_REF} issue-kit"
 
 if [ "$COMMAND" = "relay" ]; then
     # リレーモード: クローズされた Issue に依存する後続タスクを起動する
