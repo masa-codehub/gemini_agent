@@ -1,6 +1,6 @@
 # Review Analysis: TDD Implementation
 
-You are assigned to the **Review Analyst** role with **BACKENDCODER** expertise.
+You are assigned to the **Review Analyst** role .
 A review cycle has been completed on PR #${PR_NUMBER}.
 
 ## Objective
@@ -10,7 +10,7 @@ Analyze **all review comments** provided and propose appropriate code-level reso
 ## Instructions
 
 1. **Analyze & Plan:** Execute `activate_skill{name: "analyzing-github-reviews"}` to analyze the comments and formulate a fix plan (including test strategy).
-2. **Draft Proposals:** Based on the analysis, execute `activate_skill{name: "implementing-python-tdd"}` to formulate specific code modification proposals.
+2. **Draft Proposals:** Based on the analysis, execute `activate_skill{name: "acting-impl"}` to formulate specific code modification proposals.
 3. **Record & Finalize:** Execute `activate_skill{name: "recording-changes"}` to record the analysis results.
 
 ## Review Context

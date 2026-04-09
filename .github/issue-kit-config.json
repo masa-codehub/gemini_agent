@@ -2,6 +2,21 @@
   "roles": [
     {
       "name": "SYSTEM_ARCHITECT",
+      "labels": ["plan", "arch"],
+      "context": ".github/workflows/context/plan-arch-prompt.md"
+    },
+    {
+      "name": "SYSTEM_ARCHITECT",
+      "labels": ["plan", "spec"],
+      "context": ".github/workflows/context/plan-spec-prompt.md"
+    },
+    {
+      "name": "SYSTEM_ARCHITECT",
+      "labels": ["plan", "implement"],
+      "context": ".github/workflows/context/plan-implement-prompt.md"
+    },
+    {
+      "name": "TECHNICAL_DESIGNER",
       "labels": ["task", "arch"],
       "context": ".github/workflows/context/arch-prompt.md"
     },
@@ -12,35 +27,40 @@
     },
     {
       "name": "BACKENDCODER",
-      "labels": ["task", "tdd"],
-      "context": ".github/workflows/context/tdd-prompt.md"
+      "labels": ["task", "implement"],
+      "context": ".github/workflows/context/implement-prompt.md"
+    }
+  ],
+  "reviews": [
+    {
+      "name": "SYSTEM_ARCHITECT",
+      "labels": ["plan", "arch"],
+      "context": ".github/workflows/context/review-arch-prompt.md"
     },
     {
       "name": "SYSTEM_ARCHITECT",
-      "labels": ["audit", "arch"],
+      "labels": ["plan", "spec"],
+      "context": ".github/workflows/context/review-spec-prompt.md"
+    },
+    {
+      "name": "SYSTEM_ARCHITECT",
+      "labels": ["plan", "implement"],
+      "context": ".github/workflows/context/review-implement-prompt.md"
+    },
+    {
+      "name": "TECHNICAL_DESIGNER",
+      "labels": ["task", "arch"],
       "context": ".github/workflows/context/review-arch-prompt.md"
     },
     {
       "name": "TECHNICAL_DESIGNER",
-      "labels": ["audit", "spec"],
+      "labels": ["task", "spec"],
       "context": ".github/workflows/context/review-spec-prompt.md"
     },
     {
       "name": "BACKENDCODER",
-      "labels": ["audit", "tdd"],
-      "context": ".github/workflows/context/review-tdd-prompt.md"
-    },
-    {
-      "name": "SYSTEM_ARCHITECT",
-      "labels": ["plan", "arch"]
-    },
-    {
-      "name": "TECHNICAL_DESIGNER",
-      "labels": ["plan", "spec"]
-    },
-    {
-      "name": "BACKENDCODER",
-      "labels": ["plan", "tdd"]
+      "labels": ["task", "implement"],
+      "context": ".github/workflows/context/review-implement-prompt.md"
     }
   ],
   "default_role": "BACKENDCODER",
